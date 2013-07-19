@@ -36,43 +36,38 @@
                 </p:column> 
                 
                  <f:facet name="footer">  
-                     <p:commandButton  id="viewButton" value="View" icon="ui-icon-check"  update=":form:panel" actionListener="#{mBasculista.setearBasculista()}"/>  
+                     <p:commandButton  value="View" icon="ui-icon-check" actionListener="#{mBasculista.setearBasculista()}" update="@all"/>  
                  </f:facet>  
-                
             </p:dataTable>
             
-            <p:outputPanel id="panel">
-                <p:panelGrid columns="2" columnClasses="column" rendered="#{mBasculista.flag}" >  
-
-                    <f:facet name="header">  
-                        Editar Basculista  
-                    </f:facet>  
-
-                    <h:outputLabel value="RUT:" />  
-                    <h:outputText value="#{mBasculista.rut}" />  
-
-                    <h:outputLabel value="Nombre:" />  
-                    <p:inputText   value="#{mBasculista.nombre}"/>  
-                        
+            <p:panelGrid columns="2">
+                <f:facet name="header">
+                    Editar Basculista
+                </f:facet>
+                <p:outputLabel value="RUT: "/>
+                <p:outputLabel value="#{mBasculista.rut}"/>
+                <p:outputLabel value="Nombre: "/>
+                <p:inputText value="#{mBasculista.nombre}"/>
+                <p:outputLabel value="Apellido: "/>
+                <p:inputText value="#{mBasculista.apellido}"/>
+                <p:outputLabel value="Telefono: "/>
+                <p:inputText value="#{mBasculista.telefono}"/>
+                <p:outputLabel value="Turno: "/>
+                <h:selectOneMenu value="#{mBasculista.turno}" >
+                    <f:selectItems value="#{mBasculista.turnoTrabajos}" var="elem" itemValue="#{elem.nombreTurno}" itemLabel="#{elem.nombreTurno}"/>
+                </h:selectOneMenu> 
+                <f:facet name="footer">
+                    <p:commandButton value="Editar" action="#{mBasculista.editarBasculista()}" update="@all"/>
+                </f:facet>
+                
+            </p:panelGrid>
+               
             
-                    <h:outputLabel value="Apellido:" />  
-                    <p:inputText   value="#{mBasculista.apellido}"/>  
-
-                    <h:outputLabel value="Telefono:" />  
-                     <p:inputText   value="#{mBasculista.telefono}"/>    
-                    
-                    <h:outputLabel value="Turno:" />  
-                    <p:selectOneMenu value="#{mBasculista.turno}" >
-                        <f:selectItems value="#{mBasculista.turnoTrabajos}" var="elem" itemValue="#{elem.nombreTurno}" itemLabel="#{elem.nombreTurno}"/>
-                    </p:selectOneMenu> 
-                    
-                    <f:facet name="footer">  
-                        <p:commandButton value="Editar" icon="ui-icon-check"/>  
-                    </f:facet>
-                </p:panelGrid>  
-            </p:outputPanel>
-       </h:form>
+        </h:form>   
         
+        
+      
+         
     </h:body>
 </html>
 

@@ -40,7 +40,16 @@ public class MBasculista{
     private Collection<Basculista> basculista;
     private MessaegeController mc;
     private Basculista basculistaSeleccionado;
+    private String rutSeleccionado;
     private boolean flag;
+
+    public String getRutSeleccionado() {
+        return rutSeleccionado;
+    }
+
+    public void setRutSeleccionado(String rutSeleccionado) {
+        this.rutSeleccionado = rutSeleccionado;
+    }
 
    
     @PostConstruct
@@ -164,18 +173,22 @@ public class MBasculista{
     }
     
     public void editarBasculista(){
+       rut = basculistaSeleccionado.getRut();
+       System.out.print(rut);
+       System.out.print(nombre);
+       System.out.print(apellido);
+       resetCampos();
        
     }
     
     public void setearBasculista(){
-        this.rut = basculistaSeleccionado.getRut();
-        this.nombre = basculistaSeleccionado.getNombreB();
-        this.apellido = basculistaSeleccionado.getApellidoB();
-        this.telefono = basculistaSeleccionado.getTelefonoB();
-        this.turno = basculistaSeleccionado.getNombreTurno().getNombreTurno();
-        this.flag = true;
-        System.out.println("HOLA");
-    }
+        rut = basculistaSeleccionado.getRut();
+        nombre = basculistaSeleccionado.getNombreB();
+        apellido = basculistaSeleccionado.getApellidoB();
+        telefono = basculistaSeleccionado.getTelefonoB();
+        turno = basculistaSeleccionado.getNombreTurno().getNombreTurno();
+        flag = true;
+   }
     
     public void resetCampos(){
     
