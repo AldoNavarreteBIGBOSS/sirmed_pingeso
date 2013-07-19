@@ -12,8 +12,6 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.RowEditEvent;
 import sessionBeans.CrudBasculistaLocal;
 import sessionBeans.CrudUsuarioLocal;
 import sessionBeans.ListaTurnosLocal;
@@ -24,7 +22,7 @@ import sessionBeans.ListaTurnosLocal;
  */
 @Named(value = "mBasculista")
 @RequestScoped
-public class MBasculista {
+public class MBasculista{
     @EJB
     private ListaTurnosLocal listaTurnos;
     @EJB
@@ -42,6 +40,24 @@ public class MBasculista {
     private Collection<Basculista> basculista;
     private MessaegeController mc;
     private Basculista basculistaSeleccionado;
+    private boolean flag;
+
+   
+    @PostConstruct
+    public void init(){
+        turnoTrabajos = listaTurnos.listaTurnos();
+        basculista = crudBasculista.listaBasculistas();
+        mc = new MessaegeController(); 
+        basculistaSeleccionado = new Basculista();
+        flag = false;
+    }
+ public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 
     public Basculista getBasculistaSeleccionado() {
         return basculistaSeleccionado;
@@ -51,14 +67,6 @@ public class MBasculista {
         this.basculistaSeleccionado = basculistaSeleccionado;
     }
     
-    @PostConstruct
-    public void init(){
-        turnoTrabajos = listaTurnos.listaTurnos();
-        basculista = crudBasculista.listaBasculistas();
-        mc = new MessaegeController(); 
-        basculistaSeleccionado = new Basculista();
-    }
-
     public Collection<Basculista> getBasculista() {
         return basculista;
     }
@@ -155,10 +163,18 @@ public class MBasculista {
         }
     }
     
-    public void editarBasculista(RowEditEvent event){
-        System.out.println("Hola"+this.rut);
-        
-        
+    public void editarBasculista(){
+       
+    }
+    
+    public void setearBasculista(){
+        this.rut = basculistaSeleccionado.getRut();
+        this.nombre = basculistaSeleccionado.getNombreB();
+        this.apellido = basculistaSeleccionado.getApellidoB();
+        this.telefono = basculistaSeleccionado.getTelefonoB();
+        this.turno = basculistaSeleccionado.getNombreTurno().getNombreTurno();
+        this.flag = true;
+        System.out.println("HOLA");
     }
     
     public void resetCampos(){
