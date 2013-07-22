@@ -5,16 +5,17 @@
 package sessionBeans;
 
 import javax.ejb.Local;
+import javax.mail.MessagingException;
 
 /**
  *
  * @author Aldo
  */
 @Local
-public interface CrudUsuarioLocal {
+public interface EnvioMailLocal {
 
-    void crearUsuario(String rut, String email);
+    public void enviarMail() throws MessagingException;
 
-    public void eliminarUsuario(String rut);
+    
     
 }

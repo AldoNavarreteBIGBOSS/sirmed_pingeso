@@ -17,6 +17,11 @@ import javax.ejb.Local;
 public interface CrudBasculistaLocal {
 
     void crearBasculista(String rut, String turno, String nombre, String apellido, String telefono);
+    
     Collection<Basculista> listaBasculistas();
+
+    public void editarBasculista(String rut, String turno, String nombre, String apellido, String telefono);
+
+    public void eliminarBasculista(String rut, String turno, String nombre, String apellido, String telefono);
     
 }

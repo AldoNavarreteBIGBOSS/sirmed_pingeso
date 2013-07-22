@@ -6,8 +6,6 @@ package DAO_impl;
 
 import DAO_interfaces.GenericDAO;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -41,6 +39,15 @@ public abstract class GenericDAO_impl<T> implements GenericDAO<T> {
         getEntityManager().merge(actData);
     }
     
+    @Override
+    public void delete(T delData){
+        
+        T aBorrar = getEntityManager().merge(delData);
+        getEntityManager().remove(aBorrar);
+        
+    }
+    
+    @Override
     public Collection<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));

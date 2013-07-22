@@ -36,6 +36,7 @@ public class CrudBasculista implements CrudBasculistaLocal {
         dF.getBasculistaDAO().insert(b);
     }
     
+    @Override
     public Collection<Basculista> listaBasculistas(){
     
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
@@ -43,5 +44,30 @@ public class CrudBasculista implements CrudBasculistaLocal {
         return dF.getBasculistaDAO().findAll();
     }
     
-
+    @Override
+    public void editarBasculista(String rut, String turno, String nombre, String apellido, String telefono){
+        Basculista b = new Basculista();
+        b.setRut(rut);
+        TurnoTrabajo trabajo = new TurnoTrabajo(turno);
+        b.setNombreTurno(trabajo);
+        b.setNombreB(nombre);
+        b.setApellidoB(apellido);
+        b.setTelefonoB(telefono);
+        
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        dF.getBasculistaDAO().update(b);
+    }
+    
+    @Override
+    public void eliminarBasculista(String rut, String turno, String nombre, String apellido, String telefono){
+        Basculista b = new Basculista();
+        b.setRut(rut);
+        TurnoTrabajo trabajo = new TurnoTrabajo(turno);
+        b.setNombreTurno(trabajo);
+        b.setNombreB(nombre);
+        b.setApellidoB(apellido);
+        b.setTelefonoB(telefono);
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        dF.getBasculistaDAO().delete(b);
+    }
 }

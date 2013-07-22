@@ -62,7 +62,13 @@ public class CrudUsuario implements CrudUsuarioLocal {
         
     }
     
+    @Override
+    public void eliminarUsuario(String rut){
     
+        Usuario u = new Usuario(rut);
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        dF.getUsuarioDAO().delete(u);
+    }
     
     
 

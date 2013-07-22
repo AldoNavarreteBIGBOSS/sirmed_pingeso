@@ -3,14 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>SIRMED</title>
     </h:head>
     <h:body>
         <h:form id="form" prependId="false">
-            <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single">
-                
+            <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
+                <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update="@all"/>
+                <p:ajax event="rowUnselect"/> 
                 <f:facet name="header">  
                     Basculistas  
                 </f:facet>
@@ -35,8 +37,9 @@
                     #{bas.nombreTurno.nombreTurno}  
                 </p:column> 
                 
+             
                  <f:facet name="footer">  
-                     <p:commandButton  value="View" icon="ui-icon-check" actionListener="#{mBasculista.setearBasculista()}" update="@all"/>  
+                     Seleccione el basculista a editar
                  </f:facet>  
             </p:dataTable>
             
@@ -57,15 +60,24 @@
                     <f:selectItems value="#{mBasculista.turnoTrabajos}" var="elem" itemValue="#{elem.nombreTurno}" itemLabel="#{elem.nombreTurno}"/>
                 </h:selectOneMenu> 
                 <f:facet name="footer">
-                    <p:commandButton value="Editar" action="#{mBasculista.editarBasculista()}" update="@all"/>
+                    <p:commandButton value="Editar" onclick="confirmation.show();" type="button" ajax="false"/> 
+                    <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
+                        <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.actualizarBasculista()}" />  
+                        <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
+                    </p:confirmDialog>
+                    
                 </f:facet>
                 
             </p:panelGrid>
-               
+                  
             
         </h:form>   
+       
+   
+       
+            
         
-        
+    
       
          
     </h:body>

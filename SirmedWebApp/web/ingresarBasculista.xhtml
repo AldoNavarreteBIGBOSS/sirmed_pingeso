@@ -26,9 +26,9 @@
             <h:outputLabel value="Email: "/>
             <p:inputText value="#{mBasculista.email}" required="true"/>
             <h:outputLabel value="Turno: "/>
-            <p:selectOneMenu value="#{mBasculista.turno}" >
+            <h:selectOneMenu value="#{mBasculista.turno}" >
                 <f:selectItems value="#{mBasculista.turnoTrabajos}" var="elem" itemValue="#{elem.nombreTurno}" itemLabel="#{elem.nombreTurno}"/>
-            </p:selectOneMenu> 
+            </h:selectOneMenu> 
             <f:facet name="footer">
                 <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista(actionEvent)}" update="panel" icon="ui-icon-check"/>
             </f:facet>  

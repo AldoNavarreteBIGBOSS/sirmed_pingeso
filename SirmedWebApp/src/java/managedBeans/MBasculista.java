@@ -6,12 +6,18 @@ package managedBeans;
 
 import entities.Basculista;
 import entities.TurnoTrabajo;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 import sessionBeans.CrudBasculistaLocal;
 import sessionBeans.CrudUsuarioLocal;
 import sessionBeans.ListaTurnosLocal;
@@ -40,16 +46,8 @@ public class MBasculista{
     private Collection<Basculista> basculista;
     private MessaegeController mc;
     private Basculista basculistaSeleccionado;
-    private String rutSeleccionado;
-    private boolean flag;
+    private AccionesGenerales ag;
 
-    public String getRutSeleccionado() {
-        return rutSeleccionado;
-    }
-
-    public void setRutSeleccionado(String rutSeleccionado) {
-        this.rutSeleccionado = rutSeleccionado;
-    }
 
    
     @PostConstruct
@@ -58,14 +56,7 @@ public class MBasculista{
         basculista = crudBasculista.listaBasculistas();
         mc = new MessaegeController(); 
         basculistaSeleccionado = new Basculista();
-        flag = false;
-    }
- public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+        ag = new AccionesGenerales();
     }
 
     public Basculista getBasculistaSeleccionado() {
@@ -172,13 +163,28 @@ public class MBasculista{
         }
     }
     
-    public void editarBasculista(){
+    public void actualizarBasculista(){
        rut = basculistaSeleccionado.getRut();
-       System.out.print(rut);
-       System.out.print(nombre);
-       System.out.print(apellido);
+       crudBasculista.editarBasculista(rut, turno, nombre, apellido, telefono);
        resetCampos();
+       ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            ag.actualizarPagina();
+        } catch (IOException ex) {
+            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
+    }
+    
+    public void borrarBasculista(){
+            setearBasculista();
+            crudBasculista.eliminarBasculista(rut, turno, nombre, apellido, telefono);
+            crudUsuario.eliminarUsuario(rut);
+        try {
+            ag.actualizarPagina();
+        } catch (IOException ex) {
+            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void setearBasculista(){
@@ -187,7 +193,6 @@ public class MBasculista{
         apellido = basculistaSeleccionado.getApellidoB();
         telefono = basculistaSeleccionado.getTelefonoB();
         turno = basculistaSeleccionado.getNombreTurno().getNombreTurno();
-        flag = true;
    }
     
     public void resetCampos(){
