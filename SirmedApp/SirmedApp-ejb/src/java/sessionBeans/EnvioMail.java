@@ -24,7 +24,7 @@ public class EnvioMail implements EnvioMailLocal {
     @Schedule(hour="*/5")
     @Override
     public void enviarMail() throws MessagingException{
-        String mensaje = "Este es un mensaje de SIRMED cada 5 horas";
+        String mensaje = "Este es un mensaje de SIRMED cada 5 horas, por favor responder si llegó";
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -37,9 +37,9 @@ public class EnvioMail implements EnvioMailLocal {
         
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("gabi.leon.f@gmail.com"));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress("victor.floress@usach.cl"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress("arden.papifunk@gmail.com"));
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("maca_358@hotmail.com"));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress("hialek@gmail.com"));
         message.setSubject("SIRMED: Prueba");
         message.setText(mensaje);
         

@@ -30,7 +30,7 @@
                 <f:selectItems value="#{mBasculista.turnoTrabajos}" var="elem" itemValue="#{elem.nombreTurno}" itemLabel="#{elem.nombreTurno}"/>
             </h:selectOneMenu> 
             <f:facet name="footer">
-                <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista(actionEvent)}" update="panel" icon="ui-icon-check"/>
+                <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista(actionEvent)}" update="@all" icon="ui-icon-check"/>
             </f:facet>  
         </p:panelGrid>
         </h:form>

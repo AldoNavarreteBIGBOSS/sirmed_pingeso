@@ -41,9 +41,9 @@ public class Camion implements Serializable {
     private String patenteCamion;
     @OneToMany(mappedBy = "patenteCamion")
     private Collection<Registros> registrosCollection;
-    @JoinColumn(name = "ID_TIPO_CAMION", referencedColumnName = "ID_TIPO_CAMION")
+    @JoinColumn(name = "NOMBRE_TIPO_CAMION", referencedColumnName = "NOMBRE_TIPO_CAMION")
     @ManyToOne
-    private TipoCamion idTipoCamion;
+    private TipoCamion nombreTipoCamion;
     @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")
     @ManyToOne
     private Municipalidad nombreMunicipalidad;
@@ -72,12 +72,12 @@ public class Camion implements Serializable {
         this.registrosCollection = registrosCollection;
     }
 
-    public TipoCamion getIdTipoCamion() {
-        return idTipoCamion;
+    public TipoCamion getNombreTipoCamion() {
+        return nombreTipoCamion;
     }
 
-    public void setIdTipoCamion(TipoCamion idTipoCamion) {
-        this.idTipoCamion = idTipoCamion;
+    public void setNombreTipoCamion(TipoCamion nombreTipoCamion) {
+        this.nombreTipoCamion = nombreTipoCamion;
     }
 
     public Municipalidad getNombreMunicipalidad() {

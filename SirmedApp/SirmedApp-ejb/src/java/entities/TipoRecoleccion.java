@@ -9,13 +9,13 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,34 +29,27 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoRecoleccion.findAll", query = "SELECT t FROM TipoRecoleccion t"),
-    @NamedQuery(name = "TipoRecoleccion.findByIdTipoRecoleccion", query = "SELECT t FROM TipoRecoleccion t WHERE t.idTipoRecoleccion = :idTipoRecoleccion"),
     @NamedQuery(name = "TipoRecoleccion.findByNombreTipoRecoleccion", query = "SELECT t FROM TipoRecoleccion t WHERE t.nombreTipoRecoleccion = :nombreTipoRecoleccion")})
 public class TipoRecoleccion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_TIPO_RECOLECCION")
-    private Integer idTipoRecoleccion;
-    @Size(max = 80)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "NOMBRE_TIPO_RECOLECCION")
     private String nombreTipoRecoleccion;
-    @OneToMany(mappedBy = "idTipoRecoleccion")
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "DESCRP_TIPO_RECOLECCION")
+    private String descrpTipoRecoleccion;
+    @OneToMany(mappedBy = "nombreTipoRecoleccion")
     private Collection<PuntoRecoleccion> puntoRecoleccionCollection;
 
     public TipoRecoleccion() {
     }
 
-    public TipoRecoleccion(Integer idTipoRecoleccion) {
-        this.idTipoRecoleccion = idTipoRecoleccion;
-    }
-
-    public Integer getIdTipoRecoleccion() {
-        return idTipoRecoleccion;
-    }
-
-    public void setIdTipoRecoleccion(Integer idTipoRecoleccion) {
-        this.idTipoRecoleccion = idTipoRecoleccion;
+    public TipoRecoleccion(String nombreTipoRecoleccion) {
+        this.nombreTipoRecoleccion = nombreTipoRecoleccion;
     }
 
     public String getNombreTipoRecoleccion() {
@@ -65,6 +58,14 @@ public class TipoRecoleccion implements Serializable {
 
     public void setNombreTipoRecoleccion(String nombreTipoRecoleccion) {
         this.nombreTipoRecoleccion = nombreTipoRecoleccion;
+    }
+
+    public String getDescrpTipoRecoleccion() {
+        return descrpTipoRecoleccion;
+    }
+
+    public void setDescrpTipoRecoleccion(String descrpTipoRecoleccion) {
+        this.descrpTipoRecoleccion = descrpTipoRecoleccion;
     }
 
     @XmlTransient
@@ -79,7 +80,7 @@ public class TipoRecoleccion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoRecoleccion != null ? idTipoRecoleccion.hashCode() : 0);
+        hash += (nombreTipoRecoleccion != null ? nombreTipoRecoleccion.hashCode() : 0);
         return hash;
     }
 
@@ -90,7 +91,7 @@ public class TipoRecoleccion implements Serializable {
             return false;
         }
         TipoRecoleccion other = (TipoRecoleccion) object;
-        if ((this.idTipoRecoleccion == null && other.idTipoRecoleccion != null) || (this.idTipoRecoleccion != null && !this.idTipoRecoleccion.equals(other.idTipoRecoleccion))) {
+        if ((this.nombreTipoRecoleccion == null && other.nombreTipoRecoleccion != null) || (this.nombreTipoRecoleccion != null && !this.nombreTipoRecoleccion.equals(other.nombreTipoRecoleccion))) {
             return false;
         }
         return true;
@@ -98,7 +99,7 @@ public class TipoRecoleccion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.TipoRecoleccion[ idTipoRecoleccion=" + idTipoRecoleccion + " ]";
+        return "entities.TipoRecoleccion[ nombreTipoRecoleccion=" + nombreTipoRecoleccion + " ]";
     }
     
 }

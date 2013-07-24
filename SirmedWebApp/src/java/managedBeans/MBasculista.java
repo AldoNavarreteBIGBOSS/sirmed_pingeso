@@ -14,10 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpServletRequest;
 import sessionBeans.CrudBasculistaLocal;
 import sessionBeans.CrudUsuarioLocal;
 import sessionBeans.ListaTurnosLocal;
@@ -59,6 +56,7 @@ public class MBasculista{
         ag = new AccionesGenerales();
     }
 
+  
     public Basculista getBasculistaSeleccionado() {
         return basculistaSeleccionado;
     }
@@ -164,11 +162,11 @@ public class MBasculista{
     }
     
     public void actualizarBasculista(){
-       rut = basculistaSeleccionado.getRut();
-       crudBasculista.editarBasculista(rut, turno, nombre, apellido, telefono);
-       resetCampos();
-       ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+             
         try {
+            rut = basculistaSeleccionado.getRut();
+            crudBasculista.editarBasculista(rut, turno, nombre, apellido, telefono);
+            resetCampos();
             ag.actualizarPagina();
         } catch (IOException ex) {
             Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);

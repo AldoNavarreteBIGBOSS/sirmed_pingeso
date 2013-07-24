@@ -9,13 +9,13 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -29,34 +29,27 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoCamion.findAll", query = "SELECT t FROM TipoCamion t"),
-    @NamedQuery(name = "TipoCamion.findByIdTipoCamion", query = "SELECT t FROM TipoCamion t WHERE t.idTipoCamion = :idTipoCamion"),
     @NamedQuery(name = "TipoCamion.findByNombreTipoCamion", query = "SELECT t FROM TipoCamion t WHERE t.nombreTipoCamion = :nombreTipoCamion")})
 public class TipoCamion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_TIPO_CAMION")
-    private Integer idTipoCamion;
-    @Size(max = 40)
+    @NotNull
+    @Size(min = 1, max = 40)
     @Column(name = "NOMBRE_TIPO_CAMION")
     private String nombreTipoCamion;
-    @OneToMany(mappedBy = "idTipoCamion")
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "DESCRP_CAMION")
+    private String descrpCamion;
+    @OneToMany(mappedBy = "nombreTipoCamion")
     private Collection<Camion> camionCollection;
 
     public TipoCamion() {
     }
 
-    public TipoCamion(Integer idTipoCamion) {
-        this.idTipoCamion = idTipoCamion;
-    }
-
-    public Integer getIdTipoCamion() {
-        return idTipoCamion;
-    }
-
-    public void setIdTipoCamion(Integer idTipoCamion) {
-        this.idTipoCamion = idTipoCamion;
+    public TipoCamion(String nombreTipoCamion) {
+        this.nombreTipoCamion = nombreTipoCamion;
     }
 
     public String getNombreTipoCamion() {
@@ -65,6 +58,14 @@ public class TipoCamion implements Serializable {
 
     public void setNombreTipoCamion(String nombreTipoCamion) {
         this.nombreTipoCamion = nombreTipoCamion;
+    }
+
+    public String getDescrpCamion() {
+        return descrpCamion;
+    }
+
+    public void setDescrpCamion(String descrpCamion) {
+        this.descrpCamion = descrpCamion;
     }
 
     @XmlTransient
@@ -79,7 +80,7 @@ public class TipoCamion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoCamion != null ? idTipoCamion.hashCode() : 0);
+        hash += (nombreTipoCamion != null ? nombreTipoCamion.hashCode() : 0);
         return hash;
     }
 
@@ -90,7 +91,7 @@ public class TipoCamion implements Serializable {
             return false;
         }
         TipoCamion other = (TipoCamion) object;
-        if ((this.idTipoCamion == null && other.idTipoCamion != null) || (this.idTipoCamion != null && !this.idTipoCamion.equals(other.idTipoCamion))) {
+        if ((this.nombreTipoCamion == null && other.nombreTipoCamion != null) || (this.nombreTipoCamion != null && !this.nombreTipoCamion.equals(other.nombreTipoCamion))) {
             return false;
         }
         return true;
@@ -98,7 +99,7 @@ public class TipoCamion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.TipoCamion[ idTipoCamion=" + idTipoCamion + " ]";
+        return "entities.TipoCamion[ nombreTipoCamion=" + nombreTipoCamion + " ]";
     }
     
 }

@@ -41,9 +41,9 @@ public class PuntoRecoleccion implements Serializable {
     @Size(max = 65535)
     @Column(name = "DESCRP_PUNTO")
     private String descrpPunto;
-    @JoinColumn(name = "ID_TIPO_RECOLECCION", referencedColumnName = "ID_TIPO_RECOLECCION")
+    @JoinColumn(name = "NOMBRE_TIPO_RECOLECCION", referencedColumnName = "NOMBRE_TIPO_RECOLECCION")
     @ManyToOne
-    private TipoRecoleccion idTipoRecoleccion;
+    private TipoRecoleccion nombreTipoRecoleccion;
     @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")
     @ManyToOne
     private Municipalidad nombreMunicipalidad;
@@ -71,12 +71,12 @@ public class PuntoRecoleccion implements Serializable {
         this.descrpPunto = descrpPunto;
     }
 
-    public TipoRecoleccion getIdTipoRecoleccion() {
-        return idTipoRecoleccion;
+    public TipoRecoleccion getNombreTipoRecoleccion() {
+        return nombreTipoRecoleccion;
     }
 
-    public void setIdTipoRecoleccion(TipoRecoleccion idTipoRecoleccion) {
-        this.idTipoRecoleccion = idTipoRecoleccion;
+    public void setNombreTipoRecoleccion(TipoRecoleccion nombreTipoRecoleccion) {
+        this.nombreTipoRecoleccion = nombreTipoRecoleccion;
     }
 
     public Municipalidad getNombreMunicipalidad() {
