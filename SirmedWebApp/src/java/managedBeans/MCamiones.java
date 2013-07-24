@@ -44,6 +44,7 @@ public class MCamiones {
     
     @PostConstruct
     public void init(){
+        camionSeleccionado = new Camion();
         municipalidades = municipalidades1.listaMunicipalidades();
         camiones = crudCamion.listaCamiones();
         mc = new MessaegeController(); 

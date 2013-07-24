@@ -25,14 +25,14 @@ import sessionBeans.ListaTurnosLocal;
  */
 @Named(value = "mBasculista")
 @RequestScoped
-public class MBasculista{
+public class MBasculista {
+
     @EJB
     private ListaTurnosLocal listaTurnos;
     @EJB
     private CrudUsuarioLocal crudUsuario;
     @EJB
     private CrudBasculistaLocal crudBasculista;
-    
     private String rut;
     private String nombre;
     private String apellido;
@@ -41,22 +41,19 @@ public class MBasculista{
     private String turno;
     private Collection<TurnoTrabajo> turnoTrabajos;
     private Collection<Basculista> basculista;
-    private MessaegeController mc;
     private Basculista basculistaSeleccionado;
     private AccionesGenerales ag;
-
-
-   
+    private MessaegeController mc;
+    
     @PostConstruct
-    public void init(){
+    public void init() {
         turnoTrabajos = listaTurnos.listaTurnos();
         basculista = crudBasculista.listaBasculistas();
-        mc = new MessaegeController(); 
+        mc = new MessaegeController();
         basculistaSeleccionado = new Basculista();
         ag = new AccionesGenerales();
     }
 
-  
     public Basculista getBasculistaSeleccionado() {
         return basculistaSeleccionado;
     }
@@ -64,7 +61,7 @@ public class MBasculista{
     public void setBasculistaSeleccionado(Basculista basculistaSeleccionado) {
         this.basculistaSeleccionado = basculistaSeleccionado;
     }
-    
+
     public Collection<Basculista> getBasculista() {
         return basculista;
     }
@@ -80,7 +77,7 @@ public class MBasculista{
     public void setTurnoTrabajos(Collection<TurnoTrabajo> turnoTrabajos) {
         this.turnoTrabajos = turnoTrabajos;
     }
-    
+
     public CrudUsuarioLocal getCrudUsuario() {
         return crudUsuario;
     }
@@ -144,25 +141,24 @@ public class MBasculista{
     public void setTurno(String turno) {
         this.turno = turno;
     }
-    
+
     public MBasculista() {
     }
-    
-    public void nuevoBasculista(ActionEvent actionEvent){
-        
-        try{
+
+    public void nuevoBasculista(ActionEvent actionEvent) {
+
+        try {
             crudUsuario.crearUsuario(rut, email);
             crudBasculista.crearBasculista(rut, turno, nombre, apellido, telefono);
-            mc.addInfo(actionEvent, "Basculista "+nombre+" "+apellido, "Ingresado con éxito");     
+            mc.addInfo(actionEvent, "Basculista " + nombre + " " + apellido, "Ingresado con éxito");
             resetCampos();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             mc.addError(actionEvent);
         }
     }
-    
-    public void actualizarBasculista(){
-             
+
+    public void actualizarBasculista() {
+
         try {
             rut = basculistaSeleccionado.getRut();
             crudBasculista.editarBasculista(rut, turno, nombre, apellido, telefono);
@@ -171,37 +167,36 @@ public class MBasculista{
         } catch (IOException ex) {
             Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
-    
-    public void borrarBasculista(){
+
+    public void borrarBasculista() {
+
+        try {
             setearBasculista();
             crudBasculista.eliminarBasculista(rut, turno, nombre, apellido, telefono);
             crudUsuario.eliminarUsuario(rut);
-        try {
             ag.actualizarPagina();
         } catch (IOException ex) {
             Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void setearBasculista(){
+
+    public void setearBasculista() {
         rut = basculistaSeleccionado.getRut();
         nombre = basculistaSeleccionado.getNombreB();
         apellido = basculistaSeleccionado.getApellidoB();
         telefono = basculistaSeleccionado.getTelefonoB();
         turno = basculistaSeleccionado.getNombreTurno().getNombreTurno();
-   }
-    
-    public void resetCampos(){
-    
-            this.rut = null;
-            this.nombre = null;
-            this.apellido = null;
-            this.telefono = null;
-            this.email = null;
-            this.turno = null;
     }
-    
-    
+
+    public void resetCampos() {
+
+        this.rut = null;
+        this.nombre = null;
+        this.apellido = null;
+        this.telefono = null;
+        this.email = null;
+        this.turno = null;
+    }
 }
