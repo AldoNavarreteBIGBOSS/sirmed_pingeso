@@ -4,12 +4,12 @@
  */
 package DAO_interfaces;
 
-import entities.Reportes;
+import entities.Reporte;
 
 /**
  *
  * @author Aldo
  */
-public interface ReportesDAO extends GenericDAO<Reportes>{
+public interface ReportesDAO extends GenericDAO<Reporte>{
     
 }

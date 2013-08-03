@@ -15,12 +15,12 @@ import javax.ejb.Local;
 @Local
 public interface CrudRecoleccionLocal {
 
-    public void crearPuntoRecoleccion(String direccion, String municipalidad, String nombreTipo, String descripcion);
+    public void crearPuntoRecoleccion(String direccion, String nombrePunto, String descripcion);
 
     public Collection<PuntoRecoleccion> listaPuntosRecoleccion();
 
-    public void editarPuntoRecoleccion(String direccion, String municipalidad, String nombreTipo, String descripcion);
+    public void editarPuntoRecoleccion(String direccion, String nombrePunto, String descripcion);
 
-    public void eliminarPuntoRecoleccion(String direccion, String municipalidad, String nombreTipo, String descripcion);
+    public void eliminarPuntoRecoleccion(String direccion, String nombrePunto, String descripcion);
     
 }

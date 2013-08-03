@@ -11,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,35 +30,36 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Basculista.findAll", query = "SELECT b FROM Basculista b"),
-    @NamedQuery(name = "Basculista.findByRut", query = "SELECT b FROM Basculista b WHERE b.rut = :rut"),
     @NamedQuery(name = "Basculista.findByNombreB", query = "SELECT b FROM Basculista b WHERE b.nombreB = :nombreB"),
     @NamedQuery(name = "Basculista.findByApellidoB", query = "SELECT b FROM Basculista b WHERE b.apellidoB = :apellidoB"),
-    @NamedQuery(name = "Basculista.findByTelefonoB", query = "SELECT b FROM Basculista b WHERE b.telefonoB = :telefonoB")})
+    @NamedQuery(name = "Basculista.findByTelefonoB", query = "SELECT b FROM Basculista b WHERE b.telefonoB = :telefonoB"),
+    @NamedQuery(name = "Basculista.findByRut", query = "SELECT b FROM Basculista b WHERE b.rut = :rut")})
 public class Basculista implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
+    @Column(name = "NOMBRE_B")
+    private String nombreB;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
+    @Column(name = "APELLIDO_B")
+    private String apellidoB;
+    @Size(max = 20)
+    @Column(name = "TELEFONO_B")
+    private String telefonoB;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "RUT")
     private String rut;
-    @Size(max = 80)
-    @Column(name = "NOMBRE_B")
-    private String nombreB;
-    @Size(max = 80)
-    @Column(name = "APELLIDO_B")
-    private String apellidoB;
-    @Size(max = 15)
-    @Column(name = "TELEFONO_B")
-    private String telefonoB;
     @JoinColumn(name = "RUT", referencedColumnName = "RUT", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Usuario usuario;
-    @JoinColumn(name = "NOMBRE_TURNO", referencedColumnName = "NOMBRE_TURNO")
-    @ManyToOne
-    private TurnoTrabajo nombreTurno;
     @OneToMany(mappedBy = "rut")
-    private Collection<Registros> registrosCollection;
+    private Collection<Registro> registroCollection;
 
     public Basculista() {
     }
@@ -68,12 +68,10 @@ public class Basculista implements Serializable {
         this.rut = rut;
     }
 
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
+    public Basculista(String rut, String nombreB, String apellidoB) {
         this.rut = rut;
+        this.nombreB = nombreB;
+        this.apellidoB = apellidoB;
     }
 
     public String getNombreB() {
@@ -100,6 +98,14 @@ public class Basculista implements Serializable {
         this.telefonoB = telefonoB;
     }
 
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -108,21 +114,13 @@ public class Basculista implements Serializable {
         this.usuario = usuario;
     }
 
-    public TurnoTrabajo getNombreTurno() {
-        return nombreTurno;
-    }
-
-    public void setNombreTurno(TurnoTrabajo nombreTurno) {
-        this.nombreTurno = nombreTurno;
-    }
-
     @XmlTransient
-    public Collection<Registros> getRegistrosCollection() {
-        return registrosCollection;
+    public Collection<Registro> getRegistroCollection() {
+        return registroCollection;
     }
 
-    public void setRegistrosCollection(Collection<Registros> registrosCollection) {
-        this.registrosCollection = registrosCollection;
+    public void setRegistroCollection(Collection<Registro> registroCollection) {
+        this.registroCollection = registroCollection;
     }
 
     @Override

@@ -7,6 +7,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,10 +38,12 @@ public class TipoUsuario implements Serializable {
     @NotNull
     @Column(name = "ID_TIPO")
     private Integer idTipo;
-    @Size(max = 15)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "NOMBRE_TIPO")
     private String nombreTipo;
-    @OneToMany(mappedBy = "idTipo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipo")
     private Collection<Usuario> usuarioCollection;
 
     public TipoUsuario() {
@@ -48,6 +51,11 @@ public class TipoUsuario implements Serializable {
 
     public TipoUsuario(Integer idTipo) {
         this.idTipo = idTipo;
+    }
+
+    public TipoUsuario(Integer idTipo, String nombreTipo) {
+        this.idTipo = idTipo;
+        this.nombreTipo = nombreTipo;
     }
 
     public Integer getIdTipo() {

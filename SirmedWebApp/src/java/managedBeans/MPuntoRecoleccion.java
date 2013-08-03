@@ -36,10 +36,8 @@ public class MPuntoRecoleccion {
     
     private String direccion;
     private String municipalidad;
-    private String nombreTipo;
+    private String nombrePunto;
     private String descripcion;
-    private Collection<Municipalidad> municipalidads;
-    private Collection<TipoRecoleccion> tipoRecoleccion;
     private Collection<PuntoRecoleccion> puntosRecoleccion;
     private PuntoRecoleccion prSeleccionado;
     private AccionesGenerales ag;
@@ -47,12 +45,13 @@ public class MPuntoRecoleccion {
     
     @PostConstruct
     public void init() {
-        municipalidads = municipalidades.listaMunicipalidades();
+        
         puntosRecoleccion = crudRecoleccion.listaPuntosRecoleccion();
-        tipoRecoleccion = crudTipoRecoleccion.listaTipoRecoleccion();
         prSeleccionado = new PuntoRecoleccion();
         mc = new MessaegeController();
         ag = new AccionesGenerales();
+       
+       
     }
 
     public CrudTipoRecoleccionLocal getCrudTipoRecoleccion() {
@@ -95,13 +94,15 @@ public class MPuntoRecoleccion {
         this.municipalidad = municipalidad;
     }
 
-    public String getNombreTipo() {
-        return nombreTipo;
+    public String getNombrePunto() {
+        return nombrePunto;
     }
 
-    public void setNombreTipo(String nombreTipo) {
-        this.nombreTipo = nombreTipo;
+    public void setNombrePunto(String nombrePunto) {
+        this.nombrePunto = nombrePunto;
     }
+
+    
 
     public String getDescripcion() {
         return descripcion;
@@ -111,21 +112,7 @@ public class MPuntoRecoleccion {
         this.descripcion = descripcion;
     }
 
-    public Collection<Municipalidad> getMunicipalidads() {
-        return municipalidads;
-    }
-
-    public void setMunicipalidads(Collection<Municipalidad> municipalidads) {
-        this.municipalidads = municipalidads;
-    }
-
-    public Collection<TipoRecoleccion> getTipoRecoleccion() {
-        return tipoRecoleccion;
-    }
-
-    public void setTipoRecoleccion(Collection<TipoRecoleccion> tipoRecoleccion) {
-        this.tipoRecoleccion = tipoRecoleccion;
-    }
+    
 
     public Collection<PuntoRecoleccion> getPuntosRecoleccion() {
         return puntosRecoleccion;
@@ -149,7 +136,7 @@ public class MPuntoRecoleccion {
     public void nuevoPunto(ActionEvent actionEvent) {
 
         try {
-            crudRecoleccion.crearPuntoRecoleccion(direccion, municipalidad, nombreTipo, descripcion);
+            crudRecoleccion.crearPuntoRecoleccion(direccion, nombrePunto, descripcion);
             mc.addInfo(actionEvent, "Punto de Recolección Ubicado en " + direccion+" en la Municipalidad de "+municipalidad, "Ingresado con éxito");
             resetCampos();
         } catch (Exception e) {
@@ -161,7 +148,7 @@ public class MPuntoRecoleccion {
 
         try {
             direccion = prSeleccionado.getDireccionPunto();
-            crudRecoleccion.editarPuntoRecoleccion(direccion, municipalidad, nombreTipo, descripcion);
+            crudRecoleccion.editarPuntoRecoleccion(direccion, nombrePunto, descripcion);
             resetCampos();
             ag.actualizarPagina();
         } catch (IOException ex) {
@@ -174,7 +161,7 @@ public class MPuntoRecoleccion {
 
         try {
             setearPunto();
-            crudRecoleccion.eliminarPuntoRecoleccion(direccion, municipalidad, nombreTipo, descripcion);
+            crudRecoleccion.eliminarPuntoRecoleccion(direccion, nombrePunto, descripcion);
             ag.actualizarPagina();
         } catch (IOException ex) {
             Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
@@ -183,9 +170,8 @@ public class MPuntoRecoleccion {
 
     public void setearPunto() {
         direccion = prSeleccionado.getDireccionPunto();
-        municipalidad = prSeleccionado.getNombreMunicipalidad().getNombreMunicipalidad();
-        nombreTipo = prSeleccionado.getNombreTipoRecoleccion().getNombreTipoRecoleccion();
-        descripcion = prSeleccionado.getDescrpPunto();
+        nombrePunto = prSeleccionado.getNombrePunto();
+        descripcion = prSeleccionado.getDescripcionPunto();
    }
 
     public void resetCampos() {
@@ -193,6 +179,6 @@ public class MPuntoRecoleccion {
         this.direccion = null;
         this.descripcion = null;
         this.municipalidad = null;
-        this.nombreTipo = null;
+        this.nombrePunto = null;
     }
 }

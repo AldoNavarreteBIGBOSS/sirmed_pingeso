@@ -32,9 +32,7 @@
                     #{bas.telefonoB}  
                 </p:column> 
                 
-                <p:column headerText="Telefono">  
-                    #{bas.nombreTurno.nombreTurno}  
-                </p:column> 
+                
                 
              
                  <f:facet name="footer">  
@@ -54,10 +52,7 @@
                 <p:inputText value="#{mBasculista.apellido}"/>
                 <p:outputLabel value="Telefono: "/>
                 <p:inputText value="#{mBasculista.telefono}"/>
-                <p:outputLabel value="Turno: "/>
-                <h:selectOneMenu value="#{mBasculista.turno}" >
-                    <f:selectItems value="#{mBasculista.turnoTrabajos}" var="elem" itemValue="#{elem.nombreTurno}" itemLabel="#{elem.nombreTurno}"/>
-                </h:selectOneMenu> 
+               
                 <f:facet name="footer">
                     <p:commandButton value="Editar" onclick="confirmation.show();" type="button" ajax="false"/> 
                     <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  

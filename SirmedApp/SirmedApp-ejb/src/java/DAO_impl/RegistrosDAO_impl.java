@@ -5,17 +5,16 @@
 package DAO_impl;
 
 import DAO_interfaces.RegistrosDAO;
-import entities.Registros;
-import entities.Usuario;
+import entities.Registro;
 import javax.persistence.EntityManager;
 
 /**
  *
  * @author Aldo
  */
-public class RegistrosDAO_impl extends GenericDAO_impl <Registros> implements RegistrosDAO{
+public class RegistrosDAO_impl extends GenericDAO_impl <Registro> implements RegistrosDAO{
     
     public RegistrosDAO_impl(EntityManager em){
-        super(Registros.class, em);
+        super(Registro.class, em);
 }
 }

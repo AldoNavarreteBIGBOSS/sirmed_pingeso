@@ -4,12 +4,12 @@
  */
 package DAO_interfaces;
 
-import entities.Registros;
+import entities.Registro;
 
 /**
  *
  * @author Aldo
  */
-public interface RegistrosDAO extends GenericDAO <Registros> {
+public interface RegistrosDAO extends GenericDAO <Registro> {
     
 }

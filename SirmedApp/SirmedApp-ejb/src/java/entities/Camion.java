@@ -7,6 +7,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -30,54 +31,45 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Camion.findAll", query = "SELECT c FROM Camion c"),
-    @NamedQuery(name = "Camion.findByPatenteCamion", query = "SELECT c FROM Camion c WHERE c.patenteCamion = :patenteCamion")})
+    @NamedQuery(name = "Camion.findByPatente", query = "SELECT c FROM Camion c WHERE c.patente = :patente")})
 public class Camion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "PATENTE_CAMION")
-    private String patenteCamion;
-    @OneToMany(mappedBy = "patenteCamion")
-    private Collection<Registros> registrosCollection;
-    @JoinColumn(name = "NOMBRE_TIPO_CAMION", referencedColumnName = "NOMBRE_TIPO_CAMION")
-    @ManyToOne
-    private TipoCamion nombreTipoCamion;
+    @Column(name = "PATENTE")
+    private String patente;
+    @JoinColumn(name = "ID_TC", referencedColumnName = "ID_TC")
+    @ManyToOne(optional = false)
+    private TipoCamion idTc;
     @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Municipalidad nombreMunicipalidad;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patente")
+    private Collection<Registro> registroCollection;
 
     public Camion() {
     }
 
-    public Camion(String patenteCamion) {
-        this.patenteCamion = patenteCamion;
+    public Camion(String patente) {
+        this.patente = patente;
     }
 
-    public String getPatenteCamion() {
-        return patenteCamion;
+    public String getPatente() {
+        return patente;
     }
 
-    public void setPatenteCamion(String patenteCamion) {
-        this.patenteCamion = patenteCamion;
+    public void setPatente(String patente) {
+        this.patente = patente;
     }
 
-    @XmlTransient
-    public Collection<Registros> getRegistrosCollection() {
-        return registrosCollection;
+    public TipoCamion getIdTc() {
+        return idTc;
     }
 
-    public void setRegistrosCollection(Collection<Registros> registrosCollection) {
-        this.registrosCollection = registrosCollection;
-    }
-
-    public TipoCamion getNombreTipoCamion() {
-        return nombreTipoCamion;
-    }
-
-    public void setNombreTipoCamion(TipoCamion nombreTipoCamion) {
-        this.nombreTipoCamion = nombreTipoCamion;
+    public void setIdTc(TipoCamion idTc) {
+        this.idTc = idTc;
     }
 
     public Municipalidad getNombreMunicipalidad() {
@@ -88,10 +80,19 @@ public class Camion implements Serializable {
         this.nombreMunicipalidad = nombreMunicipalidad;
     }
 
+    @XmlTransient
+    public Collection<Registro> getRegistroCollection() {
+        return registroCollection;
+    }
+
+    public void setRegistroCollection(Collection<Registro> registroCollection) {
+        this.registroCollection = registroCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (patenteCamion != null ? patenteCamion.hashCode() : 0);
+        hash += (patente != null ? patente.hashCode() : 0);
         return hash;
     }
 
@@ -102,7 +103,7 @@ public class Camion implements Serializable {
             return false;
         }
         Camion other = (Camion) object;
-        if ((this.patenteCamion == null && other.patenteCamion != null) || (this.patenteCamion != null && !this.patenteCamion.equals(other.patenteCamion))) {
+        if ((this.patente == null && other.patente != null) || (this.patente != null && !this.patente.equals(other.patente))) {
             return false;
         }
         return true;
@@ -110,7 +111,7 @@ public class Camion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Camion[ patenteCamion=" + patenteCamion + " ]";
+        return "entities.Camion[ patente=" + patente + " ]";
     }
     
 }

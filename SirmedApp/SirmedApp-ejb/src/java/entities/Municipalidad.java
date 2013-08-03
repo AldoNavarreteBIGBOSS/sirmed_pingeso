@@ -7,9 +7,13 @@ package entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,36 +33,49 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Municipalidad.findAll", query = "SELECT m FROM Municipalidad m"),
     @NamedQuery(name = "Municipalidad.findByNombreMunicipalidad", query = "SELECT m FROM Municipalidad m WHERE m.nombreMunicipalidad = :nombreMunicipalidad"),
-    @NamedQuery(name = "Municipalidad.findByTelefonpMunicipalidad", query = "SELECT m FROM Municipalidad m WHERE m.telefonpMunicipalidad = :telefonpMunicipalidad"),
+    @NamedQuery(name = "Municipalidad.findByTelefonoMunicipalidad", query = "SELECT m FROM Municipalidad m WHERE m.telefonoMunicipalidad = :telefonoMunicipalidad"),
     @NamedQuery(name = "Municipalidad.findByDireccionMunicipalidad", query = "SELECT m FROM Municipalidad m WHERE m.direccionMunicipalidad = :direccionMunicipalidad")})
 public class Municipalidad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 50)
     @Column(name = "NOMBRE_MUNICIPALIDAD")
     private String nombreMunicipalidad;
-    @Size(max = 40)
-    @Column(name = "TELEFONP_MUNICIPALIDAD")
-    private String telefonpMunicipalidad;
-    @Size(max = 40)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "TELEFONO_MUNICIPALIDAD")
+    private String telefonoMunicipalidad;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "DIRECCION_MUNICIPALIDAD")
     private String direccionMunicipalidad;
-    @OneToMany(mappedBy = "nombreMunicipalidad")
+    @JoinTable(name = "municipalidad_punto", joinColumns = {
+        @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")}, inverseJoinColumns = {
+        @JoinColumn(name = "ID_PUNTO", referencedColumnName = "ID_PUNTO")})
+    @ManyToMany
     private Collection<PuntoRecoleccion> puntoRecoleccionCollection;
-    @OneToMany(mappedBy = "nombreMunicipalidad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreMunicipalidad")
     private Collection<Chofer> choferCollection;
-    @OneToMany(mappedBy = "nombreMunicipalidad")
-    private Collection<Registros> registrosCollection;
-    @OneToMany(mappedBy = "nombreMunicipalidad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreMunicipalidad")
     private Collection<Camion> camionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreMunicipalidad")
+    private Collection<Registro> registroCollection;
 
     public Municipalidad() {
     }
 
     public Municipalidad(String nombreMunicipalidad) {
         this.nombreMunicipalidad = nombreMunicipalidad;
+    }
+
+    public Municipalidad(String nombreMunicipalidad, String telefonoMunicipalidad, String direccionMunicipalidad) {
+        this.nombreMunicipalidad = nombreMunicipalidad;
+        this.telefonoMunicipalidad = telefonoMunicipalidad;
+        this.direccionMunicipalidad = direccionMunicipalidad;
     }
 
     public String getNombreMunicipalidad() {
@@ -69,12 +86,12 @@ public class Municipalidad implements Serializable {
         this.nombreMunicipalidad = nombreMunicipalidad;
     }
 
-    public String getTelefonpMunicipalidad() {
-        return telefonpMunicipalidad;
+    public String getTelefonoMunicipalidad() {
+        return telefonoMunicipalidad;
     }
 
-    public void setTelefonpMunicipalidad(String telefonpMunicipalidad) {
-        this.telefonpMunicipalidad = telefonpMunicipalidad;
+    public void setTelefonoMunicipalidad(String telefonoMunicipalidad) {
+        this.telefonoMunicipalidad = telefonoMunicipalidad;
     }
 
     public String getDireccionMunicipalidad() {
@@ -104,21 +121,21 @@ public class Municipalidad implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Registros> getRegistrosCollection() {
-        return registrosCollection;
-    }
-
-    public void setRegistrosCollection(Collection<Registros> registrosCollection) {
-        this.registrosCollection = registrosCollection;
-    }
-
-    @XmlTransient
     public Collection<Camion> getCamionCollection() {
         return camionCollection;
     }
 
     public void setCamionCollection(Collection<Camion> camionCollection) {
         this.camionCollection = camionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Registro> getRegistroCollection() {
+        return registroCollection;
+    }
+
+    public void setRegistroCollection(Collection<Registro> registroCollection) {
+        this.registroCollection = registroCollection;
     }
 
     @Override

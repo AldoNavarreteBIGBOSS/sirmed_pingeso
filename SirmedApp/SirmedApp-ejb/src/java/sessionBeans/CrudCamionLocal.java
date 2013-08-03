@@ -17,11 +17,11 @@ public interface CrudCamionLocal {
 
     public Collection<Camion> listaCamiones();
 
-    public void crearCamion(String patente, String municipalidad, String nombreTipo);
+    public void crearCamion(String patente, String municipalidad, int tipoCamion);
 
-    public void editarCamion(String patente, String municipalidad, String nombreTipo);
+    public void editarCamion(String patente, String municipalidad, int tipoCamion);
 
-    public void eliminarCamion(String patente, String municipalidad, String nombreTipo);
+    public void eliminarCamion(String patente, String municipalidad, int tipoCamion);
 
     
     

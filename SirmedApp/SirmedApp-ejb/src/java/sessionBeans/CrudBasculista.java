@@ -6,7 +6,6 @@ package sessionBeans;
 
 import DAO.DAOFactory;
 import entities.Basculista;
-import entities.TurnoTrabajo;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,15 +22,13 @@ public class CrudBasculista implements CrudBasculistaLocal {
     private EntityManager em;
 
     @Override
-    public void crearBasculista(String rut, String turno, String nombre, String apellido, String telefono) {
-        Basculista b  = new Basculista();
+    public void crearBasculista(String rut, String nombre, String apellido, String telefono) {
+        Basculista b = new Basculista();
         b.setRut(rut);
-        TurnoTrabajo trabajo = new TurnoTrabajo(turno);
-        b.setNombreTurno(trabajo);
+        b.setTelefonoB(telefono);
         b.setNombreB(nombre);
         b.setApellidoB(apellido);
-        b.setTelefonoB(telefono);
-        
+
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         dF.getBasculistaDAO().insert(b);
     }
@@ -45,28 +42,27 @@ public class CrudBasculista implements CrudBasculistaLocal {
     }
     
     @Override
-    public void editarBasculista(String rut, String turno, String nombre, String apellido, String telefono){
+    public void editarBasculista(String rut, String nombre, String apellido, String telefono){
+        
         Basculista b = new Basculista();
         b.setRut(rut);
-        TurnoTrabajo trabajo = new TurnoTrabajo(turno);
-        b.setNombreTurno(trabajo);
+        b.setTelefonoB(telefono);
         b.setNombreB(nombre);
         b.setApellidoB(apellido);
-        b.setTelefonoB(telefono);
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         dF.getBasculistaDAO().update(b);
     }
     
     @Override
-    public void eliminarBasculista(String rut, String turno, String nombre, String apellido, String telefono){
+    public void eliminarBasculista(String rut, String nombre, String apellido, String telefono){
+        
         Basculista b = new Basculista();
         b.setRut(rut);
-        TurnoTrabajo trabajo = new TurnoTrabajo(turno);
-        b.setNombreTurno(trabajo);
+        b.setTelefonoB(telefono);
         b.setNombreB(nombre);
         b.setApellidoB(apellido);
-        b.setTelefonoB(telefono);
+        
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         dF.getBasculistaDAO().delete(b);
     }

@@ -5,7 +5,6 @@
 package managedBeans;
 
 import entities.Basculista;
-import entities.TurnoTrabajo;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -17,7 +16,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
 import sessionBeans.CrudBasculistaLocal;
 import sessionBeans.CrudUsuarioLocal;
-import sessionBeans.ListaTurnosLocal;
 
 /**
  *
@@ -27,27 +25,26 @@ import sessionBeans.ListaTurnosLocal;
 @RequestScoped
 public class MBasculista {
 
-    @EJB
-    private ListaTurnosLocal listaTurnos;
+   
     @EJB
     private CrudUsuarioLocal crudUsuario;
     @EJB
     private CrudBasculistaLocal crudBasculista;
+    
     private String rut;
     private String nombre;
     private String apellido;
     private String telefono;
     private String email;
-    private String turno;
-    private Collection<TurnoTrabajo> turnoTrabajos;
     private Collection<Basculista> basculista;
     private Basculista basculistaSeleccionado;
     private AccionesGenerales ag;
     private MessaegeController mc;
+    private Basculista[] test;
     
     @PostConstruct
     public void init() {
-        turnoTrabajos = listaTurnos.listaTurnos();
+   
         basculista = crudBasculista.listaBasculistas();
         mc = new MessaegeController();
         basculistaSeleccionado = new Basculista();
@@ -68,14 +65,6 @@ public class MBasculista {
 
     public void setBasculista(Collection<Basculista> basculista) {
         this.basculista = basculista;
-    }
-
-    public Collection<TurnoTrabajo> getTurnoTrabajos() {
-        return turnoTrabajos;
-    }
-
-    public void setTurnoTrabajos(Collection<TurnoTrabajo> turnoTrabajos) {
-        this.turnoTrabajos = turnoTrabajos;
     }
 
     public CrudUsuarioLocal getCrudUsuario() {
@@ -134,22 +123,19 @@ public class MBasculista {
         this.email = email;
     }
 
-    public String getTurno() {
-        return turno;
-    }
+    
 
-    public void setTurno(String turno) {
-        this.turno = turno;
-    }
+  
 
     public MBasculista() {
     }
 
     public void nuevoBasculista(ActionEvent actionEvent) {
-
+             
         try {
+            
             crudUsuario.crearUsuario(rut, email);
-            crudBasculista.crearBasculista(rut, turno, nombre, apellido, telefono);
+            crudBasculista.crearBasculista(rut, nombre, apellido, telefono);
             mc.addInfo(actionEvent, "Basculista " + nombre + " " + apellido, "Ingresado con éxito");
             resetCampos();
         } catch (Exception e) {
@@ -161,7 +147,7 @@ public class MBasculista {
 
         try {
             rut = basculistaSeleccionado.getRut();
-            crudBasculista.editarBasculista(rut, turno, nombre, apellido, telefono);
+            crudBasculista.editarBasculista(rut, nombre, apellido, telefono);
             resetCampos();
             ag.actualizarPagina();
         } catch (IOException ex) {
@@ -174,7 +160,7 @@ public class MBasculista {
 
         try {
             setearBasculista();
-            crudBasculista.eliminarBasculista(rut, turno, nombre, apellido, telefono);
+            crudBasculista.eliminarBasculista(rut, nombre, apellido, telefono);
             crudUsuario.eliminarUsuario(rut);
             ag.actualizarPagina();
         } catch (IOException ex) {
@@ -187,7 +173,7 @@ public class MBasculista {
         nombre = basculistaSeleccionado.getNombreB();
         apellido = basculistaSeleccionado.getApellidoB();
         telefono = basculistaSeleccionado.getTelefonoB();
-        turno = basculistaSeleccionado.getNombreTurno().getNombreTurno();
+        
     }
 
     public void resetCampos() {
@@ -197,6 +183,6 @@ public class MBasculista {
         this.apellido = null;
         this.telefono = null;
         this.email = null;
-        this.turno = null;
+        
     }
 }

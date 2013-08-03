@@ -32,7 +32,7 @@ public class MCamiones {
     
     private String patente;
     private String municipalidad;
-    private String nombreTipo;
+    private int TipoCamion;
     private Collection<Municipalidad> municipalidades;
     private Collection<Camion> camiones;
     private Camion camionSeleccionado;
@@ -83,13 +83,15 @@ public class MCamiones {
         this.municipalidad = municipalidad;
     }
 
-    public String getNombreTipo() {
-        return nombreTipo;
+    public int getTipoCamion() {
+        return TipoCamion;
     }
 
-    public void setNombreTipo(String nombreTipo) {
-        this.nombreTipo = nombreTipo;
+    public void setTipoCamion(int TipoCamion) {
+        this.TipoCamion = TipoCamion;
     }
+
+   
 
     public Collection<Municipalidad> getMunicipalidades() {
         return municipalidades;
@@ -117,7 +119,7 @@ public class MCamiones {
     
     public void nuevoCamion(){
         try{
-            crudCamion.crearCamion(patente, municipalidad, nombreTipo);
+            crudCamion.crearCamion(patente, municipalidad, TipoCamion);
             mc.addInfo(null, "Camión con patente "+patente, " Ingresado con éxito");
             resetCampos();
         }
@@ -128,8 +130,8 @@ public class MCamiones {
     
     public void actualizarCamion(){
         try {
-            patente = camionSeleccionado.getPatenteCamion();
-            crudCamion.editarCamion(patente, municipalidad, nombreTipo);
+            patente = camionSeleccionado.getPatente();
+            crudCamion.editarCamion(patente, municipalidad, TipoCamion);
             resetCampos();
             ag.actualizarPagina();
         } catch (IOException ex) {
@@ -141,7 +143,7 @@ public class MCamiones {
                    
         try {
             setearCamion();
-            crudCamion.eliminarCamion(patente, municipalidad, nombreTipo);
+            crudCamion.eliminarCamion(patente, municipalidad, TipoCamion);
             ag.actualizarPagina();
         } catch (IOException ex) {
             Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,14 +151,14 @@ public class MCamiones {
     }
     
     public void setearCamion(){
-        patente = camionSeleccionado.getPatenteCamion();
+        patente = camionSeleccionado.getPatente();
         municipalidad = camionSeleccionado.getNombreMunicipalidad().getNombreMunicipalidad();
-        nombreTipo = camionSeleccionado.getNombreTipoCamion().getNombreTipoCamion();
+        TipoCamion = camionSeleccionado.getIdTc().getIdTc();
     }
     
     public void resetCampos(){
         this.patente = null;
         this.municipalidad = null;
-        this.nombreTipo = null;
+        
     }
 }

@@ -5,9 +5,7 @@
 package sessionBeans;
 
 import DAO.DAOFactory;
-import entities.Municipalidad;
 import entities.PuntoRecoleccion;
-import entities.TipoRecoleccion;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,14 +23,11 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
     
     
     @Override
-    public void crearPuntoRecoleccion(String direccion, String municipalidad, String nombreTipo, String descripcion){
+    public void crearPuntoRecoleccion(String direccion, String nombrePunto, String descripcion){
         PuntoRecoleccion pr = new PuntoRecoleccion();
-        Municipalidad m = new Municipalidad(municipalidad);
-        TipoRecoleccion tr = new TipoRecoleccion(nombreTipo);
         pr.setDireccionPunto(direccion);
-        pr.setNombreMunicipalidad(m);
-        pr.setNombreTipoRecoleccion(tr);
-        pr.setDescrpPunto(descripcion);
+        pr.setNombrePunto(nombrePunto);
+        pr.setDescripcionPunto(descripcion);
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         dF.getPuntoRecoleccionDAO().insert(pr);
@@ -45,28 +40,22 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
     }
     
     @Override
-    public void editarPuntoRecoleccion(String direccion, String municipalidad, String nombreTipo, String descripcion){
+    public void editarPuntoRecoleccion(String direccion, String nombrePunto, String descripcion){
         PuntoRecoleccion pr = new PuntoRecoleccion();
-        Municipalidad m = new Municipalidad(municipalidad);
-        TipoRecoleccion tr = new TipoRecoleccion(nombreTipo);
         pr.setDireccionPunto(direccion);
-        pr.setNombreMunicipalidad(m);
-        pr.setNombreTipoRecoleccion(tr);
-        pr.setDescrpPunto(descripcion);
+        pr.setNombrePunto(nombrePunto);
+        pr.setDescripcionPunto(descripcion);
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         dF.getPuntoRecoleccionDAO().update(pr);
     }
     
     @Override
-    public void eliminarPuntoRecoleccion(String direccion, String municipalidad, String nombreTipo, String descripcion){
+    public void eliminarPuntoRecoleccion(String direccion, String nombrePunto, String descripcion){
         PuntoRecoleccion pr = new PuntoRecoleccion();
-        Municipalidad m = new Municipalidad(municipalidad);
-        TipoRecoleccion tr = new TipoRecoleccion(nombreTipo);
         pr.setDireccionPunto(direccion);
-        pr.setNombreMunicipalidad(m);
-        pr.setNombreTipoRecoleccion(tr);
-        pr.setDescrpPunto(descripcion);
+        pr.setNombrePunto(nombrePunto);
+        pr.setDescripcionPunto(descripcion);
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         dF.getPuntoRecoleccionDAO().delete(pr);

@@ -9,7 +9,9 @@
     </h:head>
     
     <h:body>
+        
         <h:form>
+        
         <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
         <p:panelGrid id="panel" columns="2">
             <f:facet name="header">  
@@ -25,10 +27,8 @@
             <p:inputText value="#{mBasculista.telefono}" required="true"/>
             <h:outputLabel value="Email: "/>
             <p:inputText value="#{mBasculista.email}" required="true"/>
-            <h:outputLabel value="Turno: "/>
-            <h:selectOneMenu value="#{mBasculista.turno}" >
-                <f:selectItems value="#{mBasculista.turnoTrabajos}" var="elem" itemValue="#{elem.nombreTurno}" itemLabel="#{elem.nombreTurno}"/>
-            </h:selectOneMenu> 
+            
+            
             <f:facet name="footer">
                 <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista(actionEvent)}" update="@all" icon="ui-icon-check"/>
             </f:facet>  

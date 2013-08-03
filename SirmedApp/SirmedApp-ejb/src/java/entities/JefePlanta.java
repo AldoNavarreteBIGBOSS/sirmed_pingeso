@@ -30,32 +30,38 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "JefePlanta.findAll", query = "SELECT j FROM JefePlanta j"),
-    @NamedQuery(name = "JefePlanta.findByRut", query = "SELECT j FROM JefePlanta j WHERE j.rut = :rut"),
     @NamedQuery(name = "JefePlanta.findByNombreJp", query = "SELECT j FROM JefePlanta j WHERE j.nombreJp = :nombreJp"),
     @NamedQuery(name = "JefePlanta.findByApellidoJp", query = "SELECT j FROM JefePlanta j WHERE j.apellidoJp = :apellidoJp"),
-    @NamedQuery(name = "JefePlanta.findByTelefonoJp", query = "SELECT j FROM JefePlanta j WHERE j.telefonoJp = :telefonoJp")})
+    @NamedQuery(name = "JefePlanta.findByTelefonoJp", query = "SELECT j FROM JefePlanta j WHERE j.telefonoJp = :telefonoJp"),
+    @NamedQuery(name = "JefePlanta.findByRut", query = "SELECT j FROM JefePlanta j WHERE j.rut = :rut")})
 public class JefePlanta implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
+    @Column(name = "NOMBRE_JP")
+    private String nombreJp;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
+    @Column(name = "APELLIDO_JP")
+    private String apellidoJp;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "TELEFONO_JP")
+    private String telefonoJp;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "RUT")
     private String rut;
-    @Size(max = 80)
-    @Column(name = "NOMBRE_JP")
-    private String nombreJp;
-    @Size(max = 80)
-    @Column(name = "APELLIDO_JP")
-    private String apellidoJp;
-    @Size(max = 15)
-    @Column(name = "TELEFONO_JP")
-    private String telefonoJp;
     @JoinColumn(name = "RUT", referencedColumnName = "RUT", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Usuario usuario;
     @OneToMany(mappedBy = "rut")
-    private Collection<Reportes> reportesCollection;
+    private Collection<Reporte> reporteCollection;
 
     public JefePlanta() {
     }
@@ -64,12 +70,11 @@ public class JefePlanta implements Serializable {
         this.rut = rut;
     }
 
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
+    public JefePlanta(String rut, String nombreJp, String apellidoJp, String telefonoJp) {
         this.rut = rut;
+        this.nombreJp = nombreJp;
+        this.apellidoJp = apellidoJp;
+        this.telefonoJp = telefonoJp;
     }
 
     public String getNombreJp() {
@@ -96,6 +101,14 @@ public class JefePlanta implements Serializable {
         this.telefonoJp = telefonoJp;
     }
 
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -105,12 +118,12 @@ public class JefePlanta implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Reportes> getReportesCollection() {
-        return reportesCollection;
+    public Collection<Reporte> getReporteCollection() {
+        return reporteCollection;
     }
 
-    public void setReportesCollection(Collection<Reportes> reportesCollection) {
-        this.reportesCollection = reportesCollection;
+    public void setReporteCollection(Collection<Reporte> reporteCollection) {
+        this.reporteCollection = reporteCollection;
     }
 
     @Override

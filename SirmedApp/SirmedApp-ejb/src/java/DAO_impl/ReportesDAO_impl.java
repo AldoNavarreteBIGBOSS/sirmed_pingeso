@@ -5,15 +5,15 @@
 package DAO_impl;
 
 import DAO_interfaces.ReportesDAO;
-import entities.Reportes;
+import entities.Reporte;
 import javax.persistence.EntityManager;
 
 /**
  *
  * @author Aldo
  */
-public class ReportesDAO_impl extends GenericDAO_impl <Reportes> implements ReportesDAO{
+public class ReportesDAO_impl extends GenericDAO_impl <Reporte> implements ReportesDAO{
  public ReportesDAO_impl(EntityManager em){
-        super(Reportes.class, em);   
+        super(Reporte.class, em);   
 }
 }

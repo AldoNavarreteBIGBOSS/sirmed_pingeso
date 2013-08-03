@@ -7,6 +7,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -34,38 +35,48 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Chofer.findByNombreChofer", query = "SELECT c FROM Chofer c WHERE c.nombreChofer = :nombreChofer"),
     @NamedQuery(name = "Chofer.findByApellidoChofer", query = "SELECT c FROM Chofer c WHERE c.apellidoChofer = :apellidoChofer"),
     @NamedQuery(name = "Chofer.findByTelefonoChofer", query = "SELECT c FROM Chofer c WHERE c.telefonoChofer = :telefonoChofer"),
-    @NamedQuery(name = "Chofer.findByEmailChofer", query = "SELECT c FROM Chofer c WHERE c.emailChofer = :emailChofer")})
+    @NamedQuery(name = "Chofer.findByMailChofer", query = "SELECT c FROM Chofer c WHERE c.mailChofer = :mailChofer")})
 public class Chofer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 8)
     @Column(name = "RUT_CHOFER")
     private String rutChofer;
-    @Size(max = 80)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "NOMBRE_CHOFER")
     private String nombreChofer;
-    @Size(max = 80)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "APELLIDO_CHOFER")
     private String apellidoChofer;
-    @Size(max = 15)
+    @Size(max = 20)
     @Column(name = "TELEFONO_CHOFER")
     private String telefonoChofer;
-    @Size(max = 100)
-    @Column(name = "EMAIL_CHOFER")
-    private String emailChofer;
+    @Size(max = 40)
+    @Column(name = "MAIL_CHOFER")
+    private String mailChofer;
     @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Municipalidad nombreMunicipalidad;
-    @OneToMany(mappedBy = "rutChofer")
-    private Collection<Registros> registrosCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rutChofer")
+    private Collection<Registro> registroCollection;
 
     public Chofer() {
     }
 
     public Chofer(String rutChofer) {
         this.rutChofer = rutChofer;
+    }
+
+    public Chofer(String rutChofer, String nombreChofer, String apellidoChofer) {
+        this.rutChofer = rutChofer;
+        this.nombreChofer = nombreChofer;
+        this.apellidoChofer = apellidoChofer;
     }
 
     public String getRutChofer() {
@@ -100,12 +111,12 @@ public class Chofer implements Serializable {
         this.telefonoChofer = telefonoChofer;
     }
 
-    public String getEmailChofer() {
-        return emailChofer;
+    public String getMailChofer() {
+        return mailChofer;
     }
 
-    public void setEmailChofer(String emailChofer) {
-        this.emailChofer = emailChofer;
+    public void setMailChofer(String mailChofer) {
+        this.mailChofer = mailChofer;
     }
 
     public Municipalidad getNombreMunicipalidad() {
@@ -117,12 +128,12 @@ public class Chofer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Registros> getRegistrosCollection() {
-        return registrosCollection;
+    public Collection<Registro> getRegistroCollection() {
+        return registroCollection;
     }
 
-    public void setRegistrosCollection(Collection<Registros> registrosCollection) {
-        this.registrosCollection = registrosCollection;
+    public void setRegistroCollection(Collection<Registro> registroCollection) {
+        this.registroCollection = registroCollection;
     }
 
     @Override

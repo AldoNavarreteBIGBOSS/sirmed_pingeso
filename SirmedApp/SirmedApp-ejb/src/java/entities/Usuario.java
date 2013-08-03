@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findByRut", query = "SELECT u FROM Usuario u WHERE u.rut = :rut"),
-    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
+    @NamedQuery(name = "Usuario.findByMail", query = "SELECT u FROM Usuario u WHERE u.mail = :mail"),
     @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -40,15 +40,18 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "RUT")
     private String rut;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 150)
-    @Column(name = "EMAIL")
-    private String email;
-    @Size(max = 150)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 40)
+    @Column(name = "MAIL")
+    private String mail;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 150)
     @Column(name = "PASSWORD")
     private String password;
     @JoinColumn(name = "ID_TIPO", referencedColumnName = "ID_TIPO")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private TipoUsuario idTipo;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Basculista basculista;
@@ -62,6 +65,12 @@ public class Usuario implements Serializable {
         this.rut = rut;
     }
 
+    public Usuario(String rut, String mail, String password) {
+        this.rut = rut;
+        this.mail = mail;
+        this.password = password;
+    }
+
     public String getRut() {
         return rut;
     }
@@ -70,12 +79,12 @@ public class Usuario implements Serializable {
         this.rut = rut;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassword() {

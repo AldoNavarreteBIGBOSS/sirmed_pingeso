@@ -10,10 +10,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,27 +32,51 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoRecoleccion.findAll", query = "SELECT t FROM TipoRecoleccion t"),
+    @NamedQuery(name = "TipoRecoleccion.findByIdTipoRecoleccion", query = "SELECT t FROM TipoRecoleccion t WHERE t.idTipoRecoleccion = :idTipoRecoleccion"),
     @NamedQuery(name = "TipoRecoleccion.findByNombreTipoRecoleccion", query = "SELECT t FROM TipoRecoleccion t WHERE t.nombreTipoRecoleccion = :nombreTipoRecoleccion")})
 public class TipoRecoleccion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 80)
+    @Column(name = "ID_TIPO_RECOLECCION")
+    private Integer idTipoRecoleccion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "NOMBRE_TIPO_RECOLECCION")
     private String nombreTipoRecoleccion;
     @Lob
     @Size(max = 65535)
-    @Column(name = "DESCRP_TIPO_RECOLECCION")
-    private String descrpTipoRecoleccion;
-    @OneToMany(mappedBy = "nombreTipoRecoleccion")
+    @Column(name = "DESCRIPCION_TIPO_RECOLECCION")
+    private String descripcionTipoRecoleccion;
+    @JoinTable(name = "punto_tipo", joinColumns = {
+        @JoinColumn(name = "ID_TIPO_RECOLECCION", referencedColumnName = "ID_TIPO_RECOLECCION")}, inverseJoinColumns = {
+        @JoinColumn(name = "ID_PUNTO", referencedColumnName = "ID_PUNTO")})
+    @ManyToMany
     private Collection<PuntoRecoleccion> puntoRecoleccionCollection;
+    @JoinColumn(name = "ID_TC", referencedColumnName = "ID_TC")
+    @ManyToOne(optional = false)
+    private TipoCamion idTc;
 
     public TipoRecoleccion() {
     }
 
-    public TipoRecoleccion(String nombreTipoRecoleccion) {
+    public TipoRecoleccion(Integer idTipoRecoleccion) {
+        this.idTipoRecoleccion = idTipoRecoleccion;
+    }
+
+    public TipoRecoleccion(Integer idTipoRecoleccion, String nombreTipoRecoleccion) {
+        this.idTipoRecoleccion = idTipoRecoleccion;
         this.nombreTipoRecoleccion = nombreTipoRecoleccion;
+    }
+
+    public Integer getIdTipoRecoleccion() {
+        return idTipoRecoleccion;
+    }
+
+    public void setIdTipoRecoleccion(Integer idTipoRecoleccion) {
+        this.idTipoRecoleccion = idTipoRecoleccion;
     }
 
     public String getNombreTipoRecoleccion() {
@@ -60,12 +87,12 @@ public class TipoRecoleccion implements Serializable {
         this.nombreTipoRecoleccion = nombreTipoRecoleccion;
     }
 
-    public String getDescrpTipoRecoleccion() {
-        return descrpTipoRecoleccion;
+    public String getDescripcionTipoRecoleccion() {
+        return descripcionTipoRecoleccion;
     }
 
-    public void setDescrpTipoRecoleccion(String descrpTipoRecoleccion) {
-        this.descrpTipoRecoleccion = descrpTipoRecoleccion;
+    public void setDescripcionTipoRecoleccion(String descripcionTipoRecoleccion) {
+        this.descripcionTipoRecoleccion = descripcionTipoRecoleccion;
     }
 
     @XmlTransient
@@ -77,10 +104,18 @@ public class TipoRecoleccion implements Serializable {
         this.puntoRecoleccionCollection = puntoRecoleccionCollection;
     }
 
+    public TipoCamion getIdTc() {
+        return idTc;
+    }
+
+    public void setIdTc(TipoCamion idTc) {
+        this.idTc = idTc;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nombreTipoRecoleccion != null ? nombreTipoRecoleccion.hashCode() : 0);
+        hash += (idTipoRecoleccion != null ? idTipoRecoleccion.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +126,7 @@ public class TipoRecoleccion implements Serializable {
             return false;
         }
         TipoRecoleccion other = (TipoRecoleccion) object;
-        if ((this.nombreTipoRecoleccion == null && other.nombreTipoRecoleccion != null) || (this.nombreTipoRecoleccion != null && !this.nombreTipoRecoleccion.equals(other.nombreTipoRecoleccion))) {
+        if ((this.idTipoRecoleccion == null && other.idTipoRecoleccion != null) || (this.idTipoRecoleccion != null && !this.idTipoRecoleccion.equals(other.idTipoRecoleccion))) {
             return false;
         }
         return true;
@@ -99,7 +134,7 @@ public class TipoRecoleccion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.TipoRecoleccion[ nombreTipoRecoleccion=" + nombreTipoRecoleccion + " ]";
+        return "entities.TipoRecoleccion[ idTipoRecoleccion=" + idTipoRecoleccion + " ]";
     }
     
 }

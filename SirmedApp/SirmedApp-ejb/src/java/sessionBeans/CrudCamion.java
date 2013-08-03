@@ -24,13 +24,14 @@ public class CrudCamion implements CrudCamionLocal {
     private EntityManager em;
 
    @Override
-   public void crearCamion(String patente, String municipalidad, String nombreTipo){
+   public void crearCamion(String patente, String municipalidad, int tipoCamion){
        Camion c = new Camion();
-       TipoCamion tc = new TipoCamion(nombreTipo);
+       TipoCamion tc = new TipoCamion(tipoCamion);
        Municipalidad m = new Municipalidad(municipalidad);
-       c.setPatenteCamion(patente);
-       c.setNombreTipoCamion(tc);
+       c.setPatente(patente);
+       c.setIdTc(tc);
        c.setNombreMunicipalidad(m);
+       
        
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
        dF.getCamionDAO().insert(c);
@@ -43,12 +44,12 @@ public class CrudCamion implements CrudCamionLocal {
    }
 
    @Override
-   public void editarCamion(String patente, String municipalidad, String nombreTipo){
+   public void editarCamion(String patente, String municipalidad, int tipoCamion){
        Camion c = new Camion();
-       TipoCamion tc = new TipoCamion(nombreTipo);
+       TipoCamion tc = new TipoCamion(tipoCamion);
        Municipalidad m = new Municipalidad(municipalidad);
-       c.setPatenteCamion(patente);
-       c.setNombreTipoCamion(tc);
+       c.setPatente(patente);
+       c.setIdTc(tc);
        c.setNombreMunicipalidad(m);
        
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
@@ -56,12 +57,12 @@ public class CrudCamion implements CrudCamionLocal {
    }
    
    @Override
-   public void eliminarCamion(String patente, String municipalidad, String nombreTipo){
+   public void eliminarCamion(String patente, String municipalidad, int tipoCamion){
        Camion c = new Camion();
-       TipoCamion tc = new TipoCamion(nombreTipo);
+       TipoCamion tc = new TipoCamion(tipoCamion);
        Municipalidad m = new Municipalidad(municipalidad);
-       c.setPatenteCamion(patente);
-       c.setNombreTipoCamion(tc);
+       c.setPatente(patente);
+       c.setIdTc(tc);
        c.setNombreMunicipalidad(m);
        
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);

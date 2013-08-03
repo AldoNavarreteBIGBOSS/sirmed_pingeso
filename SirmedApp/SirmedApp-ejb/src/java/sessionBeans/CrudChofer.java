@@ -32,7 +32,7 @@ public class CrudChofer implements CrudChoferLocal {
         c.setNombreChofer(nombre);
         c.setApellidoChofer(apellido);
         c.setTelefonoChofer(telefono);
-        c.setEmailChofer(email);
+        c.setMailChofer(email);
         c.setNombreMunicipalidad(m);
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
@@ -55,7 +55,7 @@ public class CrudChofer implements CrudChoferLocal {
         c.setNombreChofer(nombre);
         c.setApellidoChofer(apellido);
         c.setTelefonoChofer(telefono);
-        c.setEmailChofer(email);
+        c.setMailChofer(email);
         c.setNombreMunicipalidad(m);
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
@@ -71,7 +71,7 @@ public class CrudChofer implements CrudChoferLocal {
         c.setNombreChofer(nombre);
         c.setApellidoChofer(apellido);
         c.setTelefonoChofer(telefono);
-        c.setEmailChofer(email);
+        c.setMailChofer(email);
         c.setNombreMunicipalidad(m);
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);

@@ -13,7 +13,6 @@ import DAO_impl.PuntoRecoleccionDAO_impl;
 import DAO_impl.RegistrosDAO_impl;
 import DAO_impl.ReportesDAO_impl;
 import DAO_impl.TipoRecoleccionDAO_impl;
-import DAO_impl.TurnoTrabajoDAO_impl;
 import DAO_impl.UsuarioDAO_impl;
 import DAO_interfaces.BasculistaDAO;
 import DAO_interfaces.CamionDAO;
@@ -24,7 +23,6 @@ import DAO_interfaces.PuntoRecoleccionDAO;
 import DAO_interfaces.RegistrosDAO;
 import DAO_interfaces.ReportesDAO;
 import DAO_interfaces.TipoRecoleccionDAO;
-import DAO_interfaces.TurnoTrabajoDAO;
 import DAO_interfaces.UsuarioDAO;
 import javax.persistence.EntityManager;
 
@@ -80,10 +78,7 @@ public class MysqlDAOFactory extends DAOFactory {
         return new ReportesDAO_impl(em);
     }
     
-    @Override
-        public TurnoTrabajoDAO getTurnoTrabajoDAO() {
-        return new TurnoTrabajoDAO_impl(em);
-    }
+ 
     
     @Override
         public MunicipalidadDAO getMunicipalidadDAO() {

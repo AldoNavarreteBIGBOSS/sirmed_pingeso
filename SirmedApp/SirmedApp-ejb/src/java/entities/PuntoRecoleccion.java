@@ -5,19 +5,21 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,31 +30,62 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PuntoRecoleccion.findAll", query = "SELECT p FROM PuntoRecoleccion p"),
-    @NamedQuery(name = "PuntoRecoleccion.findByDireccionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.direccionPunto = :direccionPunto")})
+    @NamedQuery(name = "PuntoRecoleccion.findByIdPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.idPunto = :idPunto"),
+    @NamedQuery(name = "PuntoRecoleccion.findByNombrePunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.nombrePunto = :nombrePunto"),
+    @NamedQuery(name = "PuntoRecoleccion.findByDireccionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.direccionPunto = :direccionPunto"),
+    @NamedQuery(name = "PuntoRecoleccion.findByDescripcionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.descripcionPunto = :descripcionPunto")})
 public class PuntoRecoleccion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID_PUNTO")
+    private Integer idPunto;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 80)
+    @Size(min = 1, max = 30)
+    @Column(name = "NOMBRE_PUNTO")
+    private String nombrePunto;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "DIRECCION_PUNTO")
     private String direccionPunto;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "DESCRP_PUNTO")
-    private String descrpPunto;
-    @JoinColumn(name = "NOMBRE_TIPO_RECOLECCION", referencedColumnName = "NOMBRE_TIPO_RECOLECCION")
-    @ManyToOne
-    private TipoRecoleccion nombreTipoRecoleccion;
-    @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")
-    @ManyToOne
-    private Municipalidad nombreMunicipalidad;
+    @Size(max = 100)
+    @Column(name = "DESCRIPCION_PUNTO")
+    private String descripcionPunto;
+    @ManyToMany(mappedBy = "puntoRecoleccionCollection")
+    private Collection<TipoRecoleccion> tipoRecoleccionCollection;
+    @ManyToMany(mappedBy = "puntoRecoleccionCollection")
+    private Collection<Municipalidad> municipalidadCollection;
 
     public PuntoRecoleccion() {
     }
 
-    public PuntoRecoleccion(String direccionPunto) {
+    public PuntoRecoleccion(Integer idPunto) {
+        this.idPunto = idPunto;
+    }
+
+    public PuntoRecoleccion(Integer idPunto, String nombrePunto, String direccionPunto) {
+        this.idPunto = idPunto;
+        this.nombrePunto = nombrePunto;
         this.direccionPunto = direccionPunto;
+    }
+
+    public Integer getIdPunto() {
+        return idPunto;
+    }
+
+    public void setIdPunto(Integer idPunto) {
+        this.idPunto = idPunto;
+    }
+
+    public String getNombrePunto() {
+        return nombrePunto;
+    }
+
+    public void setNombrePunto(String nombrePunto) {
+        this.nombrePunto = nombrePunto;
     }
 
     public String getDireccionPunto() {
@@ -63,34 +96,36 @@ public class PuntoRecoleccion implements Serializable {
         this.direccionPunto = direccionPunto;
     }
 
-    public String getDescrpPunto() {
-        return descrpPunto;
+    public String getDescripcionPunto() {
+        return descripcionPunto;
     }
 
-    public void setDescrpPunto(String descrpPunto) {
-        this.descrpPunto = descrpPunto;
+    public void setDescripcionPunto(String descripcionPunto) {
+        this.descripcionPunto = descripcionPunto;
     }
 
-    public TipoRecoleccion getNombreTipoRecoleccion() {
-        return nombreTipoRecoleccion;
+    @XmlTransient
+    public Collection<TipoRecoleccion> getTipoRecoleccionCollection() {
+        return tipoRecoleccionCollection;
     }
 
-    public void setNombreTipoRecoleccion(TipoRecoleccion nombreTipoRecoleccion) {
-        this.nombreTipoRecoleccion = nombreTipoRecoleccion;
+    public void setTipoRecoleccionCollection(Collection<TipoRecoleccion> tipoRecoleccionCollection) {
+        this.tipoRecoleccionCollection = tipoRecoleccionCollection;
     }
 
-    public Municipalidad getNombreMunicipalidad() {
-        return nombreMunicipalidad;
+    @XmlTransient
+    public Collection<Municipalidad> getMunicipalidadCollection() {
+        return municipalidadCollection;
     }
 
-    public void setNombreMunicipalidad(Municipalidad nombreMunicipalidad) {
-        this.nombreMunicipalidad = nombreMunicipalidad;
+    public void setMunicipalidadCollection(Collection<Municipalidad> municipalidadCollection) {
+        this.municipalidadCollection = municipalidadCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (direccionPunto != null ? direccionPunto.hashCode() : 0);
+        hash += (idPunto != null ? idPunto.hashCode() : 0);
         return hash;
     }
 
@@ -101,7 +136,7 @@ public class PuntoRecoleccion implements Serializable {
             return false;
         }
         PuntoRecoleccion other = (PuntoRecoleccion) object;
-        if ((this.direccionPunto == null && other.direccionPunto != null) || (this.direccionPunto != null && !this.direccionPunto.equals(other.direccionPunto))) {
+        if ((this.idPunto == null && other.idPunto != null) || (this.idPunto != null && !this.idPunto.equals(other.idPunto))) {
             return false;
         }
         return true;
@@ -109,7 +144,7 @@ public class PuntoRecoleccion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.PuntoRecoleccion[ direccionPunto=" + direccionPunto + " ]";
+        return "entities.PuntoRecoleccion[ idPunto=" + idPunto + " ]";
     }
     
 }

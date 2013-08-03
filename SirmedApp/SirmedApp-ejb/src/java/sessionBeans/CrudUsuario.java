@@ -30,15 +30,20 @@ public class CrudUsuario implements CrudUsuarioLocal {
     @Override
     public void crearUsuario(String rut, String email) {
         Usuario u = new Usuario();
+        
         u.setRut(rut);
-        u.setEmail(email);
+        u.setMail(email);
         TipoUsuario tipoUsuario = new TipoUsuario(1);
+        
         u.setIdTipo(tipoUsuario);
         try {
             try {
                 
                 String password = crearPassword(rut);
                 u.setPassword(password);
+                
+                DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+                dF.getUsuarioDAO().insert(u);
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -46,8 +51,7 @@ public class CrudUsuario implements CrudUsuarioLocal {
             Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        dF.getUsuarioDAO().insert(u);
+        
         
     }
 
