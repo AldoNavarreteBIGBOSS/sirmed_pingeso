@@ -15,31 +15,31 @@
                 <f:facet name="header">  
                     Basculistas  
                 </f:facet>
-                
+
                 <p:column headerText="RUT">  
                     #{bas.rut}  
                 </p:column>  
-                
+
                 <p:column headerText="Nombre">  
                     #{bas.nombreB}  
                 </p:column> 
-                
+
                 <p:column headerText="Apellido">  
                     #{bas.apellidoB}  
                 </p:column> 
-                
+
                 <p:column headerText="Telefono">  
                     #{bas.telefonoB}  
                 </p:column> 
-                
-                
-                
-             
-                 <f:facet name="footer">  
-                     Seleccione el basculista a editar
-                 </f:facet>  
+
+
+
+
+                <f:facet name="footer">  
+                    Seleccione el basculista a editar
+                </f:facet>  
             </p:dataTable>
-            
+
             <p:panelGrid columns="2">
                 <f:facet name="header">
                     Editar Basculista
@@ -52,28 +52,28 @@
                 <p:inputText value="#{mBasculista.apellido}"/>
                 <p:outputLabel value="Telefono: "/>
                 <p:inputText value="#{mBasculista.telefono}"/>
-               
+
                 <f:facet name="footer">
                     <p:commandButton value="Editar" onclick="confirmation.show();" type="button" ajax="false"/> 
                     <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
                         <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.actualizarBasculista()}" />  
                         <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
                     </p:confirmDialog>
-                    
+
                 </f:facet>
-                
+
             </p:panelGrid>
-                  
-            
+
+
         </h:form>   
-       
-   
-       
-            
-        
-    
-      
-         
+
+
+
+
+
+
+
+
     </h:body>
 </html>
 
