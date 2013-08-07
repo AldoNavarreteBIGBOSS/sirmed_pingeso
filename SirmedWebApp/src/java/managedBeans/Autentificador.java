@@ -10,10 +10,12 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import sessionBeans.MensajeriaLocal;
 
 /**
  *
@@ -22,9 +24,14 @@ import javax.servlet.http.HttpServletRequest;
 @Named(value = "autentificador")
 @SessionScoped
 public class Autentificador implements Serializable {
+    
+    @EJB
+    private MensajeriaLocal mensajeria;
 
+    
     private String username;
     private String password;
+    private String rutRecuperar;
 
     public String getUsername() {
         return username;
@@ -40,6 +47,14 @@ public class Autentificador implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRutRecuperar() {
+        return rutRecuperar;
+    }
+
+    public void setRutRecuperar(String rutRecuperar) {
+        this.rutRecuperar = rutRecuperar;
     }
     
     
@@ -73,4 +88,12 @@ public class Autentificador implements Serializable {
             Logger.getLogger(Autentificador.class.getName()).log(Level.SEVERE, null, ex);
         }
   }
+    
+    public void recuperarPassword(){
+        try{
+            mensajeria.recuperarContraseña(rutRecuperar);
+            this.rutRecuperar = null;
+        }
+        catch(Exception e){}
+    }
 }

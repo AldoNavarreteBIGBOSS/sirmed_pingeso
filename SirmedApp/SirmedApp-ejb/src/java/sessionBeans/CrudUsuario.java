@@ -74,6 +74,31 @@ public class CrudUsuario implements CrudUsuarioLocal {
         dF.getUsuarioDAO().delete(u);
     }
     
+    @Override
+    public void actualizarUsuario(String rut, String email, String newPassword){
+        
+        Usuario u = new Usuario();
+
+        u.setRut(rut);
+        u.setMail(email);
+        TipoUsuario tipoUsuario = new TipoUsuario(1);
+
+        u.setIdTipo(tipoUsuario);
+        try {
+            try {
+
+                String password = crearPassword(newPassword);
+                u.setPassword(password);
+
+                DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+                dF.getUsuarioDAO().update(u);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
+    }
 
 }

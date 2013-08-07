@@ -16,5 +16,7 @@ public interface CrudUsuarioLocal {
     void crearUsuario(String rut, String email);
 
     public void eliminarUsuario(String rut);
+
+    public void actualizarUsuario(String rut, String email, String newPassword);
     
 }

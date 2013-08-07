@@ -15,5 +15,7 @@ import javax.mail.MessagingException;
 public interface MensajeriaLocal {
 
     public void enviarMail() throws MessagingException;
+
+    public void recuperarContraseña(String rut);
     
 }

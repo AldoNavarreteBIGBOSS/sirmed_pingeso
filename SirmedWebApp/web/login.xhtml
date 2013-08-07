@@ -19,11 +19,18 @@
                         <p:commandButton action="#{autentificador.login()}"  value="Ingresar"/>
                         </h:panelGrid>
                     </h:form>
-                    <h:form>
+                    <h:form id="recuperarContraseña">
                         <h:panelGrid  styleClass="panelLogin" columns="1" cellpadding="5px">
                             <p:commandLink id="chartBtn" value="Olvidé mi contraseña" type="button" />  
-                            <p:overlayPanel id="chartPanel" for="chartBtn" hideEffect="fade">  
-                                ¡----Aqui crear el modo de recuperar contraseña---!  
+                            <p:overlayPanel id="chartPanel" for="chartBtn" hideEffect="fade" style="width: 500px">  
+                                
+                                    <h:outputText value="Para recuperar su contraseña, ingrese su RUT sin digito verificador ni puntuación en la casilla. Será enviada a su correo una nueva contraseña." />  
+                                    <h:panelGrid columns="3" cellpadding="10px" style="alignment-adjust: central" >  
+                                    <p:outputLabel value="RUT : "/>
+                                    <p:inputText value="#{autentificador.rutRecuperar}"/>
+                                    <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update=":recuperarContraseña"/>
+                                                               
+                                </h:panelGrid>
                             </p:overlayPanel>  
                         </h:panelGrid>
                     </h:form>
