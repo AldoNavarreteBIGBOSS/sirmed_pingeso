@@ -3,41 +3,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
+        
         <title>SIRMED</title>
+        
     </h:head>
-    
+
     <h:body>
-        
-        <h:form>
-        
-        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
-        <p:panelGrid id="panel" columns="2">
-            <f:facet name="header">  
-                Ingresar
-            </f:facet>  
-            <h:outputLabel value="Rut: "/>
-            <p:inputText value="#{mBasculista.rut}" required="true"/> 
-            <h:outputLabel value="Nombre: "/>
-            <p:inputText value="#{mBasculista.nombre}" required="true"/>
-            <h:outputLabel value="Apellido: "/>
-            <p:inputText value="#{mBasculista.apellido}" />
-            <h:outputLabel value="Telefono: "/>
-            <p:inputText value="#{mBasculista.telefono}" required="true"/>
-            <h:outputLabel value="Email: "/>
-            <p:inputText value="#{mBasculista.email}" required="true"/>
-            
-            
-            <f:facet name="footer">
-                <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista(actionEvent)}" update="@all" icon="ui-icon-check"/>
-            </f:facet>  
-        </p:panelGrid>
-        </h:form>
-        
-        
-        
-        
+        <ui:composition template="/templates/jefePlantaVista.xhtml">
+            <ui:define name="content">
+                
+                <h:form>
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
+                    <p:panelGrid id="panel" columns="2">  
+                        <h:outputLabel value="Rut: "/>
+                        <p:inputText value="#{mBasculista.rut}" required="true"/> 
+                        <h:outputLabel value="Nombre: "/>
+                        <p:inputText value="#{mBasculista.nombre}" required="true"/>
+                        <h:outputLabel value="Apellido: "/>
+                        <p:inputText value="#{mBasculista.apellido}" />
+                        <h:outputLabel value="Telefono: "/>
+                        <p:inputText value="#{mBasculista.telefono}" required="true"/>
+                        <h:outputLabel value="Email: "/>
+                        <p:inputText value="#{mBasculista.email}" required="true"/>
+                    </p:panelGrid>
+                    <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista(actionEvent)}" update="@all" icon="ui-icon-check"/>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

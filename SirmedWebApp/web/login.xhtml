@@ -8,23 +8,26 @@
 
     <h:body>
         <ui:composition template="/templates/loginFace.xhtml">
-            <ui:define name="content">
-                <h:form>
-
-                    <p:panelGrid columns="2">
-                        <f:facet name="header">
-                            <p:outputLabel value="INICIAR SESIÓN"/>
-                        </f:facet>
+            <ui:define name="top">
+                <div>
+                    <h:form>
+                        <h:panelGrid  styleClass="panelLogin" columns="5" cellpadding="5px">
                         <p:outputLabel value="Usuario: "/>
-                        <p:inputText value="#{autentificador.username}" required="true"/>
+                        <p:inputText value="#{autentificador.username}" required="true" />
                         <p:outputLabel value="Contraseña: "/>
                         <p:inputText value="#{autentificador.password}" required="true" type="password"/>
-                        <f:facet name="footer">
-                            <p:commandButton action="#{autentificador.login()}" value="Ingresar"/>
-                        </f:facet>
-                    </p:panelGrid>
-
-                </h:form>
+                        <p:commandButton action="#{autentificador.login()}"  value="Ingresar"/>
+                        </h:panelGrid>
+                    </h:form>
+                    <h:form>
+                        <h:panelGrid  styleClass="panelLogin" columns="1" cellpadding="5px">
+                            <p:commandLink id="chartBtn" value="Olvidé mi contraseña" type="button" />  
+                            <p:overlayPanel id="chartPanel" for="chartBtn" hideEffect="fade">  
+                                ¡----Aqui crear el modo de recuperar contraseña---!  
+                            </p:overlayPanel>  
+                        </h:panelGrid>
+                    </h:form>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

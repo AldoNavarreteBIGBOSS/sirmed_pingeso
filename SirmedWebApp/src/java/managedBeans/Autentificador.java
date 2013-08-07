@@ -52,24 +52,23 @@ public class Autentificador implements Serializable {
         ExternalContext externalContext = context.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         try {
-            //verificaSiEstaLogueado();
-            System.out.println(request.getAuthType()+" "+request.getRemoteUser());
+
+
             request.login(username, password);
-            externalContext.redirect(externalContext.getRequestContextPath()+"/faces/ingresarBasculista.xhtml");
-        }
-        catch (Exception e) {
-        System.out.println("MENSAJE DE EXCEPCIÓN: "+e.getMessage());
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nombre de usuario o contraseña incorrectos", ""));
+            externalContext.redirect(externalContext.getRequestContextPath() + "/faces/ingresarBasculista.xhtml");
+        } catch (Exception e) {
+            System.out.println("MENSAJE DE EXCEPCIÓN: " + e.getMessage());
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nombre de usuario o contraseña incorrectos", ""));
         }
 
     
     }
     
     public void logout() {
-  ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-  externalContext.invalidateSession();
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.invalidateSession();
         try {
-            externalContext.redirect(externalContext.getRequestContextPath()+"/faces/index.xhtml");
+            externalContext.redirect(externalContext.getRequestContextPath() + "/faces/index.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(Autentificador.class.getName()).log(Level.SEVERE, null, ex);
         }

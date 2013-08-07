@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        
+        
+        <title>SIRMED</title>
+        </f:facet>
+
+    </h:head>
+  
+    <h:body>
+        <div id="wrapper">
+            <div id="topJefe">
+                <ui:insert name="top">Top</ui:insert>
+            </div>
+            <div>
+                <div id="left">
+                    <ui:insert name="left">
+                        <h:form>
+                            <p:tieredMenu style="width:auto">
+                            <p:menuitem value="Inicio"/>
+                            <p:submenu label="Choferes">  
+                                <p:menuitem value="Nuevo chofer"   icon="ui-icon-disk" />  
+                                <p:menuitem value="Editar chofer"  icon="ui-icon-arrowrefresh-1-w" />
+                                <p:menuitem value="Eliminar chofer"  icon="ui-icon-close" />  
+                            </p:submenu>
+                            <p:submenu label="Camiones">  
+                                <p:menuitem value="Nuevo camion"   icon="ui-icon-disk" />  
+                                <p:menuitem value="Editar camion"  icon="ui-icon-arrowrefresh-1-w" />
+                                <p:menuitem value="Eliminar camion"  icon="ui-icon-close" />  
+                            </p:submenu>  
+                            <p:submenu label="Basculistas">  
+                                <p:menuitem value="Nuevo basculista"   icon="ui-icon-disk" />  
+                                <p:menuitem value="Editar basculista"  icon="ui-icon-arrowrefresh-1-w" />
+                                <p:menuitem value="Eliminar basculista"  icon="ui-icon-close" />  
+                            </p:submenu> 
+                            <p:submenu label="Punto de recolección">  
+                                <p:menuitem value="Nuevo punto"   icon="ui-icon-disk" />  
+                                <p:menuitem value="Editar punto"  icon="ui-icon-arrowrefresh-1-w" />
+                                <p:menuitem value="Eliminar punto"  icon="ui-icon-close" />  
+                            </p:submenu>  
+                            <p:menuitem value="Reportes"/>
+                        </p:tieredMenu> 
+                            </h:form>
+                    </ui:insert>
+                    
+                </div>
+                <div id="content" class="left_content">
+                    <ui:insert name="content">
+                        
+                    
+                    </ui:insert>
+                </div>
+            </div>
+            <div id="wrapper-ghost"></div>
+            <div id="bottom">
+                <div id="bottom-inner">
+                    <ui:insert name="bottom">Bottom</ui:insert>
+                </div>
+                
+            </div>
+        </div> 
+    </h:body>
+
+</html>

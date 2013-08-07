@@ -12,10 +12,8 @@ import javax.mail.MessagingException;
  * @author Aldo
  */
 @Local
-public interface EnvioMailLocal {
+public interface MensajeriaLocal {
 
     public void enviarMail() throws MessagingException;
-
-    
     
 }

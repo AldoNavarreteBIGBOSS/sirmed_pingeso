@@ -6,25 +6,32 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
-        <title>Facelets Template</title>
+        <link href="./resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        
+        <title>SIRMED</title>
     </h:head>
 
     <h:body>
+        <div id="wrapper"> 
+            <div id="top">
+                <ui:insert name="top">Top</ui:insert>
+            </div>
 
-        <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <div id="content" class="center_content" align="center"  >
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+            
+            <div id="wrapper-ghost"></div>
+            
+            <div id="bottom">
+                <div id="bottom-inner">
+                    <ui:insert name="bottom">Bottom</ui:insert>
+                </div>
+                
+            </div>
         </div>
-
-        <div id="content" class="center_content" align="center"  >
-            <ui:insert name="content">Content</ui:insert>
-        </div>
-
-        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
-        </div>
-
     </h:body>
 
 </html>
