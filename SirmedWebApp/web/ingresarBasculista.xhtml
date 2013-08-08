@@ -9,10 +9,9 @@
 
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
-            <ui:define name="content">
-                
+                <ui:define name="content">  
                 <h:form id="ret">
-                   
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <p:panelGrid id="panel" columns="2">  
                         <h:outputLabel value="Rut: "/>
                         <p:inputText value="#{mBasculista.rut}" required="true" label="RUT"/> 
@@ -25,11 +24,10 @@
                         <h:outputLabel value="Email: "/>
                         <p:inputText value="#{mBasculista.email}" required="true" label="Email"/>
                     </p:panelGrid>
-                    <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista()}" icon="ui-icon-check" update="ret"/>
-                        
+                    <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista()}" icon="ui-icon-check" update="ret"/>                        
                 </h:form>
-            </ui:define>
-        </ui:composition>
+            </ui:define>  
+            </ui:composition>
     </h:body>
 </html>
 

@@ -19,8 +19,10 @@ public interface CrudBasculistaLocal {
     
     Collection<Basculista> listaBasculistas();
 
-    public void editarBasculista(String rut, String nombre, String apellido, String telefono);
+    public void editarBasculista(String rut, String nombre, String apellido, String telefono) throws Exception;
 
     public void eliminarBasculista(String rut, String nombre, String apellido, String telefono);
+    
+   
     
 }

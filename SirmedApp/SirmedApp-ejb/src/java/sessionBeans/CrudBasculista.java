@@ -8,8 +8,6 @@ import DAO.DAOFactory;
 import DAO_interfaces.BasculistaDAO;
 import entities.Basculista;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -48,24 +46,23 @@ public class CrudBasculista implements CrudBasculistaLocal {
     }
     
     @Override
-    public void editarBasculista(String rut, String nombre, String apellido, String telefono){
+    public void editarBasculista(String rut, String nombre, String apellido, String telefono) throws Exception{
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         
         Basculista b = dF.getBasculistaDAO().buscarPorRut(rut);
         
         if(b != null){
+            b.setRut(rut);
             b.setNombreB(nombre);
             b.setApellidoB(apellido);
             b.setTelefonoB(telefono);
             dF.getBasculistaDAO().update(b);
         }
         else{
-            try {
+            
                 throw new Exception("No existe el basculista");
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
+           
         }
     }
     

@@ -37,7 +37,7 @@ public class MBasculista {
     private String telefono;
     private String email;
     private Collection<Basculista> basculista;
-    private String basculistaSeleccionado;
+    private Basculista basculistaSeleccionado;
     private AccionesGenerales ag;
     private MessaegeController mc;
     
@@ -50,11 +50,11 @@ public class MBasculista {
         ag = new AccionesGenerales();
     }
 
-    public String getBasculistaSeleccionado() {
+    public Basculista getBasculistaSeleccionado() {
         return basculistaSeleccionado;
     }
 
-    public void setBasculistaSeleccionado(String basculistaSeleccionado) {
+    public void setBasculistaSeleccionado(Basculista basculistaSeleccionado) {
         this.basculistaSeleccionado = basculistaSeleccionado;
     }
 
@@ -127,7 +127,7 @@ public class MBasculista {
     public void actualizarBasculista() {
 
         try {
-            rut = basculistaSeleccionado;
+            rut = basculistaSeleccionado.getRut();
             crudBasculista.editarBasculista(rut, nombre, apellido, telefono);
             resetCampos();
             ag.actualizarPagina();
@@ -149,19 +149,18 @@ public class MBasculista {
         }
     }
 
-    public void setearBasculista() {
-        rut = basculistaSeleccionado;
-        
-        
+    public void setearBasculista() {     
+        rut = basculistaSeleccionado.getRut();
+        nombre = basculistaSeleccionado.getNombreB();
+        apellido = basculistaSeleccionado.getApellidoB();
+        telefono = basculistaSeleccionado.getTelefonoB();       
     }
 
-    public void resetCampos() {
-
+    public void resetCampos(){
         this.rut = null;
         this.nombre = null;
         this.apellido = null;
         this.telefono = null;
-        this.email = null;
-        
+        this.email = null;      
     }
 }
