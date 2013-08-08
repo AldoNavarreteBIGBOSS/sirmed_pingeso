@@ -37,25 +37,24 @@ public class MBasculista {
     private String telefono;
     private String email;
     private Collection<Basculista> basculista;
-    private Basculista basculistaSeleccionado;
+    private String basculistaSeleccionado;
     private AccionesGenerales ag;
     private MessaegeController mc;
-    private Basculista[] test;
+    
     
     @PostConstruct
     public void init() {
    
         basculista = crudBasculista.listaBasculistas();
         mc = new MessaegeController();
-        basculistaSeleccionado = new Basculista();
         ag = new AccionesGenerales();
     }
 
-    public Basculista getBasculistaSeleccionado() {
+    public String getBasculistaSeleccionado() {
         return basculistaSeleccionado;
     }
 
-    public void setBasculistaSeleccionado(Basculista basculistaSeleccionado) {
+    public void setBasculistaSeleccionado(String basculistaSeleccionado) {
         this.basculistaSeleccionado = basculistaSeleccionado;
     }
 
@@ -65,22 +64,6 @@ public class MBasculista {
 
     public void setBasculista(Collection<Basculista> basculista) {
         this.basculista = basculista;
-    }
-
-    public CrudUsuarioLocal getCrudUsuario() {
-        return crudUsuario;
-    }
-
-    public void setCrudUsuario(CrudUsuarioLocal crudUsuario) {
-        this.crudUsuario = crudUsuario;
-    }
-
-    public CrudBasculistaLocal getCrudBasculista() {
-        return crudBasculista;
-    }
-
-    public void setCrudBasculista(CrudBasculistaLocal crudBasculista) {
-        this.crudBasculista = crudBasculista;
     }
 
     public String getRut() {
@@ -130,28 +113,26 @@ public class MBasculista {
     public MBasculista() {
     }
 
-    public void nuevoBasculista(ActionEvent actionEvent) {
-             
+    public void nuevoBasculista() {
         try {
-            
             crudUsuario.crearUsuario(rut, email);
             crudBasculista.crearBasculista(rut, nombre, apellido, telefono);
-            mc.addInfo(actionEvent, "Basculista " + nombre + " " + apellido, "Ingresado con éxito");
+            mc.mensajeRetroalimentacion("Operación Exitosa", null);
             resetCampos();
-        } catch (Exception e) {
-            mc.addError(actionEvent);
-        }
+        } catch (Exception ex) {
+            mc.mensajeRetroalimentacion("Error", ex.getMessage());
+        }    
     }
 
     public void actualizarBasculista() {
 
         try {
-            rut = basculistaSeleccionado.getRut();
+            rut = basculistaSeleccionado;
             crudBasculista.editarBasculista(rut, nombre, apellido, telefono);
             resetCampos();
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
 
     }
@@ -169,10 +150,8 @@ public class MBasculista {
     }
 
     public void setearBasculista() {
-        rut = basculistaSeleccionado.getRut();
-        nombre = basculistaSeleccionado.getNombreB();
-        apellido = basculistaSeleccionado.getApellidoB();
-        telefono = basculistaSeleccionado.getTelefonoB();
+        rut = basculistaSeleccionado;
+        
         
     }
 

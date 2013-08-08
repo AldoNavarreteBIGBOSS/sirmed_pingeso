@@ -13,4 +13,5 @@ import entities.Usuario;
 public interface UsuarioDAO extends GenericDAO <Usuario> {
     
     public String recuperarMail(String rut);
+    public Usuario buscarPorRut(String rut);
 }

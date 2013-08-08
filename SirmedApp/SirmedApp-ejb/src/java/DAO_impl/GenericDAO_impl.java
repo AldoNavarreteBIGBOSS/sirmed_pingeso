@@ -54,4 +54,9 @@ public abstract class GenericDAO_impl<T> implements GenericDAO<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
     
+    @Override
+    public T find(int id){
+        return getEntityManager().find(entityClass, id);
+    }
+    
 }

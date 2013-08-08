@@ -12,7 +12,9 @@ import DAO_interfaces.MunicipalidadDAO;
 import DAO_interfaces.PuntoRecoleccionDAO;
 import DAO_interfaces.RegistrosDAO;
 import DAO_interfaces.ReportesDAO;
+import DAO_interfaces.TipoCamionDAO;
 import DAO_interfaces.TipoRecoleccionDAO;
+import DAO_interfaces.TipoUsuarioDAO;
 import DAO_interfaces.UsuarioDAO;
 import javax.persistence.EntityManager;
 
@@ -36,6 +38,8 @@ public abstract class DAOFactory {
     public abstract ReportesDAO getReportesDAO();
     public abstract MunicipalidadDAO getMunicipalidadDAO();
     public abstract TipoRecoleccionDAO getTipoRecoleccionDAO();
+    public abstract TipoCamionDAO getTipoCamionDAO();
+    public abstract TipoUsuarioDAO getTipoUsuarioDAO();
     
     public static DAOFactory getDAOFactory(int whichFactory, EntityManager em){
     

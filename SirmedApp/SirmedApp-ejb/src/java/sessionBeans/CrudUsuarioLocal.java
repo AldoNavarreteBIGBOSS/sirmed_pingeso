@@ -4,6 +4,7 @@
  */
 package sessionBeans;
 
+import entities.Usuario;
 import javax.ejb.Local;
 
 /**
@@ -13,10 +14,12 @@ import javax.ejb.Local;
 @Local
 public interface CrudUsuarioLocal {
 
-    void crearUsuario(String rut, String email);
+    public void crearUsuario(String rut, String email)throws Exception;
 
     public void eliminarUsuario(String rut);
 
     public void actualizarUsuario(String rut, String email, String newPassword);
+    
+    
     
 }

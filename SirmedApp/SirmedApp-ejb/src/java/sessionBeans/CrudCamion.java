@@ -25,14 +25,13 @@ public class CrudCamion implements CrudCamionLocal {
 
    @Override
    public void crearCamion(String patente, String municipalidad, int tipoCamion){
+       
        Camion c = new Camion();
        TipoCamion tc = new TipoCamion(tipoCamion);
        Municipalidad m = new Municipalidad(municipalidad);
        c.setPatente(patente);
        c.setIdTc(tc);
        c.setNombreMunicipalidad(m);
-       
-       
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
        dF.getCamionDAO().insert(c);
    }

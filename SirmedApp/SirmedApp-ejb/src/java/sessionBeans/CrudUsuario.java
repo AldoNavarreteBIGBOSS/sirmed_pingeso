@@ -5,14 +5,12 @@
 package sessionBeans;
 
 import DAO.DAOFactory;
+import DAO_interfaces.TipoUsuarioDAO;
+import DAO_interfaces.UsuarioDAO;
 import entities.TipoUsuario;
 import entities.Usuario;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,43 +26,46 @@ public class CrudUsuario implements CrudUsuarioLocal {
     private EntityManager em;
 
     @Override
-    public void crearUsuario(String rut, String email) {
-        Usuario u = new Usuario();
+    public void crearUsuario(String rut, String email)throws Exception{
         
-        u.setRut(rut);
-        u.setMail(email);
-        TipoUsuario tipoUsuario = new TipoUsuario(1);
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        UsuarioDAO udao = dF.getUsuarioDAO();
+        TipoUsuarioDAO tudao = dF.getTipoUsuarioDAO(); 
+        Usuario u = udao.buscarPorRut(rut);
         
-        u.setIdTipo(tipoUsuario);
-        try {
-            try {
-                
-                String password = crearPassword(rut);
+        if(u==null){
+            u = new Usuario();
+            String password = crearPassword(rut);  
+            TipoUsuario tipoUsuario = tudao.find(1);
+            if(password != null){
+                u.setRut(rut);
+                u.setMail(email);
                 u.setPassword(password);
-                
-                DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-                dF.getUsuarioDAO().insert(u);
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                u.setIdTipo(tipoUsuario);
+                udao.insert(u);
             }
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            else{
+                throw  new Exception("Error en generar password");
+            }
         }
-        
-        
-        
+        else{
+            throw  new Exception("Usuario ya existe");
+        }
     }
 
-    private String crearPassword(String rut) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(rut.getBytes("UTF-8"));
-        
-        byte[] digest = md.digest();
-        BigInteger bigInteger = new BigInteger(1, digest);
-        return bigInteger.toString(16);
-        
+    private String crearPassword(String pass){
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(pass.getBytes("UTF-8"));
+            byte[] digest = md.digest();
+            BigInteger bigInteger = new BigInteger(1, digest);
+            return bigInteger.toString(16);
+        } catch (Exception e) {
+            return null;
+        }
     }
+        
+    
     
     @Override
     public void eliminarUsuario(String rut){
@@ -77,28 +78,6 @@ public class CrudUsuario implements CrudUsuarioLocal {
     @Override
     public void actualizarUsuario(String rut, String email, String newPassword){
         
-        Usuario u = new Usuario();
-
-        u.setRut(rut);
-        u.setMail(email);
-        TipoUsuario tipoUsuario = new TipoUsuario(1);
-
-        u.setIdTipo(tipoUsuario);
-        try {
-            try {
-
-                String password = crearPassword(newPassword);
-                u.setPassword(password);
-
-                DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-                dF.getUsuarioDAO().update(u);
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(CrudUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
     }
 
 }

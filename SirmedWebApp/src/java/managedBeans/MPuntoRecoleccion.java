@@ -137,10 +137,10 @@ public class MPuntoRecoleccion {
 
         try {
             crudRecoleccion.crearPuntoRecoleccion(direccion, nombrePunto, descripcion);
-            mc.addInfo(actionEvent, "Punto de Recolección Ubicado en " + direccion+" en la Municipalidad de "+municipalidad, "Ingresado con éxito");
+            
             resetCampos();
         } catch (Exception e) {
-            mc.addError(actionEvent);
+            
         }
     }
 

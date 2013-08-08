@@ -6,6 +6,7 @@ package managedBeans;
 
 import entities.Camion;
 import entities.Municipalidad;
+import entities.TipoCamion;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -14,7 +15,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.ActionEvent;
 import sessionBeans.CrudCamionLocal;
+import sessionBeans.CrudTipoCamionLocal;
 import sessionBeans.MunicipalidadesLocal;
 
 /**
@@ -25,16 +28,18 @@ import sessionBeans.MunicipalidadesLocal;
 @RequestScoped
 public class MCamiones {
     @EJB
+    private CrudTipoCamionLocal crudTipoCamion;
+    @EJB
     private MunicipalidadesLocal municipalidades1;
-    
     @EJB
     private CrudCamionLocal crudCamion;
     
     private String patente;
     private String municipalidad;
-    private int TipoCamion;
+    private Integer TipoCamion;
     private Collection<Municipalidad> municipalidades;
     private Collection<Camion> camiones;
+    private Collection<TipoCamion> tc;
     private Camion camionSeleccionado;
     private MessaegeController mc;
     private AccionesGenerales ag;
@@ -47,24 +52,27 @@ public class MCamiones {
         camionSeleccionado = new Camion();
         municipalidades = municipalidades1.listaMunicipalidades();
         camiones = crudCamion.listaCamiones();
+        tc = crudTipoCamion.listaTipoCamion();
         mc = new MessaegeController(); 
         ag = new AccionesGenerales();
     }
 
+    public Collection<TipoCamion> getTc() {
+        return tc;
+    }
+
+    public void setTc(Collection<TipoCamion> tc) {
+        this.tc = tc;
+    }
+
+    
+    
     public MunicipalidadesLocal getMunicipalidades1() {
         return municipalidades1;
     }
 
     public void setMunicipalidades1(MunicipalidadesLocal municipalidades1) {
         this.municipalidades1 = municipalidades1;
-    }
-
-    public CrudCamionLocal getCrudCamion() {
-        return crudCamion;
-    }
-
-    public void setCrudCamion(CrudCamionLocal crudCamion) {
-        this.crudCamion = crudCamion;
     }
 
     public String getPatente() {
@@ -83,11 +91,11 @@ public class MCamiones {
         this.municipalidad = municipalidad;
     }
 
-    public int getTipoCamion() {
+    public Integer getTipoCamion() {
         return TipoCamion;
     }
 
-    public void setTipoCamion(int TipoCamion) {
+    public void setTipoCamion(Integer TipoCamion) {
         this.TipoCamion = TipoCamion;
     }
 
@@ -117,14 +125,16 @@ public class MCamiones {
         this.camionSeleccionado = camionSeleccionado;
     }
     
-    public void nuevoCamion(){
+    public void nuevoCamion(ActionEvent actionEvent){
+        System.out.println("CACA");
         try{
+            System.out.println(patente+" "+municipalidad+" "+TipoCamion);
             crudCamion.crearCamion(patente, municipalidad, TipoCamion);
-            mc.addInfo(null, "Camión con patente "+patente, " Ingresado con éxito");
+            mc.mensajeRetroalimentacion( "Operación Existosa", "Camión "+patente+" ingresado");
             resetCampos();
         }
         catch(Exception e){
-            mc.addError(null);
+            mc.mensajeRetroalimentacion( "Ha ocurrido un error", "Explicación");
         }
     }
     

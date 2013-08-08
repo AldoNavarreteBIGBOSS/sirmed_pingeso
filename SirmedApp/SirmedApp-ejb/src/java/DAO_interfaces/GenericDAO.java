@@ -16,4 +16,5 @@ public interface GenericDAO<T> {
     public void update (T actData);
     public void delete (T delData);
     public Collection<T> findAll();
+    public T find(int id);
 }

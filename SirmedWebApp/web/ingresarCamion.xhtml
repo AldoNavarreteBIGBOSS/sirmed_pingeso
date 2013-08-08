@@ -1,12 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>SIRMED</title>
-    </h:head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+   
     <h:body>
         
+                <h:form id="ingresarCamion">
+                    <p:growl id="growl" showDetail="true" sticky="true" />
+                    <p:panelGrid id="panel" columns="2">  
+                        <h:outputLabel value="Patente: "/>
+                        <p:inputText value="#{mCamiones.patente}" required="true" label="Patente"/>
+                        <h:outputLabel value="Municipalidad: "/>
+                        <p:selectOneMenu value="#{mCamiones.municipalidad}">
+                            <f:selectItems value="#{mCamiones.municipalidades}" var="cam" itemLabel="#{cam.nombreMunicipalidad}" itemValue="#{cam.nombreMunicipalidad}"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Tipo de camion: "/>
+                        <p:selectOneMenu value="#{mCamiones.tipoCamion}">
+                            <f:selectItems value="#{mCamiones.tc}" var="tc2" itemLabel="#{tc2.nombreTc}" itemValue="#{tc2.idTc}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton  value="Ingresar"  actionListener="#{mCamiones.nuevoCamion(actionEvent)}" update=":ingresarCamion" icon="ui-icon-check"/>
+                </h:form>
+                
+            
     </h:body>
 </html>
 

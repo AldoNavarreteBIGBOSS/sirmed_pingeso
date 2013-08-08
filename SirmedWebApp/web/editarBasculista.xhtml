@@ -3,72 +3,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>SIRMED</title>
     </h:head>
     <h:body>
-        <h:form id="form" prependId="false">
-            <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
-                <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update="@all"/>
-                <p:ajax event="rowUnselect"/> 
-                <f:facet name="header">  
-                    Basculistas  
-                </f:facet>
+        <ui:composition template="/templates/templateGeneral.xhtml">
+            <ui:define name="content">
+            <h:form id="form" prependId="false">
 
-                <p:column headerText="RUT">  
-                    #{bas.rut}  
-                </p:column>  
+                <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
+                    <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update=":form"/>
+                    <p:ajax event="rowUnselect"/> 
+                    <f:facet name="header">  
+                        Basculistas  
+                    </f:facet>
 
-                <p:column headerText="Nombre">  
-                    #{bas.nombreB}  
-                </p:column> 
+                    <p:column headerText="RUT">  
+                        #{bas.rut}  
+                    </p:column>  
 
-                <p:column headerText="Apellido">  
-                    #{bas.apellidoB}  
-                </p:column> 
+                    <p:column headerText="Nombre">  
+                        #{bas.nombreB}  
+                    </p:column> 
 
-                <p:column headerText="Telefono">  
-                    #{bas.telefonoB}  
-                </p:column> 
+                    <p:column headerText="Apellido">  
+                        #{bas.apellidoB}  
+                    </p:column> 
 
-
-
-
-                <f:facet name="footer">  
-                    Seleccione el basculista a editar
-                </f:facet>  
-            </p:dataTable>
-
-            <p:panelGrid columns="2">
-                <f:facet name="header">
-                    Editar Basculista
-                </f:facet>
-                <p:outputLabel value="RUT: "/>
-                <p:outputLabel value="#{mBasculista.rut}"/>
-                <p:outputLabel value="Nombre: "/>
-                <p:inputText value="#{mBasculista.nombre}"/>
-                <p:outputLabel value="Apellido: "/>
-                <p:inputText value="#{mBasculista.apellido}"/>
-                <p:outputLabel value="Telefono: "/>
-                <p:inputText value="#{mBasculista.telefono}"/>
-
-                <f:facet name="footer">
-                    <p:commandButton value="Editar" onclick="confirmation.show();" type="button" ajax="false"/> 
-                    <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
-                        <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.actualizarBasculista()}" />  
-                        <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
-                    </p:confirmDialog>
-
-                </f:facet>
-
-                
-                
-            </p:panelGrid>
+                    <p:column headerText="Telefono">  
+                        #{bas.telefonoB}  
+                    </p:column> 
 
 
-        </h:form>   
 
+
+                    <f:facet name="footer">  
+                        Seleccione el basculista a editar
+                    </f:facet>  
+                </p:dataTable>
+
+                <p:panelGrid columns="2" id="gret">
+                    <f:facet name="header">
+                        Editar Basculista
+                    </f:facet>
+                    <p:outputLabel value="RUT: "/>
+                    <p:outputLabel value="#{mBasculista.rut}"/>
+                    <p:outputLabel value="Nombre: "/>
+                    <p:inputText value="#{mBasculista.nombre}"/>
+                    <p:outputLabel value="Apellido: "/>
+                    <p:inputText value="#{mBasculista.apellido}"/>
+                    <p:outputLabel value="Telefono: "/>
+                    <p:inputText value="#{mBasculista.telefono}"/>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Editar" onclick="confirmation.show();" type="button" ajax="false"/> 
+                        <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
+                            <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.actualizarBasculista()}" update=":form"/>  
+                            <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
+                        </p:confirmDialog>
+
+                    </f:facet>
+
+
+
+                </p:panelGrid>
+
+
+            </h:form>   
+            </ui:define>
+        </ui:composition>
 
 
 

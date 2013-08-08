@@ -5,39 +5,20 @@
     color: white;
     padding: 5px;
     margin: 0px 0px 10px 0px;
-    
-}
-#loginBox {
-    height: 75px;
-}
-
-#topJefe{
-    height: 150px;
-}
-.panelLogin{
-   margin-left: auto; 
-   margin-right: 0px;
-   font-weight: bold;
 }
 
 #bottom {
-    position: absolute;
-    bottom: 0px;
-    padding-bottom: 20px;
-}
-
-#bottom-inner {
+    position: relative;
     background-color: #c2dfef;
-    margin: 0px;
-    line-height: 25px;
-    padding-left: 5px;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
 }
 
 #left {
     float: left;
-    padding: auto;
-    width: auto;
-    background: #449d44;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
 }
 
 #right {
@@ -54,9 +35,9 @@
 }
 
 .left_content {
-    
-    padding: auto;
-    margin-left: 200px;
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
 }
 
 .right_content {

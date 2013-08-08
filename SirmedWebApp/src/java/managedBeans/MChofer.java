@@ -146,10 +146,10 @@ public class MChofer {
 
         try {
             crudChofer.crearChofer(rut, nombre, apellido, telefono, email, municipalidad);
-            mc.addInfo(actionEvent, "Chofer " + nombre + " " + apellido, "Ingresado con éxito");
+            
             resetCampos();
         } catch (Exception e) {
-            mc.addError(actionEvent);
+            
         }
     }
 

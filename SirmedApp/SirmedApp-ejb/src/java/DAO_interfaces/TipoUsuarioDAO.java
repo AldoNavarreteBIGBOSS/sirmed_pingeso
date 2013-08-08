@@ -4,13 +4,12 @@
  */
 package DAO_interfaces;
 
-import entities.Basculista;
+import entities.TipoUsuario;
 
 /**
  *
  * @author Aldo
  */
-public interface BasculistaDAO extends GenericDAO <Basculista>{
+public interface TipoUsuarioDAO extends GenericDAO<TipoUsuario>{
     
-    public Basculista buscarPorRut(String rut);
 }
