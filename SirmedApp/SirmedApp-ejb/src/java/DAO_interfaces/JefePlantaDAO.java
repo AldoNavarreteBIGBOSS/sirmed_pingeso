@@ -11,5 +11,5 @@ import entities.JefePlanta;
  * @author Aldo
  */
 public interface JefePlantaDAO extends GenericDAO<JefePlanta>{
-    
+    public JefePlanta buscarPorRut(String rut);
 }

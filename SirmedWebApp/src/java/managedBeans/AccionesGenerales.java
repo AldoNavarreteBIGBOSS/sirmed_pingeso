@@ -21,9 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestScoped
 public class AccionesGenerales {
 
-    /**
-     * Creates a new instance of AccionesGenerales
-     */
+    
     public AccionesGenerales() {
     }
     
@@ -41,4 +39,6 @@ public class AccionesGenerales {
             Logger.getLogger(AccionesGenerales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
 }

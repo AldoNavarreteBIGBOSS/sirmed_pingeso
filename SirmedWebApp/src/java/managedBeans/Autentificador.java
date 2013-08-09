@@ -4,6 +4,8 @@
  */
 package managedBeans;
 
+import entities.Basculista;
+import entities.JefePlanta;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -34,6 +36,8 @@ public class Autentificador implements Serializable {
     private String rutRecuperar;
     private AccionesGenerales ag;
     private MessaegeController mc;
+
+   
     
     public String getUsername() {
         return username;
@@ -70,18 +74,17 @@ public class Autentificador implements Serializable {
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         ag = new AccionesGenerales();
         try {
-
-
             request.login(username, password);
-            if(request.isUserInRole("JefePlanta")){
-            ag.goToPage("/faces/jefePlanta/ingresarBasculista.xhtml");
+            
+            if (request.isUserInRole("JefePlanta")) {
+                ag.goToPage("/faces/jefePlanta/ingresarBasculista.xhtml");
+            }
+            if(request.isUserInRole("Basculista")){
+                ag.goToPage("/faces/Basculista/ingresarBasculista.xhtml");
             }
         } catch (Exception e) {
-            System.out.println("MENSAJE DE EXCEPCIÓN: " + e.getMessage());
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nombre de usuario o contraseña incorrectos", ""));
-        }
-
-    
+            mc.mensajeRetroalimentacion("Error", "Usuario y/o contraseña incorrecta");
+        }   
     }
     
     public void logout() {
@@ -109,5 +112,6 @@ public class Autentificador implements Serializable {
         }
             
     }
+    
     
 }

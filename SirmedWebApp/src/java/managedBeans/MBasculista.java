@@ -16,6 +16,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
 import sessionBeans.CrudBasculistaLocal;
 import sessionBeans.CrudUsuarioLocal;
+import sessionBeans.MensajeriaLocal;
 
 /**
  *
@@ -24,8 +25,8 @@ import sessionBeans.CrudUsuarioLocal;
 @Named(value = "mBasculista")
 @RequestScoped
 public class MBasculista {
-
-   
+    @EJB
+    private MensajeriaLocal mensajeria;
     @EJB
     private CrudUsuarioLocal crudUsuario;
     @EJB
@@ -44,7 +45,6 @@ public class MBasculista {
     
     @PostConstruct
     public void init() {
-   
         basculista = crudBasculista.listaBasculistas();
         mc = new MessaegeController();
         ag = new AccionesGenerales();
@@ -105,11 +105,7 @@ public class MBasculista {
     public void setEmail(String email) {
         this.email = email;
     }
-
     
-
-  
-
     public MBasculista() {
     }
 
@@ -117,6 +113,7 @@ public class MBasculista {
         try {
             crudUsuario.crearUsuario(rut, email);
             crudBasculista.crearBasculista(rut, nombre, apellido, telefono);
+            mensajeria.enviarMensajeBienvenida(email, rut, nombre+" "+apellido);
             mc.mensajeRetroalimentacion("Operación Exitosa", null);
             resetCampos();
         } catch (Exception ex) {

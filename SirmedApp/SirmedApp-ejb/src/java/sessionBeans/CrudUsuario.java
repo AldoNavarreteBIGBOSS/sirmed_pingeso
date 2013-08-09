@@ -64,9 +64,7 @@ public class CrudUsuario implements CrudUsuarioLocal {
             return null;
         }
     }
-        
-    
-    
+         
     @Override
     public void eliminarUsuario(String rut) throws Exception{
     

@@ -16,7 +16,7 @@
 
             <p:layoutUnit position="north" size="150">  
                 <ui:insert name="top">
-                    <p:outputLabel value="Bienvenido #{autentificador.username}"/>
+                    
                 </ui:insert>
             </p:layoutUnit>  
 
@@ -32,6 +32,8 @@
                                 <p:menuitem value="Historial"   icon="ui-icon-bookmark"/>  
                                 <p:menuitem value="Perfil"  icon="ui-icon-person"/> 
                                 <p:menuitem value="Configuración" icon="ui-icon-wrench"/>
+                                <p:menuitem value="Cerrar sesión" icon="ui-icon-power" action="#{autentificador.logout()}"/>
+                                
                             </p:submenu>  
                             <p:submenu label="Basculistas">  
                                 <p:menuitem value="Ingresar basculista" icon="ui-icon-disk" url="/faces/jefePlanta/ingresarBasculista.xhtml"/>  
