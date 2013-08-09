@@ -32,7 +32,9 @@ public class Autentificador implements Serializable {
     private String username;
     private String password;
     private String rutRecuperar;
-
+    private AccionesGenerales ag;
+    private MessaegeController mc;
+    
     public String getUsername() {
         return username;
     }
@@ -66,11 +68,12 @@ public class Autentificador implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        ag = new AccionesGenerales();
         try {
 
 
             request.login(username, password);
-            externalContext.redirect(externalContext.getRequestContextPath() + "/faces/ingresarBasculista.xhtml");
+            ag.goToPage("/faces/ingresarBasculista.xhtml");
         } catch (Exception e) {
             System.out.println("MENSAJE DE EXCEPCIÓN: " + e.getMessage());
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nombre de usuario o contraseña incorrectos", ""));
@@ -90,10 +93,19 @@ public class Autentificador implements Serializable {
   }
     
     public void recuperarPassword(){
+        
         try{
             mensajeria.recuperarContraseña(rutRecuperar);
-            this.rutRecuperar = null;
+            rutRecuperar = null;
+            mc = new MessaegeController();
+            mc.mensajeRetroalimentacion("Operación Exitosa", "Correo enviado");
         }
-        catch(Exception e){}
+        catch(Exception e){
+            rutRecuperar = null;
+            mc = new MessaegeController();
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
+        }
+            
     }
+    
 }

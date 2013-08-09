@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <h:body>
+        <ui:composition template="/templates/templateLogin.xhtml">
+            <ui:define name="content">
+
+                <h3>Recuperar Contraseña</h3>  
+                <p:panel header="¿Olvidó su contraseña?" footer="Un correo electrónico será enviado a la dirección registrada en SIRMED">  
+                    <h:outputText value="En caso de que usted haya olvidado su contraseña, es posible recuperarla mediante
+                                  el ingreso de su RUT sin digito verificador ni puntuación en la siguiente casilla:" /> 
+                    <h:form id="ret">
+                        <p:growl id="growl" showDetail="true" sticky="true" /> 
+                        <p:panelGrid columns="3" >
+                            <p:outputLabel value="RUT : "/>
+                            <p:inputText value="#{autentificador.rutRecuperar}"/>
+                            <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update="ret"/>
+                        </p:panelGrid>
+                    </h:form>
+
+                </p:panel>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

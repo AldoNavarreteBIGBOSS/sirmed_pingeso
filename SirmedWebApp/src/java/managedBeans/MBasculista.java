@@ -140,12 +140,12 @@ public class MBasculista {
     public void borrarBasculista() {
 
         try {
-            setearBasculista();
-            crudBasculista.eliminarBasculista(rut, nombre, apellido, telefono);
+            rut = basculistaSeleccionado.getRut();
+            crudBasculista.eliminarBasculista(rut);
             crudUsuario.eliminarUsuario(rut);
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            mc.mensajeRetroalimentacion("Error", ex.getMessage());
         }
     }
 

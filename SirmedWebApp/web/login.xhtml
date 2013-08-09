@@ -7,34 +7,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:body>
-        
-                <div>
-                    <h:form>
-                        <h:panelGrid  styleClass="panelLogin" columns="5" cellpadding="5px">
-                        <p:outputLabel value="Usuario: "/>
-                        <p:inputText value="#{autentificador.username}" required="true" />
-                        <p:outputLabel value="Contraseña: "/>
-                        <p:inputText value="#{autentificador.password}" required="true" type="password"/>
-                        <p:commandButton action="#{autentificador.login()}"  value="Ingresar"/>
-                        </h:panelGrid>
-                    </h:form>
-                    <h:form id="recuperarContraseña">
-                        <h:panelGrid  styleClass="panelLogin" columns="1" cellpadding="5px">
-                            <p:commandLink id="chartBtn" value="Olvidé mi contraseña" type="button" />  
-                            <p:overlayPanel id="chartPanel" for="chartBtn" hideEffect="fade" style="width: 500px">  
-                                
-                                    <h:outputText value="Para recuperar su contraseña, ingrese su RUT sin digito verificador ni puntuación en la casilla. Será enviada a su correo una nueva contraseña." />  
-                                    <h:panelGrid columns="3" cellpadding="10px" style="alignment-adjust: central" >  
-                                    <p:outputLabel value="RUT : "/>
-                                    <p:inputText value="#{autentificador.rutRecuperar}"/>
-                                    <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update=":recuperarContraseña"/>
-                                                               
-                                </h:panelGrid>
-                            </p:overlayPanel>  
-                        </h:panelGrid>
-                    </h:form>
-                </div>
-            
+        <ui:composition template="/templates/templateLogin.xhtml">
+           
+        </ui:composition>  
     </h:body>
 </html>
 

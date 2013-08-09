@@ -21,13 +21,15 @@ public class UsuarioDAO_impl extends GenericDAO_impl<Usuario> implements Usuario
     @Override
     public String recuperarMail(String rut){
         
-        String mail;
-        Query q = getEntityManager().createNamedQuery("Usuario.findMailByRut");
-        q.setParameter("rut", rut);
-        mail = q.getResultList().get(0).toString();
-       
-        return mail;
-        
+        String mail = null;
+        try {
+            Query q = getEntityManager().createNamedQuery("Usuario.findMailByRut");
+            q.setParameter("rut", rut);
+            mail = q.getResultList().get(0).toString();
+            return mail;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     @Override

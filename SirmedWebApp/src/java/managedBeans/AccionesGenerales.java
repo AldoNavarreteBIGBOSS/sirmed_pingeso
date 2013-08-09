@@ -5,6 +5,8 @@
 package managedBeans;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -28,5 +30,15 @@ public class AccionesGenerales {
     public void actualizarPagina () throws IOException{
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+    }
+    
+    public void goToPage(String url){
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        try {
+            externalContext.redirect(externalContext.getRequestContextPath() + url);
+        } catch (IOException ex) {
+            Logger.getLogger(AccionesGenerales.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

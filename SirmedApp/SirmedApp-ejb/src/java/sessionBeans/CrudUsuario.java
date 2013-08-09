@@ -68,16 +68,33 @@ public class CrudUsuario implements CrudUsuarioLocal {
     
     
     @Override
-    public void eliminarUsuario(String rut){
+    public void eliminarUsuario(String rut) throws Exception{
     
-        Usuario u = new Usuario(rut);
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        dF.getUsuarioDAO().delete(u);
+       UsuarioDAO udao = dF.getUsuarioDAO();
+       Usuario b = udao.buscarPorRut(rut);
+       
+       if(b != null){
+           udao.delete(b);
+       }
+       else{
+           throw  new Exception("No existe el basculista");
+       }
     }
     
     @Override
-    public void actualizarUsuario(String rut, String email, String newPassword){
+    public void actualizarUsuario(String rut, String email, String newPassword) throws Exception{
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        UsuarioDAO udao = dF.getUsuarioDAO();
+        Usuario b = udao.buscarPorRut(rut);
         
+        if(b!=null){
+            b.setPassword(crearPassword(newPassword));
+            udao.update(b);
+        }
+        else{
+            throw  new Exception("Usuario no existe");
+        }
     }
 
 }

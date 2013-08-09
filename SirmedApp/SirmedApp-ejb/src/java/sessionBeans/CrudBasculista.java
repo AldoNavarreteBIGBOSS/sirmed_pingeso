@@ -49,15 +49,15 @@ public class CrudBasculista implements CrudBasculistaLocal {
     public void editarBasculista(String rut, String nombre, String apellido, String telefono) throws Exception{
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        
-        Basculista b = dF.getBasculistaDAO().buscarPorRut(rut);
+        BasculistaDAO bdao = dF.getBasculistaDAO();
+        Basculista b = bdao.buscarPorRut(rut);
         
         if(b != null){
             b.setRut(rut);
             b.setNombreB(nombre);
             b.setApellidoB(apellido);
             b.setTelefonoB(telefono);
-            dF.getBasculistaDAO().update(b);
+            bdao.update(b);
         }
         else{
             
@@ -67,15 +67,19 @@ public class CrudBasculista implements CrudBasculistaLocal {
     }
     
     @Override
-    public void eliminarBasculista(String rut, String nombre, String apellido, String telefono){
+    public void eliminarBasculista(String rut) throws Exception{
         
-        Basculista b = new Basculista();
-        b.setRut(rut);
-        b.setTelefonoB(telefono);
-        b.setNombreB(nombre);
-        b.setApellidoB(apellido);
+       DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+       BasculistaDAO bdao = dF.getBasculistaDAO();
+       Basculista b = bdao.buscarPorRut(rut);
+       
+       if(b != null){
+           bdao.delete(b);
+       }
+       else{
+           throw  new Exception("No existe el basculista");
+       }
         
-        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        dF.getBasculistaDAO().delete(b);
+        
     }
 }

@@ -5,6 +5,7 @@
 package sessionBeans;
 
 import DAO.DAOFactory;
+import DAO_interfaces.UsuarioDAO;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,20 +62,22 @@ public class Mensajeria implements MensajeriaLocal {
     }
 
     @Override
-    public void recuperarContraseña(String rut){
+    public void recuperarContraseña(String rut) throws Exception{
         String mail;
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        mail = dF.getUsuarioDAO().recuperarMail(rut);
-        if(!mail.isEmpty()){
-            crudUsuario.actualizarUsuario(rut, mail,rut);
-            try {
-                enviarNuevaContraseña(mail, rut);
-            } catch (AddressException ex) {
-                Logger.getLogger(Mensajeria.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (MessagingException ex) {
-                Logger.getLogger(Mensajeria.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        UsuarioDAO udao = dF.getUsuarioDAO();
+        
+        mail = udao.recuperarMail(rut);
+        
+        if(mail != null){
+            crudUsuario.actualizarUsuario(rut, mail, rut);
+            enviarNuevaContraseña(mail, rut);
         }
+        else{
+            
+            throw new Exception("Usuario no registrado");
+        }
+        
         
     }
     
