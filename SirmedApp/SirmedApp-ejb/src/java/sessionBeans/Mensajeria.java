@@ -37,7 +37,7 @@ public class Mensajeria implements MensajeriaLocal {
     private Transport t;
     
     @PostConstruct
-    public void init(){
+    public void inicioConfiguracion(){
         props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
@@ -51,7 +51,7 @@ public class Mensajeria implements MensajeriaLocal {
         message = new MimeMessage(session);     
     }
     
-    @Schedule(hour="*/5")
+    @Schedule(hour="2,6")
     @Override
     public void enviarMail() throws MessagingException {
         
@@ -110,7 +110,7 @@ public class Mensajeria implements MensajeriaLocal {
     
         String mensaje = "Felicidades! "+nombre+"\n Eres parte de SIRMED tus datos son: \n Usuario: "+contraseña+"  \n Contraseña: "+contraseña+"";
         
-        message = new MimeMessage(session);
+        
         message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
         message.setSubject("SIRMED: Bienvenido!");
