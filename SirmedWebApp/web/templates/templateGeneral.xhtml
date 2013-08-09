@@ -15,7 +15,9 @@
         <p:layout fullPage="true">  
 
             <p:layoutUnit position="north" size="150">  
-                <ui:insert name="top">Top</ui:insert>
+                <ui:insert name="top">
+                    <p:outputLabel value="Bienvenido #{autentificador.username}"/>
+                </ui:insert>
             </p:layoutUnit>  
 
             <p:layoutUnit position="south" size="100">  
@@ -32,9 +34,9 @@
                                 <p:menuitem value="Configuración" icon="ui-icon-wrench"/>
                             </p:submenu>  
                             <p:submenu label="Basculistas">  
-                                <p:menuitem value="Ingresar basculista" icon="ui-icon-disk" url="/faces/ingresarBasculista.xhtml"/>  
-                                <p:menuitem value="Editar basculista" icon="ui-icon-arrowrefresh-1-w" url="/faces/editarBasculista.xhtml"/>
-                                <p:menuitem value="Eliminar basculista" icon="ui-icon-close" url="/faces/eliminarBasculista.xhtml"/>
+                                <p:menuitem value="Ingresar basculista" icon="ui-icon-disk" url="/faces/jefePlanta/ingresarBasculista.xhtml"/>  
+                                <p:menuitem value="Editar basculista" icon="ui-icon-arrowrefresh-1-w" url="/faces/jefePlanta/editarBasculista.xhtml"/>
+                                <p:menuitem value="Eliminar basculista" icon="ui-icon-close" url="/faces/jefePlanta/eliminarBasculista.xhtml"/>
                             </p:submenu>
                             <p:submenu label="Choferes" >                                                                       
                                 <p:menuitem value="Ingresar chofer" icon="ui-icon-disk"/>  

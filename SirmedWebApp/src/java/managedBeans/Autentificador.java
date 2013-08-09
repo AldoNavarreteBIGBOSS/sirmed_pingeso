@@ -73,7 +73,9 @@ public class Autentificador implements Serializable {
 
 
             request.login(username, password);
-            ag.goToPage("/faces/ingresarBasculista.xhtml");
+            if(request.isUserInRole("JefePlanta")){
+            ag.goToPage("/faces/jefePlanta/ingresarBasculista.xhtml");
+            }
         } catch (Exception e) {
             System.out.println("MENSAJE DE EXCEPCIÓN: " + e.getMessage());
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nombre de usuario o contraseña incorrectos", ""));
@@ -86,7 +88,7 @@ public class Autentificador implements Serializable {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.invalidateSession();
         try {
-            externalContext.redirect(externalContext.getRequestContextPath() + "/faces/index.xhtml");
+            externalContext.redirect(externalContext.getRequestContextPath() + "/faces/login.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(Autentificador.class.getName()).log(Level.SEVERE, null, ex);
         }
