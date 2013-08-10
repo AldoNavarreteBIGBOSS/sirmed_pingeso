@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DAO_interfaces.AuditoriaDAO;
 import DAO_interfaces.BasculistaDAO;
 import DAO_interfaces.CamionDAO;
 import DAO_interfaces.ChoferDAO;
@@ -40,6 +41,7 @@ public abstract class DAOFactory {
     public abstract TipoRecoleccionDAO getTipoRecoleccionDAO();
     public abstract TipoCamionDAO getTipoCamionDAO();
     public abstract TipoUsuarioDAO getTipoUsuarioDAO();
+    public abstract AuditoriaDAO getAuditoriaDAO();
     
     public static DAOFactory getDAOFactory(int whichFactory, EntityManager em){
     

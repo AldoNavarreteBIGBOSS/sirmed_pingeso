@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import DAO_impl.AuditoriaDAO_impl;
 import DAO_impl.BasculistaDAO_impl;
 import DAO_impl.CamionDAO_impl;
 import DAO_impl.ChoferDAO_impl;
@@ -16,6 +17,7 @@ import DAO_impl.TipoCamionDAO_impl;
 import DAO_impl.TipoRecoleccionDAO_impl;
 import DAO_impl.TipoUsuarioDAO_impl;
 import DAO_impl.UsuarioDAO_impl;
+import DAO_interfaces.AuditoriaDAO;
 import DAO_interfaces.BasculistaDAO;
 import DAO_interfaces.CamionDAO;
 import DAO_interfaces.ChoferDAO;
@@ -102,5 +104,10 @@ public class MysqlDAOFactory extends DAOFactory {
     @Override
         public TipoUsuarioDAO getTipoUsuarioDAO() {
         return new TipoUsuarioDAO_impl(em);
+    }
+    
+    @Override
+        public AuditoriaDAO getAuditoriaDAO() {
+        return new AuditoriaDAO_impl(em);
     }
 }
