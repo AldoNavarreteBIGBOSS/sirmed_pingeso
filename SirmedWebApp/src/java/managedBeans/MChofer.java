@@ -39,16 +39,16 @@ public class MChofer {
     private Collection<Municipalidad> ms;
     private Collection<Chofer> choferes;
     private Chofer choferSeleccionado;
-    private MessaegeController mc;
-    private AccionesGenerales ag;
+    private MMessaegeController mc;
+    private MAccionesGenerales ag;
 
     @PostConstruct
     public void init() {
         ms = municipalidades.listaMunicipalidades();
         choferes = crudChofer.listaChoferes();
         choferSeleccionado = new Chofer();
-        mc = new MessaegeController();
-        ag = new AccionesGenerales();
+        mc = new MMessaegeController();
+        ag = new MAccionesGenerales();
     }
 
     public MunicipalidadesLocal getMunicipalidades() {

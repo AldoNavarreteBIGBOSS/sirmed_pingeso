@@ -39,15 +39,15 @@ public class MBasculista {
     private String email;
     private Collection<Basculista> basculista;
     private Basculista basculistaSeleccionado;
-    private AccionesGenerales ag;
-    private MessaegeController mc;
+    private MAccionesGenerales ag;
+    private MMessaegeController mc;
     
     
     @PostConstruct
     public void init() {
         basculista = crudBasculista.listaBasculistas();
-        mc = new MessaegeController();
-        ag = new AccionesGenerales();
+        mc = new MMessaegeController();
+        ag = new MAccionesGenerales();
     }
 
     public Basculista getBasculistaSeleccionado() {

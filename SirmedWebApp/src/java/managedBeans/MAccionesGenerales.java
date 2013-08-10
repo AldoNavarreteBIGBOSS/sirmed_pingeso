@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Named(value = "accionesGenerales")
 @RequestScoped
-public class AccionesGenerales {
+public class MAccionesGenerales {
 
     
-    public AccionesGenerales() {
+    public MAccionesGenerales() {
     }
     
     public void actualizarPagina () throws IOException{
@@ -36,7 +36,7 @@ public class AccionesGenerales {
         try {
             externalContext.redirect(externalContext.getRequestContextPath() + url);
         } catch (IOException ex) {
-            Logger.getLogger(AccionesGenerales.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MAccionesGenerales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

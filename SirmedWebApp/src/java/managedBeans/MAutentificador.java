@@ -25,7 +25,7 @@ import sessionBeans.MensajeriaLocal;
  */
 @Named(value = "autentificador")
 @SessionScoped
-public class Autentificador implements Serializable {
+public class MAutentificador implements Serializable {
     
     @EJB
     private MensajeriaLocal mensajeria;
@@ -34,8 +34,8 @@ public class Autentificador implements Serializable {
     private String username;
     private String password;
     private String rutRecuperar;
-    private AccionesGenerales ag;
-    private MessaegeController mc;
+    private MAccionesGenerales ag;
+    private MMessaegeController mc;
 
    
     
@@ -64,7 +64,7 @@ public class Autentificador implements Serializable {
     }
     
     
-    public Autentificador() {
+    public MAutentificador() {
     }
     
     public void login(){
@@ -72,7 +72,7 @@ public class Autentificador implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        ag = new AccionesGenerales();
+        ag = new MAccionesGenerales();
         try {
             request.login(username, password);
             
@@ -93,7 +93,7 @@ public class Autentificador implements Serializable {
         try {
             externalContext.redirect(externalContext.getRequestContextPath() + "/faces/login.xhtml");
         } catch (IOException ex) {
-            Logger.getLogger(Autentificador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MAutentificador.class.getName()).log(Level.SEVERE, null, ex);
         }
   }
     
@@ -102,12 +102,12 @@ public class Autentificador implements Serializable {
         try{
             mensajeria.recuperarContraseña(rutRecuperar);
             rutRecuperar = null;
-            mc = new MessaegeController();
+            mc = new MMessaegeController();
             mc.mensajeRetroalimentacion("Operación Exitosa", "Correo enviado");
         }
         catch(Exception e){
             rutRecuperar = null;
-            mc = new MessaegeController();
+            mc = new MMessaegeController();
             mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
             

@@ -40,16 +40,16 @@ public class MPuntoRecoleccion {
     private String descripcion;
     private Collection<PuntoRecoleccion> puntosRecoleccion;
     private PuntoRecoleccion prSeleccionado;
-    private AccionesGenerales ag;
-    private MessaegeController mc;
+    private MAccionesGenerales ag;
+    private MMessaegeController mc;
     
     @PostConstruct
     public void init() {
         
         puntosRecoleccion = crudRecoleccion.listaPuntosRecoleccion();
         prSeleccionado = new PuntoRecoleccion();
-        mc = new MessaegeController();
-        ag = new AccionesGenerales();
+        mc = new MMessaegeController();
+        ag = new MAccionesGenerales();
        
        
     }

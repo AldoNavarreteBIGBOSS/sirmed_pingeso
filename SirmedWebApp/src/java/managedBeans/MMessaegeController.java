@@ -15,10 +15,10 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "messaegeController")
 @RequestScoped
-public class MessaegeController {
+public class MMessaegeController {
 
     /**
-     * Creates a new instance of MessaegeController
+     * Creates a new instance of MMessaegeController
      */
     public void mensajeRetroalimentacion(String texto1, String texto2) {  
         

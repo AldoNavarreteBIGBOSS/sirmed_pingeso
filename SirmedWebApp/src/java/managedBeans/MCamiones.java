@@ -41,8 +41,8 @@ public class MCamiones {
     private Collection<Camion> camiones;
     private Collection<TipoCamion> tc;
     private Camion camionSeleccionado;
-    private MessaegeController mc;
-    private AccionesGenerales ag;
+    private MMessaegeController mc;
+    private MAccionesGenerales ag;
     
     public MCamiones() {
     }
@@ -53,8 +53,8 @@ public class MCamiones {
         municipalidades = municipalidades1.listaMunicipalidades();
         camiones = crudCamion.listaCamiones();
         tc = crudTipoCamion.listaTipoCamion();
-        mc = new MessaegeController(); 
-        ag = new AccionesGenerales();
+        mc = new MMessaegeController(); 
+        ag = new MAccionesGenerales();
     }
 
     public Collection<TipoCamion> getTc() {
