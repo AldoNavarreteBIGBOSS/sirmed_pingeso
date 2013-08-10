@@ -33,8 +33,6 @@ public class Mensajeria implements MensajeriaLocal {
     private EntityManager em;
     private Properties props;
     private Session session;
-    private MimeMessage message;
-    private Transport t;
     
     @PostConstruct
     public void inicioConfiguracion(){
@@ -42,13 +40,13 @@ public class Mensajeria implements MensajeriaLocal {
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
         props.setProperty("mail.smtp.port", "587");
-        props.setProperty("mail.smtp.user", "arden.papifunk@gmail.com");
+        props.setProperty("mail.smtp.user", "SIRMED");
         props.setProperty("mail.smtp.auth", "true");
 
         session = Session.getDefaultInstance(props);
         session.setDebug(true);
 
-        message = new MimeMessage(session);     
+            
     }
     
     @Schedule(hour="2,6")
@@ -56,17 +54,16 @@ public class Mensajeria implements MensajeriaLocal {
     public void enviarMail() throws MessagingException {
         
         String mensaje = "Este es un mensaje de SIRMED cada 5 horas, por favor responder si llegó";
-        
+        MimeMessage message = new MimeMessage(session); 
         message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("victor.floress@usach.cl"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress("arden.papifunk@gmail.com"));
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("hialek@gmail.com"));
         message.setSubject("SIRMED: Prueba");
         message.setText(mensaje);
 
-        t = session.getTransport("smtp");
+        Transport t = session.getTransport("smtp");
         t.connect("arden.papifunk@gmail.com", "2850326");
         t.sendMessage(message, message.getAllRecipients());
+        message = null;
         t.close();
     }
 
@@ -93,15 +90,16 @@ public class Mensajeria implements MensajeriaLocal {
     private void enviarNuevaContraseña(String mail, String contraseña) throws AddressException, MessagingException{
         
         String mensaje = "Tu contraseña ha sido reestablecida, el nuevo password es: "+contraseña+"";
-        
+        MimeMessage message = new MimeMessage(session); 
         message.setSubject("SIRMED: Contraseña Reestablecida");
         message.setText(mensaje);
         message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
         
-        t = session.getTransport("smtp");
+        Transport t = session.getTransport("smtp");
         t.connect("arden.papifunk@gmail.com", "2850326");
         t.sendMessage(message, message.getAllRecipients());
+        message = null;
         t.close();
     }  
     
@@ -110,15 +108,16 @@ public class Mensajeria implements MensajeriaLocal {
     
         String mensaje = "Felicidades! "+nombre+"\n Eres parte de SIRMED tus datos son: \n Usuario: "+contraseña+"  \n Contraseña: "+contraseña+"";
         
-        
+        MimeMessage message = new MimeMessage(session); 
         message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
         message.setSubject("SIRMED: Bienvenido!");
         message.setText(mensaje);
 
-        t = session.getTransport("smtp");
+        Transport t = session.getTransport("smtp");
         t.connect("arden.papifunk@gmail.com", "2850326");
         t.sendMessage(message, message.getAllRecipients());
+        message = null;
         t.close();
         
     
