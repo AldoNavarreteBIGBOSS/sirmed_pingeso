@@ -12,4 +12,5 @@ import entities.Camion;
  */
 public interface CamionDAO extends GenericDAO<Camion>{
     
+     public Camion buscarPorPatente(String patente);
 }

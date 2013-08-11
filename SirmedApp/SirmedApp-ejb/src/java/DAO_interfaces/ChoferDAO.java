@@ -12,4 +12,5 @@ import entities.Chofer;
  */
 public interface ChoferDAO extends GenericDAO<Chofer>{
     
+    public Chofer buscarPorRut(String rut);
 }

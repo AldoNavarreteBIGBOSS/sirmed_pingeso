@@ -46,7 +46,6 @@ public class MChofer {
     public void init() {
         ms = municipalidades.listaMunicipalidades();
         choferes = crudChofer.listaChoferes();
-        choferSeleccionado = new Chofer();
         mc = new MMessaegeController();
         ag = new MAccionesGenerales();
     }
@@ -142,47 +141,49 @@ public class MChofer {
     public MChofer() {
     }
 
-    public void nuevoChofer(ActionEvent actionEvent) {
+    public void nuevoChofer() {
 
         try {
             crudChofer.crearChofer(rut, nombre, apellido, telefono, email, municipalidad);
-            
+            mc.mensajeRetroalimentacion("Operación Exitosa", "Chofer ingresado");
             resetCampos();
         } catch (Exception e) {
-            
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
+            resetCampos();
         }
     }
 
-    public void actualizarBasculista() {
+    public void actualizarChofer() {
 
         try {
             rut = choferSeleccionado.getRutChofer();
             crudChofer.editarChofer(rut, nombre, apellido, telefono, email, municipalidad);
             resetCampos();
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
 
     }
 
-    public void borrarBasculista() {
+    public void borrarChofer() {
 
         try {
-            setearBasculista();
-            crudChofer.eliminarChofer(rut, nombre, apellido, telefono, email, municipalidad);
+            rut = choferSeleccionado.getRutChofer();
+            crudChofer.eliminarChofer(rut);
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
     }
 
-    public void setearBasculista() {
+    public void setearChofer() {
         rut = choferSeleccionado.getRutChofer();
         nombre = choferSeleccionado.getNombreChofer();
         apellido = choferSeleccionado.getApellidoChofer();
         telefono = choferSeleccionado.getTelefonoChofer();
         municipalidad = choferSeleccionado.getNombreMunicipalidad().getNombreMunicipalidad();
+        email = choferSeleccionado.getMailChofer();
     }
 
     public void resetCampos() {

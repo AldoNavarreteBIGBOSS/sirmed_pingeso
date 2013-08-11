@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+   
+    <h:body>
+        
+        <ui:composition template="/templates/templateGeneral.xhtml">
+            <ui:define name="content">
+        <h:form id="form" prependId="false">
+            <p:dataTable id="camiones" var="cam" value="#{mCamiones.camiones}" rowKey="#{cam.patente}" selection="#{mCamiones.camionSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
+                <p:ajax event="rowSelect" listener="#{mCamiones.setearCamion()}" update=":form"/>
+                        <p:ajax event="rowUnselect"/> 
+                        <f:facet name="header">  
+                            Camiones  
+                        </f:facet>
+
+                        <p:column headerText="Patente">  
+                        #{cam.patente}  
+                        </p:column>  
+
+                        <p:column headerText="Municipalidad">  
+                        #{cam.nombreMunicipalidad.nombreMunicipalidad}  
+                        </p:column> 
+
+                        <p:column headerText="Tipo de camión">  
+                        #{cam.idTc.nombreTc}  
+                        </p:column> 
+                        
+                        <f:facet name="footer">
+                            <p:commandButton value="Eliminar" onclick="confirmation.show(); " type="button" ajax="false"/> 
+                            <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
+                                <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mCamiones.borrarCamion()}" update=":form"/>  
+                                <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
+                            </p:confirmDialog>
+                        </f:facet>
+                    </p:dataTable>                                                
+                </h:form> 
+                </ui:define>
+            </ui:composition>
+    </h:body>
+</html>
+

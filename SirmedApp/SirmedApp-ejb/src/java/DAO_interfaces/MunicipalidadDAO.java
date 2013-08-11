@@ -12,4 +12,5 @@ import entities.Municipalidad;
  */
 public interface MunicipalidadDAO extends GenericDAO <Municipalidad>{
     
+    public Municipalidad buscarPorMunicipalidad(String municipalidad);
 }

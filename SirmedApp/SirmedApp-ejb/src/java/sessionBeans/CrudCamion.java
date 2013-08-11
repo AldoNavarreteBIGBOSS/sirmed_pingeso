@@ -5,6 +5,9 @@
 package sessionBeans;
 
 import DAO.DAOFactory;
+import DAO_interfaces.CamionDAO;
+import DAO_interfaces.MunicipalidadDAO;
+import DAO_interfaces.TipoCamionDAO;
 import entities.Camion;
 import entities.Municipalidad;
 import entities.TipoCamion;
@@ -24,16 +27,28 @@ public class CrudCamion implements CrudCamionLocal {
     private EntityManager em;
 
    @Override
-   public void crearCamion(String patente, String municipalidad, int tipoCamion){
+   public void crearCamion(String patente, String municipalidad, int tipoCamion)throws Exception{
        
-       Camion c = new Camion();
-       TipoCamion tc = new TipoCamion(tipoCamion);
-       Municipalidad m = new Municipalidad(municipalidad);
-       c.setPatente(patente);
-       c.setIdTc(tc);
-       c.setNombreMunicipalidad(m);
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-       dF.getCamionDAO().insert(c);
+       CamionDAO cdao = dF.getCamionDAO();
+       TipoCamionDAO tcdao = dF.getTipoCamionDAO();
+       MunicipalidadDAO mdao = dF.getMunicipalidadDAO();
+       
+       Camion c = cdao.buscarPorPatente(patente);
+       
+       if(c == null){
+           c = new Camion();
+           TipoCamion tc = tcdao.find(tipoCamion);
+           Municipalidad m = mdao.buscarPorMunicipalidad(municipalidad);
+           c.setPatente(patente);
+           c.setIdTc(tc);
+           c.setNombreMunicipalidad(m);
+           cdao.insert(c);
+       }
+       else{
+           throw new Exception("El camion ya existe");
+       }
+       
    }
    
    @Override
@@ -43,29 +58,40 @@ public class CrudCamion implements CrudCamionLocal {
    }
 
    @Override
-   public void editarCamion(String patente, String municipalidad, int tipoCamion){
-       Camion c = new Camion();
-       TipoCamion tc = new TipoCamion(tipoCamion);
-       Municipalidad m = new Municipalidad(municipalidad);
-       c.setPatente(patente);
-       c.setIdTc(tc);
-       c.setNombreMunicipalidad(m);
-       
+   public void editarCamion(String patente, String municipalidad, int tipoCamion) throws Exception{
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-       dF.getCamionDAO().update(c);
+       CamionDAO cdao = dF.getCamionDAO();
+       MunicipalidadDAO mdao = dF.getMunicipalidadDAO();
+       TipoCamionDAO tcdao = dF.getTipoCamionDAO();
+       Camion c = cdao.buscarPorPatente(patente);
+       
+       if(c!=null){
+
+           Municipalidad m = mdao.buscarPorMunicipalidad(municipalidad);
+           TipoCamion tc = tcdao.find(tipoCamion);
+           c.setPatente(patente);
+           c.setNombreMunicipalidad(m);
+           c.setIdTc(tc);
+           cdao.update(c);
+       }
+       else{
+           throw new Exception("Camión no registrado");
+       }
    }
    
    @Override
-   public void eliminarCamion(String patente, String municipalidad, int tipoCamion){
-       Camion c = new Camion();
-       TipoCamion tc = new TipoCamion(tipoCamion);
-       Municipalidad m = new Municipalidad(municipalidad);
-       c.setPatente(patente);
-       c.setIdTc(tc);
-       c.setNombreMunicipalidad(m);
+   public void eliminarCamion(String patente)throws Exception{
        
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-       dF.getCamionDAO().delete(c);
+       CamionDAO cdao = dF.getCamionDAO();
+       Camion c = cdao.buscarPorPatente(patente);
+       
+       if(c != null){
+           cdao.delete(c);
+       }
+       else{
+           throw new Exception("Camión no registrado");
+       }
    }
    
    

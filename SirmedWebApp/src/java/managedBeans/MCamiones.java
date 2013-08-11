@@ -49,7 +49,7 @@ public class MCamiones {
     
     @PostConstruct
     public void init(){
-        camionSeleccionado = new Camion();
+        
         municipalidades = municipalidades1.listaMunicipalidades();
         camiones = crudCamion.listaCamiones();
         tc = crudTipoCamion.listaTipoCamion();
@@ -125,16 +125,15 @@ public class MCamiones {
         this.camionSeleccionado = camionSeleccionado;
     }
     
-    public void nuevoCamion(ActionEvent actionEvent){
-        System.out.println("CACA");
-        try{
-            System.out.println(patente+" "+municipalidad+" "+TipoCamion);
+    public void nuevoCamion(){
+        
+        try{       
             crudCamion.crearCamion(patente, municipalidad, TipoCamion);
             mc.mensajeRetroalimentacion( "Operación Existosa", "Camión "+patente+" ingresado");
             resetCampos();
         }
         catch(Exception e){
-            mc.mensajeRetroalimentacion( "Ha ocurrido un error", "Explicación");
+            mc.mensajeRetroalimentacion( "Ha ocurrido un error", e.getMessage());
         }
     }
     
@@ -144,8 +143,8 @@ public class MCamiones {
             crudCamion.editarCamion(patente, municipalidad, TipoCamion);
             resetCampos();
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
@@ -153,10 +152,10 @@ public class MCamiones {
                    
         try {
             setearCamion();
-            crudCamion.eliminarCamion(patente, municipalidad, TipoCamion);
+            crudCamion.eliminarCamion(patente);
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     
