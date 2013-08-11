@@ -17,14 +17,14 @@
             <p:layoutUnit position="north">  
                 <ui:insert name="top">
                     <div  align="right">
-                    <h:form>
+                        <h:form id="login">
                         <p:growl id="growl" showDetail="true" sticky="true" /> 
                         <h:panelGrid  styleClass="panelLogin" columns="6" cellpadding="5px">
                             <p:outputLabel value="Usuario: "/>
                             <p:inputText value="#{autentificador.username}" required="true" label="Usuario"/>
                             <p:outputLabel value="Contraseña: "/>
                             <p:inputText value="#{autentificador.password}" required="true" type="password" label="Contraseña"/>
-                            <p:commandButton action="#{autentificador.login()}"  value="Ingresar"/>
+                            <p:commandButton action="#{autentificador.login()}"  value="Ingresar" update="login"/>
                             <a href="#{request.contextPath}/faces/recuperarPass.xhtml">Olvidé mi contraseña</a>
                         </h:panelGrid>
                     </h:form>

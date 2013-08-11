@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import sessionBeans.MensajeriaLocal;
 
@@ -81,7 +82,8 @@ public class MAutentificador implements Serializable {
             }
         } catch (Exception e) {
             mc.mensajeRetroalimentacion("Error", "Usuario y/o contraseña incorrecta");
-        }   
+        }  
+        
     }
     
     public void logout() {
