@@ -21,7 +21,7 @@
                         <h:inputTextarea value="#{mPuntoRecoleccion.descripcion}" />
                         <h:outputLabel value="Tipo recolección: "/>
                         <p:selectManyCheckbox value="#{mPuntoRecoleccion.tipoRecoleccionSeleccionados}" layout="pageDirection" >  
-                            <f:selectItems var="tr" value="#{mPuntoRecoleccion.tipoRecoleccions}" itemLabel="#{tr.nombreTipoRecoleccion}" itemValue="#{tr}" />  
+                            <f:selectItems var="tr" value="#{mPuntoRecoleccion.tipoRecoleccions}" itemLabel="#{tr.nombreTipoRecoleccion}" itemValue="#{tr.idTipoRecoleccion}" />  
                         </p:selectManyCheckbox>  
                         <h:outputLabel value="Municipalidad: "/>
                         <p:selectOneMenu value="#{mPuntoRecoleccion.municipalidad}">

@@ -6,6 +6,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.LinkedList;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,6 +61,7 @@ public class TipoRecoleccion implements Serializable {
     private TipoCamion idTc;
 
     public TipoRecoleccion() {
+        this.puntoRecoleccionCollection = new LinkedList();
     }
 
     public TipoRecoleccion(Integer idTipoRecoleccion) {

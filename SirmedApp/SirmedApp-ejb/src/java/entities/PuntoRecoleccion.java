@@ -6,6 +6,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.LinkedList;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,6 +66,7 @@ public class PuntoRecoleccion implements Serializable {
     
 
     public PuntoRecoleccion() {
+        this.tipoRecoleccionCollection = new LinkedList();
     }
 
     public PuntoRecoleccion(Integer idPunto) {

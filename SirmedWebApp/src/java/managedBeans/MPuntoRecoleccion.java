@@ -16,7 +16,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.event.ActionEvent;
 import sessionBeans.CrudRecoleccionLocal;
 import sessionBeans.CrudTipoRecoleccionLocal;
 import sessionBeans.MunicipalidadesLocal;
@@ -39,7 +38,7 @@ public class MPuntoRecoleccion {
     private String municipalidad;
     private String nombrePunto;
     private String descripcion;
-    private Collection<TipoRecoleccion> tipoRecoleccionSeleccionados;
+    private Collection<String> tipoRecoleccionSeleccionados;
     private Collection<PuntoRecoleccion> puntosRecoleccion;
     private PuntoRecoleccion prSeleccionado;
     private Collection<Municipalidad> ms;
@@ -72,11 +71,11 @@ public class MPuntoRecoleccion {
         this.tipoRecoleccions = tipoRecoleccions;
     }
 
-    public Collection<TipoRecoleccion> getTipoRecoleccionSeleccionados() {
+    public Collection<String> getTipoRecoleccionSeleccionados() {
         return tipoRecoleccionSeleccionados;
     }
 
-    public void setTipoRecoleccionSeleccionados(Collection<TipoRecoleccion> tipoRecoleccion) {
+    public void setTipoRecoleccionSeleccionados(Collection<String> tipoRecoleccion) {
         this.tipoRecoleccionSeleccionados = tipoRecoleccion;
     }
 
@@ -132,9 +131,7 @@ public class MPuntoRecoleccion {
     }
     
     public void nuevoPunto() {
-
         try {
-            municipalidad = null;
             crudRecoleccion.crearPuntoRecoleccion(direccion, nombrePunto, descripcion, municipalidad, tipoRecoleccionSeleccionados);
             mc.mensajeRetroalimentacion("Operacion", "Exitosa");
             resetCampos();
