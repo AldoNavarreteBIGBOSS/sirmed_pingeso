@@ -9,13 +9,15 @@ import entities.PuntoRecoleccion;
 import entities.TipoRecoleccion;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import managedBeans.Pojo.PuntoRecoleccionPojo;
 import sessionBeans.CrudRecoleccionLocal;
 import sessionBeans.CrudTipoRecoleccionLocal;
 import sessionBeans.MunicipalidadesLocal;
@@ -35,12 +37,13 @@ public class MPuntoRecoleccion {
     private CrudRecoleccionLocal crudRecoleccion;
     
     private String direccion;
+    private Integer idTipo;
     private String municipalidad;
     private String nombrePunto;
     private String descripcion;
     private Collection<String> tipoRecoleccionSeleccionados;
-    private Collection<PuntoRecoleccion> puntosRecoleccion;
-    private PuntoRecoleccion prSeleccionado;
+    private Collection<PuntoRecoleccionPojo> puntosRecoleccionPojo;
+    private PuntoRecoleccionPojo prSeleccionadoPojo;
     private Collection<Municipalidad> ms;
     private Collection<TipoRecoleccion> tipoRecoleccions;
     private MAccionesGenerales ag;
@@ -48,11 +51,20 @@ public class MPuntoRecoleccion {
     
     @PostConstruct
     public void init() {
+        
         ms = municipalidades.listaMunicipalidades();
         tipoRecoleccions = crudTipoRecoleccion.listaTipoRecoleccion();
-        puntosRecoleccion = crudRecoleccion.listaPuntosRecoleccion();
+        cargarPuntosRecoleccion();
         mc = new MMessaegeController();
         ag = new MAccionesGenerales();    
+    }
+
+    public Integer getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(Integer idTipo) {
+        this.idTipo = idTipo;
     }
 
     public Collection<Municipalidad> getMs() {
@@ -111,20 +123,20 @@ public class MPuntoRecoleccion {
         this.descripcion = descripcion;
     }
 
-    public Collection<PuntoRecoleccion> getPuntosRecoleccion() {
-        return puntosRecoleccion;
+    public Collection<PuntoRecoleccionPojo> getPuntosRecoleccionPojo() {
+        return puntosRecoleccionPojo;
     }
 
-    public void setPuntosRecoleccion(Collection<PuntoRecoleccion> puntosRecoleccion) {
-        this.puntosRecoleccion = puntosRecoleccion;
+    public void setPuntosRecoleccionPojo(Collection<PuntoRecoleccionPojo> puntosRecoleccion) {
+        this.puntosRecoleccionPojo = puntosRecoleccion;
     }
 
-    public PuntoRecoleccion getPrSeleccionado() {
-        return prSeleccionado;
+    public PuntoRecoleccionPojo getPrSeleccionadoPojo() {
+        return prSeleccionadoPojo;
     }
 
-    public void setPrSeleccionado(PuntoRecoleccion prSeleccionado) {
-        this.prSeleccionado = prSeleccionado;
+    public void setPrSeleccionadoPojo(PuntoRecoleccionPojo prSeleccionadoPojo) {
+        this.prSeleccionadoPojo = prSeleccionadoPojo;
     }
     
     public MPuntoRecoleccion() {
@@ -132,7 +144,7 @@ public class MPuntoRecoleccion {
     
     public void nuevoPunto() {
         try {
-            crudRecoleccion.crearPuntoRecoleccion(direccion, nombrePunto, descripcion, municipalidad, tipoRecoleccionSeleccionados);
+            crudRecoleccion.crearPuntoRecoleccion(direccion.toUpperCase(), nombrePunto, descripcion, municipalidad, tipoRecoleccionSeleccionados);
             mc.mensajeRetroalimentacion("Operacion", "Exitosa");
             resetCampos();
         } catch (Exception e) {
@@ -141,14 +153,14 @@ public class MPuntoRecoleccion {
     }
 
     public void actualizarPunto() {
-
+        
         try {
-            direccion = prSeleccionado.getDireccionPunto();
-            crudRecoleccion.editarPuntoRecoleccion(direccion.toUpperCase(), nombrePunto, descripcion);
+            System.out.println(tipoRecoleccionSeleccionados);
+            crudRecoleccion.editarPuntoRecoleccion(idTipo, direccion.toUpperCase(), nombrePunto, descripcion, municipalidad, tipoRecoleccionSeleccionados);
             resetCampos();
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            mc.mensajeRetroalimentacion("Error", ex.getMessage());
         }
 
     }
@@ -157,17 +169,21 @@ public class MPuntoRecoleccion {
 
         try {
             setearPunto();
-            crudRecoleccion.eliminarPuntoRecoleccion(direccion, nombrePunto, descripcion);
+            crudRecoleccion.eliminarPuntoRecoleccion(idTipo);
             ag.actualizarPagina();
-        } catch (IOException ex) {
-            Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            mc.mensajeRetroalimentacion("Error", ex.getMessage());
         }
     }
 
     public void setearPunto() {
-        direccion = prSeleccionado.getDireccionPunto();
-        nombrePunto = prSeleccionado.getNombrePunto();
-        descripcion = prSeleccionado.getDescripcionPunto();
+       
+        idTipo = prSeleccionadoPojo.getIdTipo();
+        nombrePunto = prSeleccionadoPojo.getNombrePunto();
+        municipalidad = prSeleccionadoPojo.getMunicipalidad();
+        direccion = prSeleccionadoPojo.getDireccionPunto();
+        descripcion = prSeleccionadoPojo.getDescripcion();
+        
    }
 
     public void resetCampos() {
@@ -176,5 +192,37 @@ public class MPuntoRecoleccion {
         this.descripcion = null;
         this.municipalidad = null;
         this.nombrePunto = null;
+        
+        this.tipoRecoleccionSeleccionados = null;
+    }
+    
+    public String returnStringCollection(Collection<TipoRecoleccion> tipoRecoleccion){
+    
+        String str = "";
+        String tmp;
+        for(Iterator<TipoRecoleccion> it = tipoRecoleccion.iterator(); it.hasNext();){         
+                tmp = it.next().getNombreTipoRecoleccion();
+                str += tmp+" - ";           
+        }     
+        return str;
+    }
+    
+    public void cargarPuntosRecoleccion(){
+        
+        Collection<PuntoRecoleccion> prs = crudRecoleccion.listaPuntosRecoleccion();
+        PuntoRecoleccion tmp;
+        puntosRecoleccionPojo = new LinkedList();
+        for(Iterator<PuntoRecoleccion> it = prs.iterator(); it.hasNext();){
+            PuntoRecoleccionPojo prp = new PuntoRecoleccionPojo();
+            tmp = it.next();
+            prp.setIdTipo(tmp.getIdPunto());
+            prp.setDescripcion(tmp.getDescripcionPunto());
+            prp.setDireccionPunto(tmp.getDireccionPunto());
+            prp.setMunicipalidad(tmp.getNombreMunicipalidad().getNombreMunicipalidad());
+            prp.setNombrePunto(tmp.getNombrePunto());
+            prp.setTiposRecoleccion(returnStringCollection(tmp.getTipoRecoleccionCollection()));
+            puntosRecoleccionPojo.add(prp);
+        }
+        
     }
 }

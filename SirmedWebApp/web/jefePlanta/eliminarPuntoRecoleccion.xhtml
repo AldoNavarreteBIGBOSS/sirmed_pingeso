@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:body>
+        <ui:composition template="/templates/templateGeneral.xhtml">
+            <ui:define name="content">
+                <h:form id="form" prependId="false">
+
+                    <p:dataTable id="precoleccion" var="pr" value="#{mPuntoRecoleccion.puntosRecoleccionPojo}" rowKey="#{pr.idTipo}" selection="#{mPuntoRecoleccion.prSeleccionadoPojo}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
+                        <p:ajax event="rowSelect" listener="#{mPuntoRecoleccion.setearPunto()}" update=":form"/>
+                        <p:ajax event="rowUnselect"/> 
+                        <f:facet name="header">  
+                            Puntos de Recolección  
+                        </f:facet>
+                        <p:column headerText="Identificador">  
+                        #{pr.idTipo}  
+                        </p:column>  
+                        <p:column headerText="Nombre punto">  
+                        #{pr.nombrePunto}  
+                        </p:column>  
+
+                        <p:column headerText="Dirección">  
+                        #{pr.direccionPunto}  
+                        </p:column> 
+
+                        <p:column headerText="Municipalidad">  
+                        #{pr.municipalidad}  
+                        </p:column> 
+
+                        <p:column headerText="Tipo recolección">  
+                        #{pr.tiposRecoleccion}  
+                        </p:column> 
+
+                        <p:column headerText="Descripción">  
+                        #{pr.descripcion}  
+                        </p:column> 
+
+                        <f:facet name="footer">  
+                            <h:inputHidden value="#{mPuntoRecoleccion.idTipo}"/>
+                            <p:commandButton value="Eliminar" onclick="confirmation.show(); " type="button" ajax="false"/> 
+                            <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
+                                <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mPuntoRecoleccion.borrarPunto()}" update=":form"/>  
+                                <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
+                            </p:confirmDialog>
+                        </f:facet>  
+                    </p:dataTable>
+                    
+                    
+                </h:form>   
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

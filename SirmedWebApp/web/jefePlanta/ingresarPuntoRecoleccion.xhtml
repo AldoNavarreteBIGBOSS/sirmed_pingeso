@@ -17,16 +17,17 @@
                         <p:inputText value="#{mPuntoRecoleccion.nombrePunto}" required="true" label="RUT"/> 
                         <h:outputLabel value="Dirección: "/>
                         <p:inputText value="#{mPuntoRecoleccion.direccion}" required="true" label="Direcció"/>
-                        <h:outputLabel value="Descripción: "/>
-                        <h:inputTextarea value="#{mPuntoRecoleccion.descripcion}" />
+                         <h:outputLabel value="Municipalidad: "/>
+                        <p:selectOneMenu value="#{mPuntoRecoleccion.municipalidad}">
+                            <f:selectItems value="#{mPuntoRecoleccion.ms}" var="mun" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}"/>
+                        </p:selectOneMenu>
+                        
                         <h:outputLabel value="Tipo recolección: "/>
                         <p:selectManyCheckbox value="#{mPuntoRecoleccion.tipoRecoleccionSeleccionados}" layout="pageDirection" >  
                             <f:selectItems var="tr" value="#{mPuntoRecoleccion.tipoRecoleccions}" itemLabel="#{tr.nombreTipoRecoleccion}" itemValue="#{tr.idTipoRecoleccion}" />  
                         </p:selectManyCheckbox>  
-                        <h:outputLabel value="Municipalidad: "/>
-                        <p:selectOneMenu value="#{mPuntoRecoleccion.municipalidad}">
-                            <f:selectItems value="#{mPuntoRecoleccion.ms}" var="mun" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}"/>
-                        </p:selectOneMenu>
+                       <h:outputLabel value="Descripción: "/>
+                        <h:inputTextarea value="#{mPuntoRecoleccion.descripcion}" />
                     </p:panelGrid>
                     <p:commandButton  value="Ingresar"  actionListener="#{mPuntoRecoleccion.nuevoPunto()}" icon="ui-icon-check" update="ret"/>                        
                 </h:form>

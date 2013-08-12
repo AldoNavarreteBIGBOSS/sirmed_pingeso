@@ -42,17 +42,18 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
                 
         if(pr == null){          
             pr = new PuntoRecoleccion();
+            
             Municipalidad m = mdao.buscarPorMunicipalidad(municipalidad);
             Collection<TipoRecoleccion> ctr = buscaTipoRecolecciones(tipoRecoleccion);
+            
             pr.getTipoRecoleccionCollection().addAll(ctr);
             pr.setNombrePunto(nombrePunto);          
             pr.setDireccionPunto(direccion);           
             pr.setNombreMunicipalidad(m);
-            TipoRecoleccion tRec;
-            for (Iterator<TipoRecoleccion> it = ctr.iterator(); it.hasNext();) {
-                 tRec = it.next();
+            pr.setDescripcionPunto(descripcion);
+            for (TipoRecoleccion tRec : ctr) {
                 tRec.getPuntoRecoleccionCollection().add(pr);
-            }         
+            }
             prdao.insert(pr);           
         }
         else{
@@ -67,25 +68,59 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
     }
     
     @Override
-    public void editarPuntoRecoleccion(String direccion, String nombrePunto, String descripcion){
-        PuntoRecoleccion pr = new PuntoRecoleccion();
-        pr.setDireccionPunto(direccion);
-        pr.setNombrePunto(nombrePunto);
-        pr.setDescripcionPunto(descripcion);
+    public void editarPuntoRecoleccion(Integer idTipo, String direccion, String nombrePunto, String descripcion, String municipalidad, Collection<String> tipoRecoleccion) throws Exception{
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        dF.getPuntoRecoleccionDAO().update(pr);
+        PuntoRecoleccionDAO prdao = dF.getPuntoRecoleccionDAO();
+        MunicipalidadDAO mdao = dF.getMunicipalidadDAO();
+        PuntoRecoleccion pr = prdao.find(idTipo);
+        
+        
+       
+        if(pr != null){
+           
+            Municipalidad m = mdao.buscarPorMunicipalidad(municipalidad);
+            Collection<TipoRecoleccion> ctr = buscaTipoRecolecciones(tipoRecoleccion);
+            for (TipoRecoleccion tRec : pr.getTipoRecoleccionCollection()) {
+                tRec.getPuntoRecoleccionCollection().remove(pr);
+            }
+            pr.getTipoRecoleccionCollection().clear();
+            pr.getTipoRecoleccionCollection().addAll(ctr);
+            pr.setNombrePunto(nombrePunto);
+            pr.setDireccionPunto(direccion);
+            pr.setDescripcionPunto(descripcion);
+            pr.setNombreMunicipalidad(m);
+            for (TipoRecoleccion tRec : ctr) {
+                tRec.getPuntoRecoleccionCollection().add(pr);
+            }
+            prdao.update(pr);
+            
+        }
+        else{
+            
+            throw new Exception("Punto de recolección ya existe");
+        }
     }
     
     @Override
-    public void eliminarPuntoRecoleccion(String direccion, String nombrePunto, String descripcion){
-        PuntoRecoleccion pr = new PuntoRecoleccion();
-        pr.setDireccionPunto(direccion);
-        pr.setNombrePunto(nombrePunto);
-        pr.setDescripcionPunto(descripcion);
+    public void eliminarPuntoRecoleccion(Integer idTipo) throws Exception{
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        dF.getPuntoRecoleccionDAO().delete(pr);
+        PuntoRecoleccionDAO prdao = dF.getPuntoRecoleccionDAO();
+        PuntoRecoleccion pr = prdao.find(idTipo);
+         
+        if(pr != null){
+        
+            for (TipoRecoleccion tRec : pr.getTipoRecoleccionCollection()) {
+                tRec.getPuntoRecoleccionCollection().remove(pr);
+            }
+            pr.getTipoRecoleccionCollection().clear();
+            prdao.delete(pr);
+            
+        }
+        else{
+            throw  new  Exception("No existe punto de recoleccion");
+        }
     }
 
     private Collection<TipoRecoleccion> buscaTipoRecolecciones(Collection<String> tiposRecolecciones){
