@@ -11,9 +11,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,6 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Municipalidad.findByTelefonoMunicipalidad", query = "SELECT m FROM Municipalidad m WHERE m.telefonoMunicipalidad = :telefonoMunicipalidad"),
     @NamedQuery(name = "Municipalidad.findByDireccionMunicipalidad", query = "SELECT m FROM Municipalidad m WHERE m.direccionMunicipalidad = :direccionMunicipalidad")})
 public class Municipalidad implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreMunicipalidad")
+    private Collection<PuntoRecoleccion> puntoRecoleccionCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -53,11 +52,9 @@ public class Municipalidad implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "DIRECCION_MUNICIPALIDAD")
     private String direccionMunicipalidad;
-    @JoinTable(name = "municipalidad_punto", joinColumns = {
-        @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")}, inverseJoinColumns = {
-        @JoinColumn(name = "ID_PUNTO", referencedColumnName = "ID_PUNTO")})
-    @ManyToMany
-    private Collection<PuntoRecoleccion> puntoRecoleccionCollection;
+    
+    
+   
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreMunicipalidad")
     private Collection<Chofer> choferCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreMunicipalidad")
@@ -162,5 +159,6 @@ public class Municipalidad implements Serializable {
     public String toString() {
         return "entities.Municipalidad[ nombreMunicipalidad=" + nombreMunicipalidad + " ]";
     }
+
     
 }

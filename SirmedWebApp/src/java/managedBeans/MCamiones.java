@@ -98,9 +98,7 @@ public class MCamiones {
     public void setTipoCamion(Integer TipoCamion) {
         this.TipoCamion = TipoCamion;
     }
-
    
-
     public Collection<Municipalidad> getMunicipalidades() {
         return municipalidades;
     }

@@ -9,6 +9,7 @@ import entities.PuntoRecoleccion;
 import entities.TipoRecoleccion;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -38,44 +39,45 @@ public class MPuntoRecoleccion {
     private String municipalidad;
     private String nombrePunto;
     private String descripcion;
+    private Collection<TipoRecoleccion> tipoRecoleccionSeleccionados;
     private Collection<PuntoRecoleccion> puntosRecoleccion;
     private PuntoRecoleccion prSeleccionado;
+    private Collection<Municipalidad> ms;
+    private Collection<TipoRecoleccion> tipoRecoleccions;
     private MAccionesGenerales ag;
     private MMessaegeController mc;
     
     @PostConstruct
     public void init() {
-        
+        ms = municipalidades.listaMunicipalidades();
+        tipoRecoleccions = crudTipoRecoleccion.listaTipoRecoleccion();
         puntosRecoleccion = crudRecoleccion.listaPuntosRecoleccion();
-        prSeleccionado = new PuntoRecoleccion();
         mc = new MMessaegeController();
-        ag = new MAccionesGenerales();
-       
-       
+        ag = new MAccionesGenerales();    
     }
 
-    public CrudTipoRecoleccionLocal getCrudTipoRecoleccion() {
-        return crudTipoRecoleccion;
+    public Collection<Municipalidad> getMs() {
+        return ms;
     }
 
-    public void setCrudTipoRecoleccion(CrudTipoRecoleccionLocal crudTipoRecoleccion) {
-        this.crudTipoRecoleccion = crudTipoRecoleccion;
+    public void setMs(Collection<Municipalidad> ms) {
+        this.ms = ms;
     }
 
-    public MunicipalidadesLocal getMunicipalidades() {
-        return municipalidades;
+    public Collection<TipoRecoleccion> getTipoRecoleccions() {
+        return tipoRecoleccions;
     }
 
-    public void setMunicipalidades(MunicipalidadesLocal municipalidades) {
-        this.municipalidades = municipalidades;
+    public void setTipoRecoleccions(Collection<TipoRecoleccion> tipoRecoleccions) {
+        this.tipoRecoleccions = tipoRecoleccions;
     }
 
-    public CrudRecoleccionLocal getCrudRecoleccion() {
-        return crudRecoleccion;
+    public Collection<TipoRecoleccion> getTipoRecoleccionSeleccionados() {
+        return tipoRecoleccionSeleccionados;
     }
 
-    public void setCrudRecoleccion(CrudRecoleccionLocal crudRecoleccion) {
-        this.crudRecoleccion = crudRecoleccion;
+    public void setTipoRecoleccionSeleccionados(Collection<TipoRecoleccion> tipoRecoleccion) {
+        this.tipoRecoleccionSeleccionados = tipoRecoleccion;
     }
 
     public String getDireccion() {
@@ -102,8 +104,6 @@ public class MPuntoRecoleccion {
         this.nombrePunto = nombrePunto;
     }
 
-    
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -111,8 +111,6 @@ public class MPuntoRecoleccion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    
 
     public Collection<PuntoRecoleccion> getPuntosRecoleccion() {
         return puntosRecoleccion;
@@ -133,14 +131,15 @@ public class MPuntoRecoleccion {
     public MPuntoRecoleccion() {
     }
     
-    public void nuevoPunto(ActionEvent actionEvent) {
+    public void nuevoPunto() {
 
         try {
-            crudRecoleccion.crearPuntoRecoleccion(direccion, nombrePunto, descripcion);
-            
+            municipalidad = null;
+            crudRecoleccion.crearPuntoRecoleccion(direccion, nombrePunto, descripcion, municipalidad, tipoRecoleccionSeleccionados);
+            mc.mensajeRetroalimentacion("Operacion", "Exitosa");
             resetCampos();
         } catch (Exception e) {
-            
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
     }
 
@@ -148,7 +147,7 @@ public class MPuntoRecoleccion {
 
         try {
             direccion = prSeleccionado.getDireccionPunto();
-            crudRecoleccion.editarPuntoRecoleccion(direccion, nombrePunto, descripcion);
+            crudRecoleccion.editarPuntoRecoleccion(direccion.toUpperCase(), nombrePunto, descripcion);
             resetCampos();
             ag.actualizarPagina();
         } catch (IOException ex) {

@@ -12,4 +12,5 @@ import entities.PuntoRecoleccion;
  */
 public interface PuntoRecoleccionDAO extends GenericDAO<PuntoRecoleccion>{
     
+    public PuntoRecoleccion buscarPorDireccionLike(String direccion);
 }

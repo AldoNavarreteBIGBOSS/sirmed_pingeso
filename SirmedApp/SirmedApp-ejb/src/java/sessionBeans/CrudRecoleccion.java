@@ -5,8 +5,15 @@
 package sessionBeans;
 
 import DAO.DAOFactory;
+import DAO_interfaces.MunicipalidadDAO;
+import DAO_interfaces.PuntoRecoleccionDAO;
+import DAO_interfaces.RegistrosDAO;
+import entities.Municipalidad;
 import entities.PuntoRecoleccion;
+import entities.Registro;
+import entities.TipoRecoleccion;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,14 +30,47 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
     
     
     @Override
-    public void crearPuntoRecoleccion(String direccion, String nombrePunto, String descripcion){
-        PuntoRecoleccion pr = new PuntoRecoleccion();
-        pr.setDireccionPunto(direccion);
-        pr.setNombrePunto(nombrePunto);
-        pr.setDescripcionPunto(descripcion);
+    public void crearPuntoRecoleccion(String direccion, String nombrePunto, String descripcion, String municipalidad, Collection<TipoRecoleccion> tipoRecoleccion) throws Exception{
         
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        dF.getPuntoRecoleccionDAO().insert(pr);
+        PuntoRecoleccionDAO prdao = dF.getPuntoRecoleccionDAO();
+        MunicipalidadDAO mdao = dF.getMunicipalidadDAO();
+        
+        PuntoRecoleccion pr = prdao.buscarPorDireccionLike(direccion);
+        
+        
+        if(pr == null){
+            
+           
+            
+            pr = new PuntoRecoleccion();
+            
+            Municipalidad m = mdao.buscarPorMunicipalidad(municipalidad);
+            
+            
+            
+            pr.setNombrePunto(nombrePunto);
+            
+            pr.setDireccionPunto(direccion);
+           
+            pr.setNombreMunicipalidad(m);
+            
+            pr.setTipoRecoleccionCollection(tipoRecoleccion);
+            
+            prdao.insert(pr);
+            
+        }
+        else{
+            throw new Exception("Punto de recolección ya existe");
+        }
+       
+        
+      
+        
+        
+        
+        
+        
     }
     
     @Override

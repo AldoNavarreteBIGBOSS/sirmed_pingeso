@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,8 +35,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PuntoRecoleccion.findByIdPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.idPunto = :idPunto"),
     @NamedQuery(name = "PuntoRecoleccion.findByNombrePunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.nombrePunto = :nombrePunto"),
     @NamedQuery(name = "PuntoRecoleccion.findByDireccionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.direccionPunto = :direccionPunto"),
-    @NamedQuery(name = "PuntoRecoleccion.findByDescripcionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.descripcionPunto = :descripcionPunto")})
+    @NamedQuery(name = "PuntoRecoleccion.findByDescripcionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.descripcionPunto = :descripcionPunto"),
+    @NamedQuery(name = "PuntoRecoleccion.finByDireccionLike", query = "SELECT p FROM PuntoRecoleccion p WHERE p.direccionPunto LIKE :direccionPunto ")})
 public class PuntoRecoleccion implements Serializable {
+    @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")
+    @ManyToOne(optional = false)
+    private Municipalidad nombreMunicipalidad;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,8 +62,7 @@ public class PuntoRecoleccion implements Serializable {
     private String descripcionPunto;
     @ManyToMany(mappedBy = "puntoRecoleccionCollection")
     private Collection<TipoRecoleccion> tipoRecoleccionCollection;
-    @ManyToMany(mappedBy = "puntoRecoleccionCollection")
-    private Collection<Municipalidad> municipalidadCollection;
+    
 
     public PuntoRecoleccion() {
     }
@@ -113,14 +118,7 @@ public class PuntoRecoleccion implements Serializable {
         this.tipoRecoleccionCollection = tipoRecoleccionCollection;
     }
 
-    @XmlTransient
-    public Collection<Municipalidad> getMunicipalidadCollection() {
-        return municipalidadCollection;
-    }
-
-    public void setMunicipalidadCollection(Collection<Municipalidad> municipalidadCollection) {
-        this.municipalidadCollection = municipalidadCollection;
-    }
+    
 
     @Override
     public int hashCode() {
@@ -145,6 +143,14 @@ public class PuntoRecoleccion implements Serializable {
     @Override
     public String toString() {
         return "entities.PuntoRecoleccion[ idPunto=" + idPunto + " ]";
+    }
+
+    public Municipalidad getNombreMunicipalidad() {
+        return nombreMunicipalidad;
+    }
+
+    public void setNombreMunicipalidad(Municipalidad nombreMunicipalidad) {
+        this.nombreMunicipalidad = nombreMunicipalidad;
     }
     
 }

@@ -5,6 +5,7 @@
 package sessionBeans;
 
 import entities.PuntoRecoleccion;
+import entities.TipoRecoleccion;
 import java.util.Collection;
 import javax.ejb.Local;
 
@@ -15,7 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface CrudRecoleccionLocal {
 
-    public void crearPuntoRecoleccion(String direccion, String nombrePunto, String descripcion);
+    public void crearPuntoRecoleccion(String direccion, String nombrePunto, String descripcion, String municipalidad, Collection<TipoRecoleccion> tipoRecoleccion) throws Exception;
 
     public Collection<PuntoRecoleccion> listaPuntosRecoleccion();
 
