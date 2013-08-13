@@ -53,7 +53,8 @@ public class MRegistros {
     @PostConstruct
    public void init(){
        rutBasculista = mAutentificador.getUsername();
-       listaMunicipalidades = municipalidades.listaMunicipalidades();
+       cargarDatos();
+       
    }
 
     public Collection<Chofer> getChoferes() {
@@ -151,8 +152,10 @@ public class MRegistros {
     }
     
     public void cargarDatos(){
-        camiones = crudCamion.listarCamionMunicipalidad(municipalidad);
-        choferes = crudChofer.listarChoferMunicipalidad(municipalidad);
-        puntosRecoleccion = crudRecoleccion.listarPuntoRecoleccionMunicipalidad(municipalidad);
+        
+        camiones = crudCamion.listaCamiones();
+        choferes = crudChofer.listaChoferes();
+        puntosRecoleccion = crudRecoleccion.listaPuntosRecoleccion();
+        listaMunicipalidades = municipalidades.listaMunicipalidades();
     }
 }
