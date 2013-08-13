@@ -8,30 +8,93 @@
    
     <h:body>
         <ui:composition template="/templates/templateBasculista.xhtml">
-             <ui:define name="content">
-                 <h:form id="muni">                   
-                     <p:panelGrid columns="2">
-                         <p:outputLabel value="Seleccione municipalidad: "/>
-                         <p:selectOneMenu value="#{mRegistros.municipalidad}">
-                             <f:selectItems var="mun" value="#{mRegistros.listaMunicipalidades}" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}" />
-                         </p:selectOneMenu>
-                         <p:outputLabel value="Seleccione Camion: "/>
-                         <p:selectOneMenu value="#{mRegistros.patenteCamion}">
-                             <f:selectItems var="cam" value="#{mRegistros.camiones}" itemLabel="#{cam.patente}" itemValue="#{cam.patente}" />
-                         </p:selectOneMenu>
+            <ui:define name="content">
 
-                         <p:outputLabel value="Seleccione Chofer: "/>
-                         <p:selectOneMenu value="#{mRegistros.rutChofer}">
-                             <f:selectItems var="chf" value="#{mRegistros.choferes}" itemLabel="#{chf.rutChofer}" itemValue="#{chf.rutChofer}" />
-                         </p:selectOneMenu>
 
-                     </p:panelGrid>
-                 </h:form>
-                 
-                 
-                 
-             </ui:define>            
-       </ui:composition>      
+                <h:form >        
+                    <p:panel header="Seleccionar Municipalidad" footer="Seleccione la municipalidad de procedencia de la carga">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:outputLabel value="Municipalidad: "/>
+                            <h:selectOneMenu value="#{mRegistros.municipalidad}">
+                                <f:selectItems var="mun" value="#{mRegistros.listaMunicipalidades}" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}"/>
+                                <f:ajax render="reta" listener="#{mRegistros.cargarDatos()}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:outputPanel id="reta">
+                        <p:panel header="Seleccionar Camión" footer="Seleccione la patente del camión que trae la carga e ingrese el peso">
+                            <h:panelGrid columns="4" cellpadding="10">
+
+                                <p:outputLabel value="Camión: "/>
+                                <p:selectOneMenu  value="#{mRegistros.patenteCamion}">
+                                    <f:selectItems var="cam" value="#{mRegistros.camiones}" itemLabel="#{cam.patente}" itemValue="#{cam.patente}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Pesaje Camión (Ton.): "/>
+                                <p:inputText value="#{mRegistros.pesajeCamion}" style="width: 50px"/>
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Seleccionar Chofer" footer="Seleccione el chofer encargado de manejar la máquina">
+                            <h:panelGrid columns="2" cellpadding="10">
+                            <p:selectOneMenu  value="#{mRegistros.rutChofer}">
+                                <f:selectItems var="chf" value="#{mRegistros.choferes}" itemLabel="#{chf.nombreChofer} #{chf.apellidoChofer} RUT: #{chf.rutChofer}" itemValue="#{chf.rutChofer}"/>
+
+                            </p:selectOneMenu>
+                                </h:panelGrid>
+                        </p:panel>
+                        
+                        <p:panel header="Comentarios" footer="Si lo desea puede dejar un comentario u observación de la actividad">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:outputLabel value="Descripción: "/>
+                                <p:inputTextarea value="#{mRegistros.comentarioRegistro}"/>
+                            </h:panelGrid>
+                            
+                        </p:panel>
+                        <p:panel header="Seleccionar Puntos de Recolección" footer="Seleccione los puntos de recolección que visitó el camión">
+                            <p:dataTable var="pto" value="#{mRegistros.puntosRecoleccion}" rowKey="#{pto.idPunto}" rows="10" selection="#{mRegistros.puntosRecoleccionSeleccionados}">
+                                <f:facet name="header">  
+                                    Selección de Puntos de Recolección  
+                                </f:facet>  
+                                <p:column selectionMode="multiple" style="width:7%"></p:column>
+                                
+                                <p:column headerText="Identificador" style="width:25%">  
+                                    #{pto.idPunto}  
+                                </p:column>  
+                                
+                                <p:column headerText="Nombre punto" style="width:25%">  
+                                    #{pto.nombrePunto}  
+                                </p:column>
+                                
+                                <p:column headerText="Dirección" style="width:25%">  
+                                    #{pto.direccionPunto}  
+                                </p:column>
+                                
+                                <p:column headerText="Municipalidad" style="width:25%">  
+                                    #{pto.nombreMunicipalidad.nombreMunicipalidad}  
+                                </p:column>
+                                
+                                <p:column headerText="Descripción" style="width:25%">  
+                                    #{pto.descripcionPunto}  
+                                </p:column>
+                                
+                                
+                            </p:dataTable> 
+                            
+                            <h:commandButton value="Ingresar">
+                        <f:ajax listener="#{mRegistros.crearRegistro()}" render="reta" />
+                    </h:commandButton>  
+                        </p:panel>
+                        
+                    </p:outputPanel>
+                    
+                    
+                                
+                </h:form>
+
+
+
+            </ui:define>            
+        </ui:composition>      
     </h:body>
 </html>
 

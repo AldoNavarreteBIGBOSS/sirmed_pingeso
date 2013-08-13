@@ -8,24 +8,30 @@ import entities.Camion;
 import entities.Chofer;
 import entities.Municipalidad;
 import entities.PuntoRecoleccion;
+import java.io.Serializable;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import sessionBeans.CrudCamionLocal;
 import sessionBeans.CrudChoferLocal;
 import sessionBeans.CrudRecoleccionLocal;
 import sessionBeans.MunicipalidadesLocal;
+import sessionBeans.RegistrosLocal;
 
 /**
  *
  * @author Aldo
  */
 @Named(value = "mRegistros")
-@RequestScoped
-public class MRegistros {
+@ViewScoped
+public class MRegistros{
+    @EJB
+    private RegistrosLocal registros;
     @EJB
     private CrudRecoleccionLocal crudRecoleccion;
     @EJB
@@ -49,13 +55,24 @@ public class MRegistros {
     private Collection<Municipalidad> listaMunicipalidades;
     private Collection<Camion> camiones;
     private Collection<PuntoRecoleccion> puntosRecoleccion;
+    private Collection<PuntoRecoleccion> puntosRecoleccionSeleccionados;
+    private MAccionesGenerales ag;
     
     @PostConstruct
    public void init(){
        rutBasculista = mAutentificador.getUsername();
-       cargarDatos();
+       listaMunicipalidades = municipalidades.listaMunicipalidades();
+      System.out.println("CACA1");
        
    }
+
+    public Collection<PuntoRecoleccion> getPuntosRecoleccionSeleccionados() {
+        return puntosRecoleccionSeleccionados;
+    }
+
+    public void setPuntosRecoleccionSeleccionados(Collection<PuntoRecoleccion> puntosRecoleccionSeleccionados) {
+        this.puntosRecoleccionSeleccionados = puntosRecoleccionSeleccionados;
+    }
 
     public Collection<Chofer> getChoferes() {
         return choferes;
@@ -153,9 +170,20 @@ public class MRegistros {
     
     public void cargarDatos(){
         
-        camiones = crudCamion.listaCamiones();
-        choferes = crudChofer.listaChoferes();
-        puntosRecoleccion = crudRecoleccion.listaPuntosRecoleccion();
-        listaMunicipalidades = municipalidades.listaMunicipalidades();
+        camiones = crudCamion.listarCamionMunicipalidad(municipalidad);
+        choferes = crudChofer.listarChoferMunicipalidad(municipalidad);
+        puntosRecoleccion = crudRecoleccion.listarPuntoRecoleccionMunicipalidad(municipalidad);      
+    }
+    
+    public void crearRegistro(){
+        System.out.println("CACA2");
+        try{
+            System.out.println("CACA3");
+            registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, patenteCamion, puntosRecoleccion);
+           
+        }
+        catch(Exception e){
+        System.out.println("CACA"+e.getMessage());
+        }
     }
 }

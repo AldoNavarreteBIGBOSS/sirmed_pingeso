@@ -180,5 +180,9 @@ public class Registro implements Serializable {
     public String toString() {
         return "entities.Registro[ idRegistro=" + idRegistro + " ]";
     }
+
+    public void setFechaRegistro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

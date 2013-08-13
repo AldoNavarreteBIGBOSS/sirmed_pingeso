@@ -39,13 +39,20 @@ public class CamionDAO_impl extends GenericDAO_impl<Camion> implements CamionDAO
     public Collection<Camion> buscarPorMunicipalidad(String municipalidad){
     
         try{
-            Collection<Camion> c = new LinkedList();
+            
+            Collection<Camion> c;
+            
             Query q = getEntityManager().createNamedQuery("Camion.findByMunicipalidad");
+           
             q.setParameter("nombreMunicipalidad", municipalidad);
+         
             c = q.getResultList();
+           
+            
             return c;
         }
         catch(Exception e){
+            
             return null;
         }
     }

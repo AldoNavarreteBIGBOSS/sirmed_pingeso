@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PuntoRecoleccion.findByNombrePunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.nombrePunto = :nombrePunto"),
     @NamedQuery(name = "PuntoRecoleccion.findByDireccionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.direccionPunto = :direccionPunto"),
     @NamedQuery(name = "PuntoRecoleccion.findByDescripcionPunto", query = "SELECT p FROM PuntoRecoleccion p WHERE p.descripcionPunto = :descripcionPunto"),
-    @NamedQuery(name = "PuntoRecoleccion.findByMunicipalidad", query = "SELECT p FROM PuntoRecoleccion p WHERE p.nombreMunicipalidad = :nombreMunicipalidad"),
+    @NamedQuery(name = "PuntoRecoleccion.findByMunicipalidad", query = "SELECT p FROM PuntoRecoleccion p WHERE p.nombreMunicipalidad.nombreMunicipalidad = :nombreMunicipalidad"),
     @NamedQuery(name = "PuntoRecoleccion.finByDireccionLike", query = "SELECT p FROM PuntoRecoleccion p WHERE p.direccionPunto LIKE :direccionPunto ")})
 public class PuntoRecoleccion implements Serializable {
     @JoinColumn(name = "NOMBRE_MUNICIPALIDAD", referencedColumnName = "NOMBRE_MUNICIPALIDAD")

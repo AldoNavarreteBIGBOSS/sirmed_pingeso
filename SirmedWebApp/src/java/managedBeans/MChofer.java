@@ -6,15 +6,11 @@ package managedBeans;
 
 import entities.Chofer;
 import entities.Municipalidad;
-import java.io.IOException;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.event.ActionEvent;
 import sessionBeans.CrudChoferLocal;
 import sessionBeans.MunicipalidadesLocal;
 

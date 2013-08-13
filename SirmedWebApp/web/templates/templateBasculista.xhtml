@@ -16,7 +16,9 @@
 
             <p:layoutUnit position="north" size="100" header="Registros">  
                 <ui:insert name="top">
-
+                    <h:form>
+                    <p:commandLink value="Cerrar Sesión" action="#{autentificador.logout()}"/>
+                    </h:form>
                 </ui:insert>
             </p:layoutUnit>  
 
