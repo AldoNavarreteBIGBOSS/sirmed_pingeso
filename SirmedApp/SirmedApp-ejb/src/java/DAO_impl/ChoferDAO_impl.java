@@ -6,6 +6,8 @@ package DAO_impl;
 
 import DAO_interfaces.ChoferDAO;
 import entities.Chofer;
+import java.util.Collection;
+import java.util.LinkedList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -29,5 +31,22 @@ public class ChoferDAO_impl extends GenericDAO_impl <Chofer> implements ChoferDA
         catch(Exception e){
             return null;
         }
+    }
+    
+    
+    @Override
+    public Collection<Chofer> buscarPorMunicipalidad(String municipalidad){
+        
+        try{
+            Collection<Chofer> c = new LinkedList();
+            Query q = getEntityManager().createNamedQuery("Chofer.findByMunicipalidad");
+            q.setParameter("nombreMunicipalidad", municipalidad);
+            c = q.getResultList();
+            return c;
+        }
+        catch(Exception e){
+            return null;
+        }
+    
     }
 }

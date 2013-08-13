@@ -5,6 +5,7 @@
 package DAO_interfaces;
 
 import entities.PuntoRecoleccion;
+import java.util.Collection;
 
 /**
  *
@@ -13,4 +14,5 @@ import entities.PuntoRecoleccion;
 public interface PuntoRecoleccionDAO extends GenericDAO<PuntoRecoleccion>{
     
     public PuntoRecoleccion buscarPorDireccionLike(String direccion);
+    public Collection<PuntoRecoleccion> buscarPorMunicipalidad(String municipalidad);
 }

@@ -100,4 +100,14 @@ public class CrudChofer implements CrudChoferLocal {
         
     
     }
+    
+    @Override
+    public Collection<Chofer> listarChoferMunicipalidad(String municipalidad){
+        
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        ChoferDAO cdao = dF.getChoferDAO();
+        
+        return cdao.buscarPorMunicipalidad(municipalidad);
+    
+    }
 }

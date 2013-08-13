@@ -149,4 +149,14 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
         
     
     }
+    
+    @Override
+    public Collection<PuntoRecoleccion> listarPuntoRecoleccionMunicipalidad(String municipalidad){
+        
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        PuntoRecoleccionDAO cdao = dF.getPuntoRecoleccionDAO();
+        
+        return cdao.buscarPorMunicipalidad(municipalidad);
+    
+    }
 }

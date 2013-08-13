@@ -77,7 +77,7 @@ public class MAutentificador implements Serializable {
                 ag.goToPage("/faces/jefePlanta/ingresarBasculista.xhtml");
             }
             if(request.isUserInRole("Basculista")){
-                ag.goToPage("/faces/Basculista/ingresarBasculista.xhtml");
+                ag.goToPage("/faces/basculista/registros.xhtml");
             }
         } catch (Exception e) {
             mc.mensajeRetroalimentacion("Error", "Usuario y/o contraseña incorrecta");

@@ -23,6 +23,6 @@ public interface CrudCamionLocal {
 
     public void eliminarCamion(String patente) throws Exception;
 
-    
+     public Collection<Camion> listarCamionMunicipalidad(String municipalidad);
     
 }

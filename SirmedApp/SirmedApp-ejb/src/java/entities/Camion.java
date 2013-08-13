@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Camion.findAll", query = "SELECT c FROM Camion c"),
-    @NamedQuery(name = "Camion.findByPatente", query = "SELECT c FROM Camion c WHERE c.patente = :patente")})
+    @NamedQuery(name = "Camion.findByPatente", query = "SELECT c FROM Camion c WHERE c.patente = :patente"),
+    @NamedQuery(name = "Camion.findByMunicipalidad", query = "SELECT c FROM Camion c WHERE c.nombreMunicipalidad = :nombreMunicipalidad")
+})
 public class Camion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

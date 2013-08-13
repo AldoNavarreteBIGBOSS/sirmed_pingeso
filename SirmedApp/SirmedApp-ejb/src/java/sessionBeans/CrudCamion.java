@@ -94,5 +94,13 @@ public class CrudCamion implements CrudCamionLocal {
        }
    }
    
-   
+   @Override
+   public Collection<Camion> listarCamionMunicipalidad(String municipalidad){
+        
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        CamionDAO cdao = dF.getCamionDAO();
+        
+        return cdao.buscarPorMunicipalidad(municipalidad);
+    
+    }
 }

@@ -5,6 +5,7 @@
 package DAO_interfaces;
 
 import entities.Chofer;
+import java.util.Collection;
 
 /**
  *
@@ -13,4 +14,5 @@ import entities.Chofer;
 public interface ChoferDAO extends GenericDAO<Chofer>{
     
     public Chofer buscarPorRut(String rut);
+    public Collection<Chofer> buscarPorMunicipalidad(String municipalidad);
 }

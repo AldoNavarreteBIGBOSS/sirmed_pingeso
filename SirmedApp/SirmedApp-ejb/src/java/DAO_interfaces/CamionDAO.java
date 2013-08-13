@@ -5,6 +5,7 @@
 package DAO_interfaces;
 
 import entities.Camion;
+import java.util.Collection;
 
 /**
  *
@@ -13,4 +14,5 @@ import entities.Camion;
 public interface CamionDAO extends GenericDAO<Camion>{
     
      public Camion buscarPorPatente(String patente);
+      public Collection<Camion> buscarPorMunicipalidad(String municipalidad);
 }

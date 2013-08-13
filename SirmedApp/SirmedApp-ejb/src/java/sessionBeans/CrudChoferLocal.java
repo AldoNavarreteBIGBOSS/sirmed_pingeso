@@ -23,4 +23,6 @@ public interface CrudChoferLocal {
 
     public void eliminarChofer(String rut) throws Exception;
     
+    public Collection<Chofer> listarChoferMunicipalidad(String municipalidad);
+    
 }

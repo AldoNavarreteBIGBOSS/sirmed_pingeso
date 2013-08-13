@@ -23,4 +23,6 @@ public interface CrudRecoleccionLocal {
 
     public void eliminarPuntoRecoleccion(Integer idTipo) throws Exception;
     
+    public Collection<PuntoRecoleccion> listarPuntoRecoleccionMunicipalidad(String municipalidad);
+    
 }
