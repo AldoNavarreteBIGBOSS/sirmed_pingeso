@@ -15,10 +15,12 @@ import javax.mail.internet.AddressException;
 @Local
 public interface MensajeriaLocal {
 
-    public void enviarMail() throws MessagingException;
+    
 
     public void recuperarContraseña(String rut) throws Exception;
 
     public void enviarMensajeBienvenida(String mail, String contraseña, String nombre)throws AddressException, MessagingException;
+
+    
     
 }

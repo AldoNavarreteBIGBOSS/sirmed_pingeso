@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import sessionBeans.CrudBasculistaLocal;
 import sessionBeans.CrudUsuarioLocal;
+import sessionBeans.InformeMailLocal;
 import sessionBeans.MensajeriaLocal;
 
 /**
@@ -21,6 +22,8 @@ import sessionBeans.MensajeriaLocal;
 @Named(value = "mBasculista")
 @RequestScoped
 public class MBasculista {
+    @EJB
+    private InformeMailLocal informeMail;
     @EJB
     private MensajeriaLocal mensajeria;
     @EJB

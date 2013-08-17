@@ -12,10 +12,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import sessionBeans.CrudCamionLocal;
 import sessionBeans.CrudChoferLocal;
@@ -28,8 +26,9 @@ import sessionBeans.RegistrosLocal;
  * @author Aldo
  */
 @Named(value = "mRegistros")
-@ViewScoped
-public class MRegistros{
+@SessionScoped
+public class MRegistros implements Serializable{
+    
     @EJB
     private RegistrosLocal registros;
     @EJB
@@ -42,7 +41,6 @@ public class MRegistros{
     private CrudChoferLocal crudChofer;
     @Inject
     private MAutentificador mAutentificador;
-    
     
     private String rutChofer;
     private String rutBasculista;
@@ -60,10 +58,9 @@ public class MRegistros{
     
     @PostConstruct
    public void init(){
+        ag = new MAccionesGenerales();
        rutBasculista = mAutentificador.getUsername();
-       listaMunicipalidades = municipalidades.listaMunicipalidades();
-      System.out.println("CACA1");
-       
+       listaMunicipalidades = municipalidades.listaMunicipalidades();    
    }
 
     public Collection<PuntoRecoleccion> getPuntosRecoleccionSeleccionados() {
@@ -161,29 +158,21 @@ public class MRegistros{
     public void setDetalleRegistro(String detalleRegistro) {
         this.detalleRegistro = detalleRegistro;
     }
-    
-    
-    
-    
+       
     public MRegistros() {
     }
     
-    public void cargarDatos(){
-        
+    public void cargarDatos(){     
         camiones = crudCamion.listarCamionMunicipalidad(municipalidad);
         choferes = crudChofer.listarChoferMunicipalidad(municipalidad);
         puntosRecoleccion = crudRecoleccion.listarPuntoRecoleccionMunicipalidad(municipalidad);      
     }
     
     public void crearRegistro(){
-        System.out.println("CACA2");
-        try{
-            System.out.println("CACA3");
-            registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, patenteCamion, puntosRecoleccion);
-           
-        }
-        catch(Exception e){
-        System.out.println("CACA"+e.getMessage());
-        }
+        
+            try{
+                registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, comentarioRegistro, puntosRecoleccionSeleccionados);
+            }
+            catch(Exception e){}
     }
 }

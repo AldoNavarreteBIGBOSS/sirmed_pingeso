@@ -16,5 +16,7 @@ import javax.ejb.Local;
 public interface RegistrosLocal {
 
     public void crearRegistro(String rutBasculista, String municipalidad, String patenteCamion, String rutChofer, float pesaje, String comentario, Collection<PuntoRecoleccion> puntosSeleccionados) throws Exception;
+
+    public String generarInforme(Integer hora);
     
 }

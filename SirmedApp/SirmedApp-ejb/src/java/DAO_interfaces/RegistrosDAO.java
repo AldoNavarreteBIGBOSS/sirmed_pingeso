@@ -5,6 +5,7 @@
 package DAO_interfaces;
 
 import entities.Registro;
+import java.util.Collection;
 
 /**
  *
@@ -12,4 +13,5 @@ import entities.Registro;
  */
 public interface RegistrosDAO extends GenericDAO <Registro> {
     
+    public Collection<Registro> generarInforme(String fechaActual, String hora);
 }

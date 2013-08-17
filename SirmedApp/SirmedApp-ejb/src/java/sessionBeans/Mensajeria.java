@@ -7,10 +7,15 @@ package sessionBeans;
 import DAO.DAOFactory;
 import DAO_interfaces.UsuarioDAO;
 import java.util.Properties;
+import javax.ejb.Timer;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.Schedule;
+import javax.ejb.ScheduleExpression;
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import javax.ejb.Timeout;
+import javax.ejb.TimerService;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -34,6 +39,7 @@ public class Mensajeria implements MensajeriaLocal {
     private Properties props;
     private Session session;
     
+    
     @PostConstruct
     public void inicioConfiguracion(){
         props = new Properties();
@@ -42,31 +48,11 @@ public class Mensajeria implements MensajeriaLocal {
         props.setProperty("mail.smtp.port", "587");
         props.setProperty("mail.smtp.user", "SIRMED");
         props.setProperty("mail.smtp.auth", "true");
-
         session = Session.getDefaultInstance(props);
-        session.setDebug(true);
-
-            
+        session.setDebug(true);          
     }
     
-    @Schedule(hour="2,6")
-    @Override
-    public void enviarMail() throws MessagingException {
-        
-        String mensaje = "Este es un mensaje de SIRMED cada 5 horas, por favor responder si llegó";
-        MimeMessage message = new MimeMessage(session); 
-        message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("arden.papifunk@gmail.com"));
-        message.setSubject("SIRMED: Prueba");
-        message.setText(mensaje);
-
-        Transport t = session.getTransport("smtp");
-        t.connect("arden.papifunk@gmail.com", "2850326");
-        t.sendMessage(message, message.getAllRecipients());
-        message = null;
-        t.close();
-    }
-
+    
     @Override
     public void recuperarContraseña(String rut) throws Exception{
         String mail;
