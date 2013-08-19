@@ -1,14 +1,14 @@
 
 #top {
     position: relative;
+    background-image:url('banner_sirmed.jpg');
     background-color: #036fab;
-    color: white;
     padding: 5px;
-    margin: 0px 0px 10px 0px;
+    margin: 0px 0px 10px 10px;
 }
 
 #bottom {
-    position: relative;
+    position: center;
     background-color: #c2dfef;
     padding: 5px;
     margin: 10px 0px 0px 0px;
