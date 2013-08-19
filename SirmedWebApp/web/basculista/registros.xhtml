@@ -10,12 +10,13 @@
         <ui:composition template="/templates/templateBasculista.xhtml">
             <ui:define name="content">
                 
-                <h:form>
-
+                <h:form id="form">
+                    <p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" /> 
                 <p:panel header="Seleccionar Municipalidad" footer="Seleccione la municipalidad de procedencia de la carga">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:outputLabel value="Municipalidad: "/>
-                            <p:selectOneMenu value="#{mRegistros.municipalidad}" >
+                            <p:selectOneMenu value="#{mRegistros.municipalidad}"  required="true"  label="Municipalidad">
+                                <f:selectItem itemLabel="Municipalidad..." itemValue="#{null}"/>
                                 <f:selectItems var="mun" value="#{mRegistros.listaMunicipalidades}" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}" />
                                 <p:ajax listener="#{mRegistros.cargarDatos()}" update="reta"/>
                             </p:selectOneMenu>
@@ -25,17 +26,19 @@
                         <p:panel  header="Seleccionar Camión" footer="Seleccione la patente del camión que trae la carga e ingrese el peso">
                             <h:panelGrid columns="4" cellpadding="10">
                                 <p:outputLabel value="Camión: "/>
-                                <p:selectOneMenu  value="#{mRegistros.patenteCamion}"  style="width: 200px">
+                                <p:selectOneMenu  value="#{mRegistros.patenteCamion}"  style="width: 200px" required="true" label="Camión">
+                                     <f:selectItem itemLabel="Camión..." itemValue="#{null}"/>
                                     <f:selectItems var="cam" value="#{mRegistros.camiones}" itemLabel="#{cam.patente}" itemValue="#{cam.patente}"/>
                                 </p:selectOneMenu>
                                 <p:outputLabel value="Pesaje Camión (Ton.): "/>
-                                <p:inputText value="#{mRegistros.pesajeCamion}" style="width: 50px"/>
+                                <p:inputText value="#{mRegistros.pesajeCamion}" style="width: 50px" required="true" label="Pesaje"/>
                             </h:panelGrid>
                         </p:panel>
                         <p:panel header="Seleccionar Chofer" footer="Seleccione el chofer encargado de manejar la máquina">
                             <h:panelGrid columns="2" cellpadding="10">
                                <p:outputLabel value="Chofer: "/>
-                            <p:selectOneMenu  value="#{mRegistros.rutChofer}">
+                            <p:selectOneMenu  value="#{mRegistros.rutChofer}" required="true" label="Chofer">
+                                <f:selectItem itemLabel="Chofer..." itemValue="#{null}"/>
                                 <f:selectItems var="chf" value="#{mRegistros.choferes}" itemLabel="#{chf.nombreChofer} #{chf.apellidoChofer} RUT: #{chf.rutChofer}" itemValue="#{chf.rutChofer}"/>
                             </p:selectOneMenu>
                                 </h:panelGrid>
@@ -74,7 +77,9 @@
                                     #{pto.descripcionPunto}  
                                 </p:column>                               
                             </p:dataTable>                            
-                            <p:commandButton value="Ingresar" action="#{mRegistros.crearRegistro()}"/>             
+                            <p:commandButton value="Ingresar" action="#{mRegistros.crearRegistro()}" update="growl"/>
+                                
+                           
                         </p:panel>                       
                     </p:outputPanel>       
                

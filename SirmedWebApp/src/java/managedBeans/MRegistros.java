@@ -173,10 +173,22 @@ public class MRegistros implements Serializable{
     public void crearRegistro(){
         
             try{
-                registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, comentarioRegistro, puntosRecoleccionSeleccionados);
-                mc.mensajeRetroalimentacion("Operación Exitosa", "Registro Ingresado");
-                
+                registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, comentarioRegistro, puntosRecoleccionSeleccionados);             
+                resetCampos();
+                ag.actualizarPagina();                
             }
-            catch(Exception e){}
+            catch(Exception e){
+                mc.mensajeRetroalimentacion("Error", e.getMessage());
+            }
+    }
+    
+    public void resetCampos(){
+        this.puntosRecoleccionSeleccionados = null;
+        this.camiones = null;
+        this.choferes = null;
+        this.comentarioRegistro = null;
+        this.pesajeCamion = 0;
+        this.municipalidad = null;
+        
     }
 }
