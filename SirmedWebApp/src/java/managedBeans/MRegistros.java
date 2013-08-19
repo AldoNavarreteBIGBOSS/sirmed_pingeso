@@ -55,10 +55,12 @@ public class MRegistros implements Serializable{
     private Collection<PuntoRecoleccion> puntosRecoleccion;
     private Collection<PuntoRecoleccion> puntosRecoleccionSeleccionados;
     private MAccionesGenerales ag;
+    private MMessaegeController mc;
     
     @PostConstruct
    public void init(){
-        ag = new MAccionesGenerales();
+       mc = new MMessaegeController();
+       ag = new MAccionesGenerales();
        rutBasculista = mAutentificador.getUsername();
        listaMunicipalidades = municipalidades.listaMunicipalidades();    
    }
@@ -172,6 +174,8 @@ public class MRegistros implements Serializable{
         
             try{
                 registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, comentarioRegistro, puntosRecoleccionSeleccionados);
+                mc.mensajeRetroalimentacion("Operación Exitosa", "Registro Ingresado");
+                
             }
             catch(Exception e){}
     }
