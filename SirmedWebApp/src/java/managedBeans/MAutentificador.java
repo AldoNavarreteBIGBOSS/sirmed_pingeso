@@ -24,6 +24,7 @@ import sessionBeans.MensajeriaLocal;
  */
 @Named(value = "autentificador")
 @SessionScoped
+
 public class MAutentificador implements Serializable {
     
     @EJB
