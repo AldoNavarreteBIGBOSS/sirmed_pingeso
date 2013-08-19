@@ -27,7 +27,7 @@ public class JefePlantaDAO_impl extends GenericDAO_impl<JefePlanta> implements J
             Query q = getEntityManager().createNamedQuery("JefePlanta.findByRut");
             q.setParameter("rut", rut);
             jp = (JefePlanta) q.getResultList().get(0);
-
+            
             return jp;
         } catch (Exception e) {
             return null;

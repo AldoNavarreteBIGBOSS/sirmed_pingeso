@@ -18,7 +18,11 @@ public interface CrudUsuarioLocal {
 
     public void eliminarUsuario(String rut)throws Exception;
 
-    public void actualizarUsuario(String rut, String email, String newPassword)throws Exception;
+    public void actualizarUsuario(String rut, String newPassword)throws Exception;
+
+    public Usuario entregarPorRut(String rut) throws Exception;
+
+    public boolean analizarContraseña(String rut, String oldPass) throws Exception;
     
     
     

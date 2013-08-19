@@ -81,7 +81,7 @@ public class CrudUsuario implements CrudUsuarioLocal {
     }
     
     @Override
-    public void actualizarUsuario(String rut, String email, String newPassword) throws Exception{
+    public void actualizarUsuario(String rut, String newPassword) throws Exception{
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         UsuarioDAO udao = dF.getUsuarioDAO();
         Usuario b = udao.buscarPorRut(rut);
@@ -95,4 +95,44 @@ public class CrudUsuario implements CrudUsuarioLocal {
         }
     }
 
+    @Override
+    public Usuario entregarPorRut(String rut) throws Exception{
+        
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        UsuarioDAO jpdao = dF.getUsuarioDAO();
+        Usuario jp = jpdao.buscarPorRut(rut);
+        
+        if(jp != null){
+            
+            return jp;
+        }
+        else{
+            throw new Exception("Error");
+        }
+    
+    }
+    
+    @Override
+    public boolean analizarContraseña(String rut, String oldPass) throws Exception{
+        
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        UsuarioDAO udao = dF.getUsuarioDAO();
+        
+        Usuario u = udao.buscarPorRut(rut);
+        
+        if(u != null){
+            String codePass = crearPassword(oldPass);
+           
+            if(codePass.compareTo(u.getPassword())==0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            throw new Exception("El usuario no existe");
+        }
+        
+    }
 }

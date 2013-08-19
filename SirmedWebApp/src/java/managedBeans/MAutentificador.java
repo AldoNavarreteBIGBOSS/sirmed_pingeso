@@ -10,9 +10,11 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import sessionBeans.MensajeriaLocal;
 
@@ -34,8 +36,11 @@ public class MAutentificador implements Serializable {
     private MAccionesGenerales ag;
     private MMessaegeController mc;
 
-   
-    
+   @PostConstruct
+    public void init(){
+        mc = new MMessaegeController();
+        ag = new MAccionesGenerales();
+    }
     public String getUsername() {
         return username;
     }
@@ -69,7 +74,7 @@ public class MAutentificador implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        ag = new MAccionesGenerales();
+        
         try {
             request.login(username, password);
             
@@ -79,7 +84,7 @@ public class MAutentificador implements Serializable {
             if(request.isUserInRole("Basculista")){
                 ag.goToPage("/faces/basculista/registros.xhtml");
             }
-        } catch (Exception e) {
+        } catch (ServletException e) {
             mc.mensajeRetroalimentacion("Error", "Usuario y/o contraseña incorrecta");
         }  
         
@@ -100,12 +105,12 @@ public class MAutentificador implements Serializable {
         try{
             mensajeria.recuperarContraseña(rutRecuperar);
             rutRecuperar = null;
-            mc = new MMessaegeController();
+          
             mc.mensajeRetroalimentacion("Operación Exitosa", "Correo enviado");
         }
         catch(Exception e){
             rutRecuperar = null;
-            mc = new MMessaegeController();
+           
             mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
             

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+        <ui:composition template="/templates/templateGeneral.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" /> 
+                    <p:panel header="Configuración de horario" footer="Seleccione los dos horarios en que desea recibir los informes">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:outputLabel value="Horario 1: "/>
+                            <p:selectOneMenu value="#{mConfigJefePlanta.hora1}" required="true" label="Horario 1">
+                                <f:selectItem itemLabel="Seleccionar horario 1" itemValue="#{null}"/>
+                                <f:selectItems var="hor" value="#{mConfigJefePlanta.listaHorarios}" itemLabel="#{hor.etiqueta}" itemValue="#{hor.valor}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Horario 2: "/>
+                            <p:selectOneMenu value="#{mConfigJefePlanta.hora2}" required="true" label="Horario 2">
+                                <f:selectItem itemLabel="Seleccionar horario 2" itemValue="#{null}"/>
+                                <f:selectItems var="hor2" value="#{mConfigJefePlanta.listaHorarios}" itemLabel="#{hor2.etiqueta}" itemValue="#{hor2.valor}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <p:commandButton value="Aceptar" update="growl" action="#{mConfigJefePlanta.determinarHora()}"/>
+                    </p:panel>
+                    
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+
+</html>
+

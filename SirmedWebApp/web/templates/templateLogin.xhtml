@@ -24,7 +24,7 @@
                             <p:inputText value="#{autentificador.username}" required="true" label="Usuario"/>
                             <p:outputLabel value="Contraseña: "/>
                             <p:inputText value="#{autentificador.password}" required="true" type="password" label="Contraseña"/>
-                            <p:commandButton action="#{autentificador.login()}"  value="Ingresar" update="login"/>
+                            <p:commandButton action="#{autentificador.login()}"  value="Ingresar" update="growl"/>
                             <a href="#{request.contextPath}/faces/recuperarPass.xhtml">Olvidé mi contraseña</a>
                         </h:panelGrid>
                     </h:form>

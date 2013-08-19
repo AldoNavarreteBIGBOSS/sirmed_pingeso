@@ -40,7 +40,7 @@ public class UsuarioDAO_impl extends GenericDAO_impl<Usuario> implements Usuario
             Query q = getEntityManager().createNamedQuery("Usuario.findByRut");
             q.setParameter("rut", rut);
             u = (Usuario) q.getResultList().get(0);
-
+            
             return u;
         } catch (Exception e) {
             return null;

@@ -57,9 +57,9 @@ public class InformeMail implements InformeMailLocal {
     public void determinarHora(String h1, String h2){
     /*Modificar cuando se haga la vista del Jefe de Planta Configiración*/
         ScheduleExpression schedule = new ScheduleExpression();
-        schedule.minute("*");
-        schedule.hour("*");
-        schedule.second(20);
+        schedule.minute("0");
+        schedule.hour(h1+","+h2);
+        schedule.second("0");
         
         timer = (Timer) timerService.createCalendarTimer(schedule);
     }

@@ -7,15 +7,9 @@ package sessionBeans;
 import DAO.DAOFactory;
 import DAO_interfaces.UsuarioDAO;
 import java.util.Properties;
-import javax.ejb.Timer;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.ScheduleExpression;
-import javax.ejb.Singleton;
 import javax.ejb.Stateless;
-import javax.ejb.Timeout;
-import javax.ejb.TimerService;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -62,7 +56,7 @@ public class Mensajeria implements MensajeriaLocal {
         mail = udao.recuperarMail(rut);
         
         if(mail != null){
-            crudUsuario.actualizarUsuario(rut, mail, rut);
+            crudUsuario.actualizarUsuario(rut, rut);
             enviarNuevaContraseña(mail, rut);
         }
         else{
