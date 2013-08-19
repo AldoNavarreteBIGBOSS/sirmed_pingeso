@@ -14,6 +14,11 @@ public class ListaHorarios {
     private String etiqueta;
 
     public ListaHorarios(){}
+
+    public ListaHorarios(String valor, String etiqueta) {
+        this.valor = valor;
+        this.etiqueta = etiqueta;
+    }
     
     public String getValor() {
         return valor;

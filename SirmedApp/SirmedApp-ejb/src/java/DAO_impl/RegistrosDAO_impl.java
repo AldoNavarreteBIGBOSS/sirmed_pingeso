@@ -32,4 +32,34 @@ public class RegistrosDAO_impl extends GenericDAO_impl <Registro> implements Reg
         return null;
     }
     }
+    
+    @Override
+    public Collection<Registro> listarRegistrosPorFecha(String fechaInicio, String fechaFin){
+        
+        try{
+            Query q = getEntityManager().createNamedQuery("Registro.findByFechaRegistroBetween");
+            q.setParameter("fechaInicio", fechaInicio);
+            
+            q.setParameter("fechaFin", fechaFin);
+            return q.getResultList();
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    @Override
+    public Collection<Registro> listarRegistrosPorFechaMunicipalidad(String fechaInicio, String fechaFin, String municipalidad){
+    
+    try{
+            Query q = getEntityManager().createNamedQuery("Registro.findByFechaRegistroBetweenMuni");
+            q.setParameter("fechaInicio", fechaInicio);       
+            q.setParameter("fechaFin", fechaFin);
+            q.setParameter("municipalidad", municipalidad);
+            return q.getResultList();
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
 }

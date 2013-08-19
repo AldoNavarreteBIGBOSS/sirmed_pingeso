@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Registro.findByIdRegistro", query = "SELECT r FROM Registro r WHERE r.idRegistro = :idRegistro"),
     @NamedQuery(name = "Registro.findByPesajeRegistro", query = "SELECT r FROM Registro r WHERE r.pesajeRegistro = :pesajeRegistro"),
     @NamedQuery(name = "Registro.findByFechaRegistro", query = "SELECT r FROM Registro r WHERE r.fechaRegistro = :fechaRegistro"),
-    @NamedQuery(name = "Registro.findByFechaRegistroLike", query = "SELECT r FROM Registro r WHERE SUBSTRING(r.fechaRegistro, 1, 10) = :fecha")
+    @NamedQuery(name = "Registro.findByFechaRegistroLike", query = "SELECT r FROM Registro r WHERE SUBSTRING(r.fechaRegistro, 1, 10) = :fecha"),
+    @NamedQuery(name = "Registro.findByFechaRegistroBetween", query = "SELECT r FROM Registro r WHERE SUBSTRING(r.fechaRegistro, 1, 10) BETWEEN :fechaInicio AND :fechaFin ORDER BY r.fechaRegistro"),
+    @NamedQuery(name = "Registro.findByFechaRegistroBetweenMuni", query = "SELECT r FROM Registro r WHERE SUBSTRING(r.fechaRegistro, 1, 10) BETWEEN :fechaInicio AND :fechaFin AND r.nombreMunicipalidad.nombreMunicipalidad = :municipalidad ORDER BY r.nombreMunicipalidad.nombreMunicipalidad")
 })
 public class Registro implements Serializable {
     private static final long serialVersionUID = 1L;

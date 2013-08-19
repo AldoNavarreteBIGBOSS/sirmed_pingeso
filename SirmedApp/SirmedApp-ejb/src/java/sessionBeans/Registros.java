@@ -134,4 +134,36 @@ public class Registros implements RegistrosLocal {
         
         return data;
     }
+    
+    @Override
+    public Collection<Registro> listarRegistroPorFechas(String fecha1, String fecha2)throws Exception{
+    
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        RegistrosDAO rdao = dF.getRegistrosDAO();
+        Collection<Registro> cr = rdao.listarRegistrosPorFecha(fecha1, fecha2);
+        
+        if(cr != null && !cr.isEmpty()){
+            return cr;
+        }
+        else{
+            throw new Exception("No existen registros");
+        }
+    }
+    
+    
+    @Override
+    public Collection<Registro> listarRegistroPorFechasMunicipalidad(String fecha1, String fecha2, String municipalidad)throws Exception{
+    
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        RegistrosDAO rdao = dF.getRegistrosDAO();
+        Collection<Registro> cr = rdao.listarRegistrosPorFechaMunicipalidad(fecha2, fecha2, municipalidad);
+        
+        if(cr != null && !cr.isEmpty()){
+            return cr;
+        }
+        else{
+            throw new Exception("No existen registros");
+        }
+    }
 }
+

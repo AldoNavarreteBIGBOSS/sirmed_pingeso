@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+        <ui:composition template="/templates/templateGeneral.xhtml">
+            <ui:define name="content">
+                <h:form id="reto">
+                    <p:growl id="growl" showDetail="true" sticky="true"/> 
+                    <h:form>
+
+                        <p:panel header="Selección de fechas" footer="Seleccione entre las fechas para generar un reporte">
+
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:outputLabel value="Fecha desde:"/>
+                                <p:calendar value="#{mReportes.fechaInicio}" pattern="yyyy-MM-dd" required="true" label="Fecha de Inicio"/>
+                                <p:outputLabel value="Fecha hasta:"/>
+                                <p:calendar value="#{mReportes.fechaFin}" pattern="yyyy-MM-dd" required="true" label="Fecha de Termino"/>
+                                <p:outputLabel value="Municipalidad: "/>
+                                <p:selectOneMenu value="#{mReportes.filtroMunicipalidad}">
+                                    <f:selectItem itemLabel="Seleccionar municipalidad" itemValue="#{null}"/>
+                                    <f:selectItems var="mun" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}"/>
+                                </p:selectOneMenu>                          
+                            </h:panelGrid>
+                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros"/>
+                        </p:panel> 
+                    </h:form>
+                    <h:form>
+                        <p:panel header="Selección por temporada" footer="Tiene la opción de obtener la información de alguna temporada en particular">
+
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:outputLabel value="Año: "/>
+                                <p:selectOneMenu value="#{mReportes.filtroAño}" style="width: 250px" required="true" label="Año">
+                                    <f:selectItem itemLabel="Seleccionar año" itemValue="#{null}"/>
+                                    <f:selectItems var="ano" value="#{mReportes.listaAño}" itemLabel="#{ano.etiqueta}" itemValue="#{ano.valor}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Temporada: "/>
+                                <p:selectOneMenu value="#{mReportes.filtroTemporada}" style="width: 250px" required="true" label="Temporada">
+                                    <f:selectItem itemLabel="Seleccionar temporada" itemValue="#{null}"/>
+                                    <f:selectItems var="tem" value="#{mReportes.listaTemporada}" itemLabel="#{tem.etiqueta}" itemValue="#{tem.valor}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Municipalidad: "/>
+                                <p:selectOneMenu value="#{mReportes.filtroMunicipalidad2}" style="width: 250px">
+                                    <f:selectItem itemLabel="Seleccionar municipalidad" itemValue="#{null}"/>
+                                    <f:selectItems var="mun2" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun2.nombreMunicipalidad}" itemValue="#{mun2.nombreMunicipalidad}"/>
+                                </p:selectOneMenu>                          
+                            </h:panelGrid>
+                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros"/>
+                        </p:panel>  
+                    </h:form>
+
+                    <p:panel header="Vista previa" footer="Estos son los registros resultantes">
+                        <p:dataTable id="registros" var="reg" value="#{mReportes.listaRegistros}" >
+                            <p:column headerText="N° Registro">  
+                                <h:outputText value="#{reg.idRegistro}" />  
+                            </p:column>
+                            <p:column headerText="Municipalidad">  
+                                <h:outputText value="#{reg.municipalidad}" />  
+                            </p:column>
+                            <p:column headerText="Basculista">  
+                                <h:outputText value="#{reg.basculista}" />  
+                            </p:column>
+                            <p:column headerText="Chofer">  
+                                <h:outputText value="#{reg.chofer}" />  
+                            </p:column>
+                            <p:column headerText="Camión">  
+                                <h:outputText value="#{reg.patenteCamion}" />  
+                            </p:column>
+                            <p:column headerText="Pesaje camión">  
+                                <h:outputText value="#{reg.pesajeCamion}" />  
+                            </p:column>
+                            <p:column headerText="Fecha registro">  
+                                <h:outputText value="#{reg.fechaRegistro}" />  
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>   
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
