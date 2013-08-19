@@ -74,7 +74,7 @@ public class InformeMail implements InformeMailLocal {
         MimeMessage message = new MimeMessage(session); 
         message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress("arden.papifunk@gmail.com"));
-        message.setSubject("SIRMED: Prueba");
+        message.setSubject("SIRMED: Informe de registros");
         message.setText(mensaje);
 
         Transport t = session.getTransport("smtp");
