@@ -15,7 +15,7 @@
 
                         <p:panel header="Selección de fechas" footer="Seleccione entre las fechas para generar un reporte">
 
-                            <h:panelGrid columns="2" cellpadding="10">
+                            <h:panelGrid id="panel1" columns="2" cellpadding="10">
                                 <p:outputLabel value="Fecha desde:"/>
                                 <p:calendar value="#{mReportes.fechaInicio}" pattern="yyyy-MM-dd" required="true" label="Fecha de Inicio"/>
                                 <p:outputLabel value="Fecha hasta:"/>
@@ -33,7 +33,7 @@
                     <h:form>
                         <p:panel header="Selección por temporada" footer="Tiene la opción de obtener la información de alguna temporada en particular">
 
-                            <h:panelGrid columns="2" cellpadding="10">
+                            <h:panelGrid  id="panel2" columns="2" cellpadding="10">
                                 <p:outputLabel value="Año: "/>
                                 <p:selectOneMenu value="#{mReportes.filtroAño}" style="width: 250px" required="true" label="Año">
                                     <f:selectItem itemLabel="Seleccionar año" itemValue="#{null}"/>
@@ -50,7 +50,7 @@
                                     <f:selectItems var="mun2" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun2.nombreMunicipalidad}" itemValue="#{mun2.nombreMunicipalidad}"/>
                                 </p:selectOneMenu>                          
                             </h:panelGrid>
-                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros"/>
+                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros" />
                         </p:panel>  
                     </h:form>
 
