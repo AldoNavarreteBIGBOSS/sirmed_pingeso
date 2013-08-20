@@ -17,14 +17,19 @@
             <p:layoutUnit position="north" size="100" header="Registros">  
                 <ui:insert name="top">
                     <h:form>
-                    <p:commandLink value="Cerrar Sesión" action="#{autentificador.logout()}"/>
+                        <div align="right">
+                            <p:commandLink value="Cerrar Sesión" action="#{autentificador.logout()}"/>
+                        </div>
                     </h:form>
                 </ui:insert>
             </p:layoutUnit>  
 
             <p:layoutUnit position="south" size="100">  
                 <ui:insert name="Bottom">
-                    
+                    <div  align="center">
+                        SIRMED fue desarrollada por los alumnos: Aldo Navarrete, Gabriela León y Macarena Pérez.
+                        <p align =" center">Para el curso de Proyecto de Ingeniería de Software de la USACH en el primer semestre del 2013. </p>
+                    </div>
                 </ui:insert>
             </p:layoutUnit>  
 

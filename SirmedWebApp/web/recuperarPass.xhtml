@@ -11,15 +11,18 @@
 
                 <h3>Recuperar Contraseña</h3>  
                 <p:panel header="¿Olvidó su contraseña?" footer="Un correo electrónico será enviado a la dirección registrada en SIRMED con su contraseña reestablecida.">  
-                    <h:outputText value="En caso de que usted haya olvidado su contraseña, es posible recuperarla mediante
-                                  el ingreso de su RUT sin digito verificador ni puntuación en la siguiente casilla:" /> 
+                    <h:outputText value="En caso de que usted haya olvidado su contraseña es posible recuperarla mediante
+                                  el ingreso de su RUT, sin digito verificador ni puntuación, en la siguiente casilla:" /> 
                     <h:form id="ret">
                         <p:growl id="growl" showDetail="true" sticky="true" /> 
+                        <p> </p>
+                        <div align="center">
                         <p:panelGrid columns="3" >
                             <p:outputLabel value="RUT : "/>
                             <p:inputText value="#{autentificador.rutRecuperar}"/>
                             <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update="ret"/>
                         </p:panelGrid>
+                        </div>
                     </h:form>
 
                 </p:panel>
