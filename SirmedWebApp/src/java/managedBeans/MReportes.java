@@ -152,7 +152,7 @@ public class MReportes {
         DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         String f1 = df.format(fechaInicio);
         String f2 = df.format(fechaFin);
-        System.out.println(filtroMunicipalidad);
+        
        try{
            
            if(filtroMunicipalidad == null){
@@ -210,7 +210,17 @@ public class MReportes {
         }
     }
     
-    
+    public void obtenerRegistrosTemporada(){
+        System.out.println("CACA");
+        System.out.println(filtroAño+" "+ filtroTemporada+" "+ filtroMunicipalidad2);
+        try{
+            Collection<Registro> cr = registros.listarRegistroPorFechasMunicipalidad(filtroAño, filtroTemporada, filtroMunicipalidad2);
+            cargarDatos(cr);
+        }
+        catch(Exception e){
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
+        }
+    }
     public MReportes() {
     }
 }

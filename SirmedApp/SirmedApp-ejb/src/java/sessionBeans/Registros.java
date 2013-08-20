@@ -10,6 +10,7 @@ import DAO_interfaces.CamionDAO;
 import DAO_interfaces.ChoferDAO;
 import DAO_interfaces.MunicipalidadDAO;
 import DAO_interfaces.RegistrosDAO;
+import com.sun.xml.bind.util.ListImpl;
 import entities.Basculista;
 import entities.Camion;
 import entities.Chofer;
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -164,6 +166,50 @@ public class Registros implements RegistrosLocal {
         else{
             throw new Exception("No existen registros");
         }
+    }
+    
+    @Override
+    public Collection<Registro> listarRegistroPorTemporada(String año, String temporada, String municipalidad)throws Exception{
+    
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        RegistrosDAO rdao = dF.getRegistrosDAO();
+        Collection<Registro> r = null;
+        String fecha1=null;
+        String fecha2=null;
+        
+        if(temporada.compareTo("verano")==0){
+            fecha1=año+"-12-21";
+            fecha2=año+"-04-21";
+        }
+        if(temporada.compareTo("otoño")==0){
+            fecha1=año+"-04-21";
+            fecha2=año+"-06-21";
+        }
+        if(temporada.compareTo("invierno")==0){
+            fecha1=año+"-06-21";
+            fecha2=año+"-09-21";
+        }
+        if(temporada.compareTo("primavera")==0){
+            fecha1=año+"-09-21";
+            fecha2=año+"-12-21";
+        }
+        
+        if(municipalidad !=null){
+            r = rdao.listarRegistrosPorFechaMunicipalidad(fecha1, fecha2, municipalidad);
+        
+        }
+        if(municipalidad==null){
+            r = rdao.listarRegistrosPorFecha(fecha1, fecha2);
+        }
+        
+        if(r != null){
+            return r;
+        }
+        else{
+            throw new Exception("No existen registros");
+        }
+        
+        
     }
 }
 

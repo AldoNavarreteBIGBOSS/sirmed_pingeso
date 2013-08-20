@@ -29,6 +29,7 @@
                             <p:commandButton value="Ver" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros"/>
                         </p:panel> 
                     </h:form>
+                    
                     <h:form>
                         <p:panel header="Selección por temporada" footer="Tiene la opción de obtener la información de alguna temporada en particular">
 
@@ -49,7 +50,7 @@
                                     <f:selectItems var="mun2" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun2.nombreMunicipalidad}" itemValue="#{mun2.nombreMunicipalidad}"/>
                                 </p:selectOneMenu>                          
                             </h:panelGrid>
-                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros"/>
+                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros"/>
                         </p:panel>  
                     </h:form>
 

@@ -23,5 +23,7 @@ public interface RegistrosLocal {
     public Collection<Registro> listarRegistroPorFechas(String fecha1, String fecha2) throws Exception;
 
     public Collection<Registro> listarRegistroPorFechasMunicipalidad(String fecha1, String fecha2, String municipalidad) throws Exception;
+
+    public Collection<Registro> listarRegistroPorTemporada(String año, String temporada, String municipalidad) throws Exception;
     
 }
