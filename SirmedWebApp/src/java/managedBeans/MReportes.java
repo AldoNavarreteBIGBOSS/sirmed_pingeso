@@ -214,7 +214,7 @@ public class MReportes {
         System.out.println("CACA");
         System.out.println(filtroAño+" "+ filtroTemporada+" "+ filtroMunicipalidad2);
         try{
-            Collection<Registro> cr = registros.listarRegistroPorFechasMunicipalidad(filtroAño, filtroTemporada, filtroMunicipalidad2);
+            Collection<Registro> cr = registros.listarRegistroPorTemporada(filtroAño, filtroTemporada, filtroMunicipalidad2);
             cargarDatos(cr);
         }
         catch(Exception e){

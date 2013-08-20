@@ -30,29 +30,7 @@
                         </p:panel> 
                     </h:form>
                     
-                    <h:form>
-                        <p:panel header="Selección por temporada" footer="Tiene la opción de obtener la información de alguna temporada en particular">
-
-                            <h:panelGrid  id="panel2" columns="2" cellpadding="10">
-                                <p:outputLabel value="Año: "/>
-                                <p:selectOneMenu value="#{mReportes.filtroAño}" style="width: 250px" required="true" label="Año">
-                                    <f:selectItem itemLabel="Seleccionar año" itemValue="#{null}"/>
-                                    <f:selectItems var="ano" value="#{mReportes.listaAño}" itemLabel="#{ano.etiqueta}" itemValue="#{ano.valor}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="Temporada: "/>
-                                <p:selectOneMenu value="#{mReportes.filtroTemporada}" style="width: 250px" required="true" label="Temporada">
-                                    <f:selectItem itemLabel="Seleccionar temporada" itemValue="#{null}"/>
-                                    <f:selectItems var="tem" value="#{mReportes.listaTemporada}" itemLabel="#{tem.etiqueta}" itemValue="#{tem.valor}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="Municipalidad: "/>
-                                <p:selectOneMenu value="#{mReportes.filtroMunicipalidad2}" style="width: 250px">
-                                    <f:selectItem itemLabel="Seleccionar municipalidad" itemValue="#{null}"/>
-                                    <f:selectItems var="mun2" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun2.nombreMunicipalidad}" itemValue="#{mun2.nombreMunicipalidad}"/>
-                                </p:selectOneMenu>                          
-                            </h:panelGrid>
-                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros" />
-                        </p:panel>  
-                    </h:form>
+                   
 
                     <p:panel header="Vista previa" footer="Estos son los registros resultantes">
                         <p:dataTable id="registros" var="reg" value="#{mReportes.listaRegistros}" >
@@ -80,6 +58,29 @@
                         </p:dataTable>
                     </p:panel>   
                 </h:form>
+                 <h:form>
+                        <p:panel header="Selección por temporada" footer="Tiene la opción de obtener la información de alguna temporada en particular">
+
+                            <h:panelGrid  id="panel2" columns="2" cellpadding="10">
+                                <p:outputLabel value="Año: "/>
+                                <p:selectOneMenu value="#{mReportes.filtroAño}" style="width: 250px" required="true" label="Año">
+                                    <f:selectItem itemLabel="Seleccionar año" itemValue="#{null}"/>
+                                    <f:selectItems var="ano" value="#{mReportes.listaAño}" itemLabel="#{ano.etiqueta}" itemValue="#{ano.valor}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Temporada: "/>
+                                <p:selectOneMenu value="#{mReportes.filtroTemporada}" style="width: 250px" required="true" label="Temporada">
+                                    <f:selectItem itemLabel="Seleccionar temporada" itemValue="#{null}"/>
+                                    <f:selectItems var="tem" value="#{mReportes.listaTemporada}" itemLabel="#{tem.etiqueta}" itemValue="#{tem.valor}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Municipalidad: "/>
+                                <p:selectOneMenu value="#{mReportes.filtroMunicipalidad2}" style="width: 250px">
+                                    <f:selectItem itemLabel="Seleccionar municipalidad" itemValue="#{null}"/>
+                                    <f:selectItems var="mun2" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun2.nombreMunicipalidad}" itemValue="#{mun2.nombreMunicipalidad}"/>
+                                </p:selectOneMenu>                          
+                            </h:panelGrid>
+                            <p:commandButton value="Ver" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros"/>
+                        </p:panel>  
+                    </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

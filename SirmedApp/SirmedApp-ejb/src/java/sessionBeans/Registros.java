@@ -158,9 +158,9 @@ public class Registros implements RegistrosLocal {
     
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         RegistrosDAO rdao = dF.getRegistrosDAO();
-        Collection<Registro> cr = rdao.listarRegistrosPorFechaMunicipalidad(fecha2, fecha2, municipalidad);
+        Collection<Registro> cr = rdao.listarRegistrosPorFechaMunicipalidad(fecha1, fecha2, municipalidad);
         
-        if(cr != null && !cr.isEmpty()){
+        if(cr != null){
             return cr;
         }
         else{
