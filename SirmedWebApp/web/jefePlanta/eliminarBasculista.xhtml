@@ -5,40 +5,39 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-   
+
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
-                    <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">               
-                        <f:facet name="header">  
-                            Basculistas  
-                        </f:facet>           
-                        <p:column headerText="RUT">  
-                    #{bas.rut}  
-                        </p:column>  
+                    <p:panel header="Eliminar basculista" footer="Seleccione el basculista que desee eliminar">
+                        <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">               
 
-                        <p:column headerText="Nombre">  
-                    #{bas.nombreB}  
-                        </p:column> 
+                            <p:column headerText="RUT">  
+                            #{bas.rut}  
+                            </p:column>  
 
-                        <p:column headerText="Apellido">  
-                    #{bas.apellidoB}  
-                        </p:column> 
+                            <p:column headerText="Nombre">  
+                            #{bas.nombreB}  
+                            </p:column> 
 
-                        <p:column headerText="Telefono">  
-                    #{bas.telefonoB}  
-                        </p:column>                     
-                        <f:facet name="footer">  
-                            <p:commandButton value="Eliminar" onclick="confirmation.show();" type="button" ajax="false"/> 
-                            <p:confirmDialog message="¿Eliminar el basculista seleccionado?" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
-                                <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.borrarBasculista()}" />  
-                                <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
-                            </p:confirmDialog>
-                        </f:facet>  
-                        
-                    </p:dataTable>
-                    
+                            <p:column headerText="Apellido">  
+                            #{bas.apellidoB}  
+                            </p:column> 
+
+                            <p:column headerText="Telefono">  
+                            #{bas.telefonoB}  
+                            </p:column>                     
+                            <f:facet name="footer">  
+                                <p:commandButton value="Eliminar" onclick="confirmation.show();" type="button" ajax="false"/> 
+                                <p:confirmDialog message="¿Eliminar el basculista seleccionado?" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
+                                    <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.borrarBasculista()}" />  
+                                    <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
+                                </p:confirmDialog>
+                            </f:facet>  
+
+                        </p:dataTable>
+                    </p:panel>
                 </h:form>
             </ui:define>
         </ui:composition>

@@ -2,20 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package auxiliar;
+package managedBeans.Pojo;
 
 /**
  *
  * @author Aldo
  */
-public class ListaHorarios {
+public class ListasComboPojo {
     
     private String valor;
     private String etiqueta;
 
-    public ListaHorarios(){}
+    public ListasComboPojo(){}
 
-    public ListaHorarios(String valor, String etiqueta) {
+    public ListasComboPojo(String valor, String etiqueta) {
         this.valor = valor;
         this.etiqueta = etiqueta;
     }

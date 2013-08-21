@@ -5,62 +5,58 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
-        <h:form id="form" prependId="false">
-            <p:dataTable id="camiones" var="cam" value="#{mCamiones.camiones}" rowKey="#{cam.patente}" selection="#{mCamiones.camionSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
-                <p:ajax event="rowSelect" listener="#{mCamiones.setearCamion()}" update=":form"/>
-                        <p:ajax event="rowUnselect"/> 
-                        <f:facet name="header">  
-                            Camiones  
-                        </f:facet>
+                <h:form id="form" prependId="false">
+                    <p:panel header="Seleccionar camión" footer="Seleccione el camión a editar">
+                        <p:dataTable id="camiones" var="cam" value="#{mCamiones.camiones}" rowKey="#{cam.patente}" selection="#{mCamiones.camionSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
+                            <p:ajax event="rowSelect" listener="#{mCamiones.setearCamion()}" update=":form"/>
+                            <p:ajax event="rowUnselect"/> 
 
-                        <p:column headerText="Patente">  
-                        #{cam.patente}  
-                        </p:column>  
 
-                        <p:column headerText="Municipalidad">  
-                        #{cam.nombreMunicipalidad.nombreMunicipalidad}  
-                        </p:column> 
+                            <p:column headerText="Patente">  
+                            #{cam.patente}  
+                            </p:column>  
 
-                        <p:column headerText="Tipo de camión">  
-                        #{cam.idTc.nombreTc}  
-                        </p:column> 
-                        
-                        <f:facet name="footer">  
-                            Seleccione el camión a editar
-                        </f:facet>  
-                    </p:dataTable>
+                            <p:column headerText="Municipalidad">  
+                            #{cam.nombreMunicipalidad.nombreMunicipalidad}  
+                            </p:column> 
 
-                    <p:panelGrid columns="2" id="gret">
-                        <f:facet name="header">
-                            Editar Camión
-                        </f:facet>
-                        <p:outputLabel value="Patente: "/>
-                        <p:outputLabel value="#{mCamiones.patente}"/>
-                        <p:outputLabel value="Municipalidad: "/>
-                        <p:selectOneMenu value="#{mCamiones.municipalidad}">
-                            <f:selectItems value="#{mCamiones.municipalidades}" var="cam" itemLabel="#{cam.nombreMunicipalidad}" itemValue="#{cam.nombreMunicipalidad}"/>
-                        </p:selectOneMenu>
-                        <h:outputLabel value="Tipo de camion: "/>
-                        <p:selectOneMenu value="#{mCamiones.tipoCamion}">
-                            <f:selectItems value="#{mCamiones.tc}" var="tc2" itemLabel="#{tc2.nombreTc}" itemValue="#{tc2.idTc}"/>
-                        </p:selectOneMenu>
+                            <p:column headerText="Tipo de camión">  
+                            #{cam.idTc.nombreTc}  
+                            </p:column> 
 
-                        <f:facet name="footer">
-                            <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
-                            <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
-                                <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mCamiones.actualizarCamion()}" update=":form"/>  
-                                <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
-                            </p:confirmDialog>
-                        </f:facet>
-                        
-                    </p:panelGrid>
+
+                        </p:dataTable>
+                    </p:panel>
+                    <p:panel header="Editar camión" footer="Edite los datos que estime convenientes">
+                        <h:panelGrid columns="2" id="gret" cellpadding="10">
+
+                            <p:outputLabel value="Patente: "/>
+                            <p:outputLabel value="#{mCamiones.patente}"/>
+                            <p:outputLabel value="Municipalidad: "/>
+                            <p:selectOneMenu value="#{mCamiones.municipalidad}">
+                                <f:selectItems value="#{mCamiones.municipalidades}" var="cam" itemLabel="#{cam.nombreMunicipalidad}" itemValue="#{cam.nombreMunicipalidad}"/>
+                            </p:selectOneMenu>
+                            <h:outputLabel value="Tipo de camion: "/>
+                            <p:selectOneMenu value="#{mCamiones.tipoCamion}" style="width: 227px">
+                                <f:selectItems value="#{mCamiones.tc}" var="tc2" itemLabel="#{tc2.nombreTc}" itemValue="#{tc2.idTc}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Editar" onclick="confirmation.show();" type="button" ajax="false"/> 
+                        <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
+                            <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mCamiones.actualizarCamion()}" update=":form"/>  
+                            <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
+                        </p:confirmDialog>
+
+                    </p:panel>
+
                 </h:form> 
-                </ui:define>
-            </ui:composition>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

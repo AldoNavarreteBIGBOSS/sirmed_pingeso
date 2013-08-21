@@ -4,7 +4,7 @@
  */
 package managedBeans;
 
-import auxiliar.ListaHorarios;
+import managedBeans.Pojo.ListasComboPojo;
 import entities.Municipalidad;
 import entities.Registro;
 import java.text.DateFormat;
@@ -45,8 +45,8 @@ public class MReportes {
     private Date fechaFin;
     private List<RegistroPojo> listaRegistros;
     private Collection<Municipalidad> listaMunicipalidades;
-    private List<ListaHorarios> listaTemporada;
-    private List<ListaHorarios> listaAño;
+    private List<ListasComboPojo> listaTemporada;
+    private List<ListasComboPojo> listaAño;
     private MMessaegeController mc;
     private MAccionesGenerales ag;
     private String filtroMunicipalidad;
@@ -121,19 +121,19 @@ public class MReportes {
         this.listaRegistros = listaRegistros;
     }
 
-    public List<ListaHorarios> getListaTemporada() {
+    public List<ListasComboPojo> getListaTemporada() {
         return listaTemporada;
     }
 
-    public void setListaTemporada(List<ListaHorarios> listaTemporada) {
+    public void setListaTemporada(List<ListasComboPojo> listaTemporada) {
         this.listaTemporada = listaTemporada;
     }
 
-    public List<ListaHorarios> getListaAño() {
+    public List<ListasComboPojo> getListaAño() {
         return listaAño;
     }
 
-    public void setListaAño(List<ListaHorarios> listaAño) {
+    public void setListaAño(List<ListasComboPojo> listaAño) {
         this.listaAño = listaAño;
     }
     
@@ -191,19 +191,19 @@ public class MReportes {
     }
     
     public void cargarListas(){
-        listaTemporada = new LinkedList<ListaHorarios>();
-        ListaHorarios verano = new ListaHorarios("verano", "Verano");
-        ListaHorarios invierno = new ListaHorarios("invierno", "Invierno");
-        ListaHorarios primavera = new ListaHorarios("primavera", "Primavera");
-        ListaHorarios otoño = new ListaHorarios("otoño", "Otoño");
+        listaTemporada = new LinkedList<ListasComboPojo>();
+        ListasComboPojo verano = new ListasComboPojo("verano", "Verano");
+        ListasComboPojo invierno = new ListasComboPojo("invierno", "Invierno");
+        ListasComboPojo primavera = new ListasComboPojo("primavera", "Primavera");
+        ListasComboPojo otoño = new ListasComboPojo("otoño", "Otoño");
         listaTemporada.add(otoño);
         listaTemporada.add(primavera);
         listaTemporada.add(invierno);
         listaTemporada.add(verano);
         
-        listaAño = new LinkedList<ListaHorarios>();
+        listaAño = new LinkedList<ListasComboPojo>();
         for(Integer i = 13; i <= 30; i++){
-            ListaHorarios lh = new ListaHorarios();
+            ListasComboPojo lh = new ListasComboPojo();
             lh.setEtiqueta("20"+i.toString());
             lh.setValor("20"+i.toString());
             listaAño.add(lh);
