@@ -12,5 +12,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface ReporteLocal {
+
+    public void generarReporteExcelFecha(String fecha1, String fecha2) throws Exception;
     
 }

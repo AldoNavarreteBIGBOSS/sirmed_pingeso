@@ -53,17 +53,22 @@ public class MReportes {
     private String filtroMunicipalidad2;
     private String filtroTemporada;
     private String filtroAño;
+    private String nombreArchivo;
 
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
+    }
+    
     public String getFiltroMunicipalidad2() {
         return filtroMunicipalidad2;
     }
-
     public void setFiltroMunicipalidad2(String filtroMunicipalidad2) {
         this.filtroMunicipalidad2 = filtroMunicipalidad2;
-    }
-
-    
-    
+    }   
     public String getFiltroAño() {
         return filtroAño;
     }
@@ -211,8 +216,7 @@ public class MReportes {
     }
     
     public void obtenerRegistrosTemporada(){
-        System.out.println("CACA");
-        System.out.println(filtroAño+" "+ filtroTemporada+" "+ filtroMunicipalidad2);
+     
         try{
             Collection<Registro> cr = registros.listarRegistroPorTemporada(filtroAño, filtroTemporada, filtroMunicipalidad2);
             cargarDatos(cr);
@@ -221,6 +225,24 @@ public class MReportes {
             mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
     }
+    
+    public void generarReporteFechasDescarga(){
+        
+        DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+        String f1 = df.format(fechaInicio);
+        String f2 = df.format(fechaFin);
+        
+        try{      
+            if(filtroMunicipalidad == null){
+                
+            }
+            else{
+                System.out.println(f1+" "+f2+" "+filtroMunicipalidad);
+            }
+        }
+        catch(Exception e){}
+    }
+    
     public MReportes() {
     }
 }
