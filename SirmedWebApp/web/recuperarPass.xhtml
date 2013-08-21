@@ -22,7 +22,8 @@
                             <p:outputLabel value="RUT : "/>
                             <p:inputText value="#{autentificador.rutRecuperar}"/>
                             <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update="ret"/>
-                            <a href="#{request.contextPath}/faces/login.xhtml">Volver</a>
+                            <p:button value="Volver" href="/faces/login.xhtml"/>
+                            
                         </h:panelGrid>
                         </div>
 
