@@ -7,6 +7,8 @@ package managedBeans;
 import managedBeans.Pojo.ListasComboPojo;
 import entities.Municipalidad;
 import entities.Registro;
+import java.io.InputStream;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -15,10 +17,13 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import managedBeans.Pojo.RegistroPojo;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import sessionBeans.MunicipalidadesLocal;
 import sessionBeans.RegistrosLocal;
 import sessionBeans.ReporteLocal;
@@ -29,16 +34,16 @@ import sessionBeans.ReporteLocal;
  */
 @Named(value = "mReportes")
 @RequestScoped
-public class MReportes {
+public class MReportes implements Serializable{
     @EJB
     private MunicipalidadesLocal municipalidades;
     @EJB
     private ReporteLocal reporte;
     @EJB
     private RegistrosLocal registros;
-    
     @Inject
     private MAutentificador autentificador;
+   
     
     private String rutJP;
     private Date fechaInicio;
@@ -54,7 +59,12 @@ public class MReportes {
     private String filtroTemporada;
     private String filtroAño;
     private String nombreArchivo;
+    private StreamedContent file;
 
+    public StreamedContent getFile() {
+        return file;
+    }    
+    
     public String getNombreArchivo() {
         return nombreArchivo;
     }
@@ -66,9 +76,11 @@ public class MReportes {
     public String getFiltroMunicipalidad2() {
         return filtroMunicipalidad2;
     }
+    
     public void setFiltroMunicipalidad2(String filtroMunicipalidad2) {
         this.filtroMunicipalidad2 = filtroMunicipalidad2;
     }   
+    
     public String getFiltroAño() {
         return filtroAño;
     }
@@ -84,7 +96,6 @@ public class MReportes {
     public void setListaMunicipalidades(Collection<Municipalidad> listaMunicipalidades) {
         this.listaMunicipalidades = listaMunicipalidades;
     }
-
     
     public String getFiltroMunicipalidad() {
         return filtroMunicipalidad;
@@ -142,10 +153,9 @@ public class MReportes {
         this.listaAño = listaAño;
     }
     
-    
-    
     @PostConstruct
     public void init(){
+       
         mc = new MMessaegeController();
         ag = new MAccionesGenerales();
         rutJP = autentificador.getUsername();
@@ -231,10 +241,13 @@ public class MReportes {
         DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         String f1 = df.format(fechaInicio);
         String f2 = df.format(fechaFin);
+        String url = null;
         
         try{      
             if(filtroMunicipalidad == null){
-                
+                url =  reporte.generarReporteExcelFecha(f1, f2, nombreArchivo);
+                InputStream stream = this.getClass().getResourceAsStream(url);
+                file = new DefaultStreamedContent(stream, "application/xls", nombreArchivo);               
             }
             else{
                 System.out.println(f1+" "+f2+" "+filtroMunicipalidad);

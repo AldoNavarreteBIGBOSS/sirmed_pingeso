@@ -27,7 +27,10 @@
                                 </p:selectOneMenu>  
                                 <p:commandButton value="Pre-visualizar" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros" style="width: 187px"/>
                                 <h:panelGroup/>
-                                <p:commandButton value="Descargar reporte" action="#{mReportes.generarReporteFechas()}"/>
+                                <p:commandButton value="Descargar reporte">
+                                   
+                                </p:commandButton>
+                                
                                 <p:inputText id="archivo" value="#{mReportes.nombreArchivo}"/>
                                 <p:watermark for="archivo" value="Nombre de reporte"/>
                                     
