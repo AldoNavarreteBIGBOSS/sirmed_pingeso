@@ -12,8 +12,7 @@
                 <ui:define name="content">  
                 <h:form id="ret">
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
-                    <p:panel header="Ingresar basculista" footer="Ingrese la información respectiva a cada campo">
-                    <h:panelGrid id="panel" columns="2" cellpadding="10">  
+                    <p:panelGrid id="panel" columns="2">  
                         <h:outputLabel value="Rut: "/>
                         <p:inputText value="#{mBasculista.rut}" required="true" label="RUT"/> 
                         <h:outputLabel value="Nombre: "/>
@@ -24,9 +23,8 @@
                         <p:inputText value="#{mBasculista.telefono}" required="true" label="Telefono"/>
                         <h:outputLabel value="Email: "/>
                         <p:inputText value="#{mBasculista.email}" required="true" label="Email"/>
-                    </h:panelGrid>
-                    <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista()}" icon="ui-icon-check" update="ret"/>  
-                    </p:panel>
+                    </p:panelGrid>
+                    <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista()}" icon="ui-icon-check" update="ret"/>                        
                 </h:form>
             </ui:define>  
             </ui:composition>

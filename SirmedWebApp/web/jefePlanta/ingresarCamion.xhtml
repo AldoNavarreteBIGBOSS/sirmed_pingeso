@@ -10,22 +10,20 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content" >
                 <h:form id="ingresarCamion">
-                    <p:panel header="Ingresar camión" footer="Ingrese la información respectiva a cada campo">
                     <p:growl id="growl" showDetail="true" sticky="true" />
-                    <h:panelGrid id="panel" columns="2" cellpadding="10">  
+                    <p:panelGrid id="panel" columns="2">  
                         <h:outputLabel value="Patente: "/>
                         <p:inputText value="#{mCamiones.patente}" required="true" label="Patente"/>
                         <h:outputLabel value="Municipalidad: "/>
                         <p:selectOneMenu value="#{mCamiones.municipalidad}">
                             <f:selectItems value="#{mCamiones.municipalidades}" var="cam" itemLabel="#{cam.nombreMunicipalidad}" itemValue="#{cam.nombreMunicipalidad}"/>
                         </p:selectOneMenu>
-                        <h:outputLabel value="Tipo de camion: " />
-                        <p:selectOneMenu value="#{mCamiones.tipoCamion}" style="width: 227px">
+                        <h:outputLabel value="Tipo de camion: "/>
+                        <p:selectOneMenu value="#{mCamiones.tipoCamion}">
                             <f:selectItems value="#{mCamiones.tc}" var="tc2" itemLabel="#{tc2.nombreTc}" itemValue="#{tc2.idTc}"/>
                         </p:selectOneMenu>
-                    </h:panelGrid>
+                    </p:panelGrid>
                     <p:commandButton  value="Ingresar"  actionListener="#{mCamiones.nuevoCamion()}" update="ingresarCamion" icon="ui-icon-check"/>
-                    </p:panel>
                 </h:form>
           </ui:define>      
        </ui:composition>     

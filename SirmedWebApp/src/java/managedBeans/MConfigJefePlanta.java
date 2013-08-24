@@ -4,7 +4,7 @@
  */
 package managedBeans;
 
-import managedBeans.Pojo.ListasComboPojo;
+import auxiliar.ListaHorarios;
 import entities.JefePlanta;
 import entities.Usuario;
 import java.util.LinkedList;
@@ -38,7 +38,7 @@ public class MConfigJefePlanta {
     private String rutJP;
     private String hora1;
     private String hora2;
-    private List<ListasComboPojo> listaHorarios;
+    private List<ListaHorarios> listaHorarios;
     private JefePlantaPojo jefePlantaPojo;
     private MMessaegeController mc;
     
@@ -69,11 +69,11 @@ public class MConfigJefePlanta {
         this.hora2 = hora2;
     }
 
-    public List<ListasComboPojo> getListaHorarios() {
+    public List<ListaHorarios> getListaHorarios() {
         return listaHorarios;
     }
 
-    public void setListaHorarios(List<ListasComboPojo> listaHorarios) {
+    public void setListaHorarios(List<ListaHorarios> listaHorarios) {
         this.listaHorarios = listaHorarios;
     }
     
@@ -90,9 +90,9 @@ public class MConfigJefePlanta {
     
     private void cargarLista(){
     
-       listaHorarios = new LinkedList<ListasComboPojo>();
+       listaHorarios = new LinkedList<ListaHorarios>();
         for(Integer i = 1; i <= 24; i++){
-           ListasComboPojo lh = new ListasComboPojo();
+           ListaHorarios lh = new ListaHorarios();
            lh.setEtiqueta(i.toString()+":00");
            lh.setValor(i.toString());
            listaHorarios.add(lh);

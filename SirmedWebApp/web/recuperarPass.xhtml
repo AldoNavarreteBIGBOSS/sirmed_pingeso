@@ -15,23 +15,22 @@
                                   el ingreso de su RUT, sin digito verificador ni puntuación, en la siguiente casilla:" /> 
                     <h:form id="ret">
                         <p:growl id="growl" showDetail="true" sticky="true" /> 
-
                         <p> </p>
                         <div align="center">
-                            <h:panelGrid columns="4"  cellpadding="10">
+                        <p:panelGrid columns="3" >
                             <p:outputLabel value="RUT : "/>
                             <p:inputText value="#{autentificador.rutRecuperar}"/>
                             <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update="ret"/>
-                            <p:button value="Volver" href="/faces/login.xhtml"/>
-                                
-                        </h:panelGrid>
-                        </div>
 
+                        </p:panelGrid>
+
+                        </div>
                     </h:form>
                 </p:panel>
                 <h:form>
-                    
-                   
+                    <p></p>
+                    <br></br>
+                    <p:button value="Volver" href="/faces/login.xhtml"/>
                 </h:form>
             </ui:define>
         </ui:composition>
