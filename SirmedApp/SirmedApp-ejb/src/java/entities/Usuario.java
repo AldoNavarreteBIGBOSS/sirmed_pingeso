@@ -36,6 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
         
 public class Usuario implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "HABILITADO")
+    private boolean habilitado;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -145,6 +149,14 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "entities.Usuario[ rut=" + rut + " ]";
+    }
+
+    public boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
     }
     
 }

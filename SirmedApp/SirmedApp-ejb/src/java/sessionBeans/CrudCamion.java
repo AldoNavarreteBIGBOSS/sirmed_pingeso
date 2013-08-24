@@ -12,6 +12,7 @@ import entities.Camion;
 import entities.Municipalidad;
 import entities.TipoCamion;
 import java.util.Collection;
+import java.util.LinkedList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,6 +44,7 @@ public class CrudCamion implements CrudCamionLocal {
            c.setPatente(patente);
            c.setIdTc(tc);
            c.setNombreMunicipalidad(m);
+           c.setHabilitado(true);
            cdao.insert(c);
        }
        else{
@@ -54,7 +56,19 @@ public class CrudCamion implements CrudCamionLocal {
    @Override
    public Collection<Camion> listaCamiones(){
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-       return dF.getCamionDAO().findAll();
+       
+        Collection<Camion> c = dF.getCamionDAO().findAll();
+        Collection<Camion> cE = new LinkedList<Camion>();
+        
+        for(Camion cc: c){
+            if(cc.getHabilitado() == false){
+                cE.add(cc);
+            }
+        }
+        
+        c.removeAll(cE);
+        
+        return c;
    }
 
    @Override
@@ -87,7 +101,8 @@ public class CrudCamion implements CrudCamionLocal {
        Camion c = cdao.buscarPorPatente(patente);
        
        if(c != null){
-           cdao.delete(c);
+           c.setHabilitado(false);
+           cdao.update(c);
        }
        else{
            throw new Exception("Camión no registrado");
@@ -100,7 +115,40 @@ public class CrudCamion implements CrudCamionLocal {
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         CamionDAO cdao = dF.getCamionDAO();
         
-        return cdao.buscarPorMunicipalidad(municipalidad);
+        Collection<Camion> cc = cdao.buscarPorMunicipalidad(municipalidad);
+        Collection<Camion> ccE = new LinkedList<Camion>();
+        
+        for(Camion c: cc){
+            if(c.getHabilitado() == false){
+                ccE.add(c);
+            }
+        }
+        
+        cc.removeAll(ccE);
+        
+        return cc;
     
     }
+   
+   @Override
+   public void activarCamion(String patente)throws Exception{
+   
+       DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+       CamionDAO cdao = dF.getCamionDAO();
+       
+       Camion c = cdao.buscarPorPatente(patente);
+       
+       if(c != null){
+           if(c.getHabilitado()==false){
+               c.setHabilitado(true);
+               cdao.update(c);
+           }
+           else{
+               throw new Exception("El camión ya esta habilitado");
+           }
+       }
+       else{
+           throw new Exception("No existe el camión");
+       }
+   }
 }

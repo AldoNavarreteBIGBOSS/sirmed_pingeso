@@ -10,6 +10,15 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+                    <p:panel header="Re-activar camión" footer="Ingrese la patente del camión que desea volver a activar">
+                        <h:panelGrid columns="3" cellpadding="10">
+                            <p:outputLabel value="Patente :"/>
+                            <p:inputText value="#{mCamiones.patenteActivar}"/>
+                            <p:commandButton value="Activar" action="#{mCamiones.activarCamion()}" update="growl"/>
+                        </h:panelGrid>
+                    </p:panel>
                     <p:panel header="Seleccionar camión" footer="Seleccione el camión a editar">
                         <p:dataTable id="camiones" var="cam" value="#{mCamiones.camiones}" rowKey="#{cam.patente}" selection="#{mCamiones.camionSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                             <p:ajax event="rowSelect" listener="#{mCamiones.setearCamion()}" update=":form"/>

@@ -35,6 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Basculista.findByTelefonoB", query = "SELECT b FROM Basculista b WHERE b.telefonoB = :telefonoB"),
     @NamedQuery(name = "Basculista.findByRut", query = "SELECT b FROM Basculista b WHERE b.rut = :rut")})
 public class Basculista implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "HABILITADO")
+    private boolean habilitado;
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -146,6 +150,14 @@ public class Basculista implements Serializable {
     @Override
     public String toString() {
         return "entities.Basculista[ rut=" + rut + " ]";
+    }
+
+    public boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
     }
     
 }

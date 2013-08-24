@@ -10,6 +10,7 @@ import DAO_interfaces.MunicipalidadDAO;
 import entities.Chofer;
 import entities.Municipalidad;
 import java.util.Collection;
+import java.util.LinkedList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,6 +44,7 @@ public class CrudChofer implements CrudChoferLocal {
             c.setNombreMunicipalidad(m);
             c.setMailChofer(email);
             c.setTelefonoChofer(telefono);
+            c.setHabilitado(true);
             cdao.insert(c);
         }
         else{
@@ -54,7 +56,18 @@ public class CrudChofer implements CrudChoferLocal {
     @Override
     public Collection<Chofer> listaChoferes(){
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        return dF.getChoferDAO().findAll();
+        Collection<Chofer> cc = dF.getChoferDAO().findAll();
+        Collection<Chofer> ccE = new LinkedList<Chofer>();
+        
+        for(Chofer c: cc){
+            if(c.getHabilitado() == false){
+                ccE.add(c);
+            }
+        }
+        
+        cc.removeAll(ccE);
+        
+        return cc;
     }
     
     @Override
@@ -92,7 +105,8 @@ public class CrudChofer implements CrudChoferLocal {
         Chofer c = cdao.buscarPorRut(rut);
         
         if(c != null){
-            cdao.delete(c);
+            c.setHabilitado(false);
+            cdao.update(c);
         }
         else{
             throw new Exception("No existe el chofer");
@@ -107,7 +121,43 @@ public class CrudChofer implements CrudChoferLocal {
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         ChoferDAO cdao = dF.getChoferDAO();
         
-        return cdao.buscarPorMunicipalidad(municipalidad);
+        Collection<Chofer> cc = cdao.buscarPorMunicipalidad(municipalidad);
+        Collection<Chofer> ccE = new LinkedList<Chofer>();
+        
+        for(Chofer c: cc){
+            if(c.getHabilitado() == false){
+                ccE.add(c);
+            }
+        }
+        
+        cc.removeAll(ccE);
+        
+        return cc;
+        
+    
+    }
+    
+    @Override
+    public void activarChofer(String rut)throws Exception{
+        
+        
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        ChoferDAO cdao = dF.getChoferDAO();
+        
+        Chofer chf = cdao.buscarPorRut(rut);
+        
+        if(chf != null){
+            if(chf.getHabilitado() == false){
+                chf.setHabilitado(true);
+                cdao.update(chf);
+            }
+            else{
+                throw new Exception("El chofer ya esta habilitado");
+            }
+        }
+        else{
+            throw new Exception("El chofer no existe");
+        }
     
     }
 }

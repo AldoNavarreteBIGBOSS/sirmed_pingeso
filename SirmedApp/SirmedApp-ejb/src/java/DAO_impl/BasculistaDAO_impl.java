@@ -6,6 +6,7 @@ package DAO_impl;
 
 import DAO_interfaces.BasculistaDAO;
 import entities.Basculista;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -20,18 +21,15 @@ public class BasculistaDAO_impl extends GenericDAO_impl<Basculista> implements B
     
     @Override
     public Basculista buscarPorRut(String rut){
+        System.out.println(rut);
         
-        Basculista b;
         Query q = getEntityManager().createNamedQuery("Basculista.findByRut");
         q.setParameter("rut", rut);
-        b = (Basculista) q.getResultList().get(0);
-        
-        if(b != null){
-            return b;
-        }
-        else{
+        List<Basculista> lb = (List<Basculista>) q.getResultList();
+        if(lb.isEmpty()){
             return null;
         }
+         return lb.get(0);
         
     }
 

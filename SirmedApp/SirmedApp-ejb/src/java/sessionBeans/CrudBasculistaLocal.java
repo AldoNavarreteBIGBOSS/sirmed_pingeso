@@ -22,6 +22,8 @@ public interface CrudBasculistaLocal {
     public void editarBasculista(String rut, String nombre, String apellido, String telefono) throws Exception;
 
     public void eliminarBasculista(String rut) throws Exception;
+
+    public void activarBasculistaUsuario(String rut) throws Exception;
     
    
     

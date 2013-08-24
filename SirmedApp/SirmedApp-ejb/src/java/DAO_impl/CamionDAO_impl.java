@@ -28,7 +28,10 @@ public class CamionDAO_impl extends GenericDAO_impl<Camion> implements CamionDAO
             Query q = getEntityManager().createNamedQuery("Camion.findByPatente");
             q.setParameter("patente", patente);
             c = (Camion) q.getResultList().get(0);
+            
+            
             return c;
+          
         }
         catch(Exception e){
             return null;

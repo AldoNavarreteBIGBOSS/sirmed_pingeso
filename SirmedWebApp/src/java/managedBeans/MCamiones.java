@@ -41,6 +41,7 @@ public class MCamiones {
     private Camion camionSeleccionado;
     private MMessaegeController mc;
     private MAccionesGenerales ag;
+    private String patenteActivar;
     
     public MCamiones() {
     }
@@ -55,6 +56,16 @@ public class MCamiones {
         ag = new MAccionesGenerales();
     }
 
+    public String getPatenteActivar() {
+        return patenteActivar;
+    }
+
+    public void setPatenteActivar(String patenteActivar) {
+        this.patenteActivar = patenteActivar;
+    }
+
+    
+    
     public Collection<TipoCamion> getTc() {
         return tc;
     }
@@ -165,5 +176,16 @@ public class MCamiones {
         this.patente = null;
         this.municipalidad = null;
         
+    }
+    
+    public void activarCamion(){
+        
+        try{
+            crudCamion.activarCamion(patenteActivar);
+            ag.actualizarPagina();
+        }
+        catch(Exception e){
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
+        }
     }
 }

@@ -5,11 +5,20 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    
+
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+                    <p:panel header="Re-activar chofer" footer="Ingrese el RUT del chofer que desea volver a activar">
+                        <h:panelGrid columns="3" cellpadding="10">
+                            <p:outputLabel value="RUT :"/>
+                            <p:inputText value="#{mChofer.rutActivarChofer}"/>
+                            <p:commandButton value="Activar" action="#{mChofer.activarChofer()}" update="growl"/>
+                        </h:panelGrid>
+                    </p:panel>
                     <p:panel header="Seleccionar chofer" footer="Seleccione el chofer a editar">
                         <p:dataTable id="choferes" var="chf" value="#{mChofer.choferes}" rowKey="#{chf.rutChofer}" selection="#{mChofer.choferSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                             <p:ajax event="rowSelect" listener="#{mChofer.setearChofer()}" update=":form"/>
@@ -17,27 +26,27 @@
 
 
                             <p:column headerText="RUT">  
-                        #{chf.rutChofer}  
+                                #{chf.rutChofer}  
                             </p:column>  
 
                             <p:column headerText="Nombre">  
-                        #{chf.nombreChofer}  
+                                #{chf.nombreChofer}  
                             </p:column> 
 
                             <p:column headerText="Apellido">  
-                        #{chf.apellidoChofer}  
+                                #{chf.apellidoChofer}  
                             </p:column> 
 
                             <p:column headerText="Municipalidad">  
-                        #{chf.nombreMunicipalidad.nombreMunicipalidad}  
+                                #{chf.nombreMunicipalidad.nombreMunicipalidad}  
                             </p:column> 
 
                             <p:column headerText="Telefono">  
-                        #{chf.telefonoChofer}  
+                                #{chf.telefonoChofer}  
                             </p:column> 
 
                             <p:column headerText="Email">  
-                        #{chf.mailChofer}  
+                                #{chf.mailChofer}  
                             </p:column> 
 
 
@@ -62,7 +71,7 @@
                             <p:inputText value="#{mChofer.email}"/>
                         </h:panelGrid>
 
-                        <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
+                        <p:commandButton value="Editar" onclick="confirmation.show();" type="button" ajax="false"/> 
                         <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
                             <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mChofer.actualizarChofer()}" update=":form"/>  
                             <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   

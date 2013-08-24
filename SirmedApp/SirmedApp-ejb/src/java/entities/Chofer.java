@@ -39,6 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Chofer.findByMunicipalidad", query = "SELECT c FROM Chofer c WHERE c.nombreMunicipalidad.nombreMunicipalidad = :nombreMunicipalidad")
 })
 public class Chofer implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "HABILITADO")
+    private boolean habilitado;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -161,6 +165,14 @@ public class Chofer implements Serializable {
     @Override
     public String toString() {
         return "entities.Chofer[ rutChofer=" + rutChofer + " ]";
+    }
+
+    public boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
     }
     
 }

@@ -36,6 +36,7 @@ public class MBasculista {
     private String apellido;
     private String telefono;
     private String email;
+    private String rutActivar;
     private Collection<Basculista> basculista;
     private Basculista basculistaSeleccionado;
     private MAccionesGenerales ag;
@@ -49,6 +50,16 @@ public class MBasculista {
         ag = new MAccionesGenerales();
     }
 
+    public String getRutActivar() {
+        return rutActivar;
+    }
+
+    public void setRutActivar(String rutActivar) {
+        this.rutActivar = rutActivar;
+    }
+
+    
+    
     public Basculista getBasculistaSeleccionado() {
         return basculistaSeleccionado;
     }
@@ -158,5 +169,17 @@ public class MBasculista {
         this.apellido = null;
         this.telefono = null;
         this.email = null;      
+    }
+    
+    public void activarRut(){
+    
+       try{
+          
+           crudBasculista.activarBasculistaUsuario(rutActivar);
+           ag.actualizarPagina();
+       } 
+       catch(Exception e){
+           mc.mensajeRetroalimentacion("Error", e.getMessage());
+       }
     }
 }

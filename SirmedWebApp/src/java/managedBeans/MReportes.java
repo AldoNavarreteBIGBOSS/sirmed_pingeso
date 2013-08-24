@@ -245,12 +245,14 @@ public class MReportes implements Serializable{
         
         try{      
             if(filtroMunicipalidad == null){
-                url =  reporte.generarReporteExcelFecha(f1, f2, nombreArchivo);
+                url =  reporte.generarReporteExcelFecha(f1, f2, nombreArchivo, null);
                 InputStream stream = this.getClass().getResourceAsStream(url);
                 file = new DefaultStreamedContent(stream, "application/xls", nombreArchivo);               
             }
             else{
-                System.out.println(f1+" "+f2+" "+filtroMunicipalidad);
+               url =  reporte.generarReporteExcelFecha(f1, f2, nombreArchivo, filtroMunicipalidad);
+                InputStream stream = this.getClass().getResourceAsStream(url);
+                file = new DefaultStreamedContent(stream, "application/xls", nombreArchivo);     
             }
         }
         catch(Exception e){}

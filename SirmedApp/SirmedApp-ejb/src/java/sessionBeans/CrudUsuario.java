@@ -42,6 +42,7 @@ public class CrudUsuario implements CrudUsuarioLocal {
                 u.setMail(email);
                 u.setPassword(password);
                 u.setIdTipo(tipoUsuario);
+                u.setHabilitado(true);
                 udao.insert(u);
             }
             else{
@@ -71,9 +72,10 @@ public class CrudUsuario implements CrudUsuarioLocal {
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
        UsuarioDAO udao = dF.getUsuarioDAO();
        Usuario b = udao.buscarPorRut(rut);
+       b.setHabilitado(false);
        
        if(b != null){
-           udao.delete(b);
+           udao.update(b);
        }
        else{
            throw  new Exception("No existe el basculista");

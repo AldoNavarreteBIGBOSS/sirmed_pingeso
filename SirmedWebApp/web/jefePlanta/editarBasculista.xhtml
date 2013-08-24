@@ -9,11 +9,21 @@
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
-                <h:form id="form" prependId="false">
-                    <p:panel header="Seleccionar basculista" footer="Seleccione el basculista a editar">
+              <h:form id="form" prependId="false">
+                    <p:panel header="Re-activar basculista" footer="Ingrese el RUT del basculista que desea volver a activar">
+                        <h:panelGrid columns="3" cellpadding="10">
+                            <p:outputLabel value="RUT :"/>
+                            <p:inputText value="#{mBasculista.rutActivar}"/>
+                            <p:commandButton value="Activar" action="#{mBasculista.activarRut()}" update="growl"/>
+                        </h:panelGrid>
+                    </p:panel>
+                        
+               
+                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    <p:panel id="panelito" header="Seleccionar basculista" footer="Seleccione el basculista a editar">
                         <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                             <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update=":form"/>
-                            <p:ajax event="rowUnselect"/> 
+                            <p:ajax event="rowUnselect" id="barras"/> 
 
                             <p:column headerText="RUT">  
                         #{bas.rut}  
@@ -51,6 +61,7 @@
                         </p:confirmDialog>
                     </h:panelGrid>
                     </p:panel>
+                    
                 </h:form>   
                 </ui:define>
             </ui:composition>

@@ -35,6 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Camion.findByMunicipalidad", query = "SELECT c FROM Camion c WHERE c.nombreMunicipalidad.nombreMunicipalidad = :nombreMunicipalidad")
 })
 public class Camion implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "HABILITADO")
+    private boolean habilitado;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -114,6 +118,14 @@ public class Camion implements Serializable {
     @Override
     public String toString() {
         return "entities.Camion[ patente=" + patente + " ]";
+    }
+
+    public boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
     }
     
 }

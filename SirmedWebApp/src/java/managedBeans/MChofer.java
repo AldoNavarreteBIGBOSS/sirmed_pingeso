@@ -37,6 +37,7 @@ public class MChofer {
     private Chofer choferSeleccionado;
     private MMessaegeController mc;
     private MAccionesGenerales ag;
+    private String rutActivarChofer;
 
     @PostConstruct
     public void init() {
@@ -46,6 +47,16 @@ public class MChofer {
         ag = new MAccionesGenerales();
     }
 
+    public String getRutActivarChofer() {
+        return rutActivarChofer;
+    }
+
+    public void setRutActivarChofer(String rutActivarChofer) {
+        this.rutActivarChofer = rutActivarChofer;
+    }
+
+    
+    
     public MunicipalidadesLocal getMunicipalidades() {
         return municipalidades;
     }
@@ -191,4 +202,16 @@ public class MChofer {
         this.email = null;
         this.municipalidad = null;
     }
+    
+    public void activarChofer(){
+        
+        try{
+            crudChofer.activarChofer(rutActivarChofer);
+            ag.actualizarPagina();
+        }
+        catch(Exception e){
+            mc.mensajeRetroalimentacion("Error", e.getMessage());
+        }
+    }
+    
 }
