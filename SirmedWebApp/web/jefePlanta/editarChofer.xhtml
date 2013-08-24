@@ -12,6 +12,7 @@
                 <h:form id="form" prependId="false">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
 
                     <p:panel header="Re-activar chofer" footer="Ingrese el RUT del chofer que desea volver a activar">
@@ -29,6 +30,8 @@
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
 =======
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
+=======
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
 
                     <p:dataTable id="choferes" var="chf" value="#{mChofer.choferes}" rowKey="#{chf.rutChofer}" selection="#{mChofer.choferSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                         <p:ajax event="rowSelect" listener="#{mChofer.setearChofer()}" update=":form"/>
@@ -37,6 +40,7 @@
                             Choferes  
                         </f:facet>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                             <p:column headerText="RUT">  
@@ -111,6 +115,16 @@
                         </p:column> 
 
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
+=======
+                        <p:column headerText="RUT">  
+                        #{chf.rutChofer}  
+                        </p:column>  
+
+                        <p:column headerText="Nombre">  
+                        #{chf.nombreChofer}  
+                        </p:column> 
+
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
                         <p:column headerText="Apellido">  
                         #{chf.apellidoChofer}  
                         </p:column> 
@@ -132,6 +146,9 @@
                         </f:facet>  
                     </p:dataTable>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
+=======
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
 =======
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7

@@ -45,6 +45,7 @@ public class Reporte implements ReporteLocal {
             else{
                 rs = registros.listarRegistroPorFechasMunicipalidad(fecha1, fecha2, municipalidad);
             }
+            
             Integer count = 1;
             HSSFWorkbook libroReporte = new HSSFWorkbook();
             HSSFSheet hojaReporte = libroReporte.createSheet();
@@ -70,8 +71,6 @@ public class Reporte implements ReporteLocal {
             Pso.setCellValue("PESAJE");
             Dte.setCellValue("FECHA REGISTRO");
             Det.setCellValue("DETALLE REGISTRO");
-
-
 
             for (Registro r : rs) {
 
@@ -105,9 +104,7 @@ public class Reporte implements ReporteLocal {
             for (Integer i = 0; i <= 7; i++) {
                 hojaReporte.autoSizeColumn(i);
             }
-            
-            
-            
+                       
             try {
 
                 String path = System.getProperty("java.home");
@@ -130,11 +127,14 @@ public class Reporte implements ReporteLocal {
                 throw new Exception(e.getMessage());
             }
 
-
-
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
+    }
+    
+    public String generarReporteExcelTemporada(String año, String temporada, String nombre archivo){
+    
+    
     }
 }

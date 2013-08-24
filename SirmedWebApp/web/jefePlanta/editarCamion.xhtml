@@ -11,6 +11,7 @@
             <ui:define name="content">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <h:form id="form" prependId="false">
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
 
@@ -42,6 +43,8 @@
 =======
 =======
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
+=======
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
         <h:form id="form" prependId="false">
             <p:dataTable id="camiones" var="cam" value="#{mCamiones.camiones}" rowKey="#{cam.patente}" selection="#{mCamiones.camionSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                 <p:ajax event="rowSelect" listener="#{mCamiones.setearCamion()}" update=":form"/>
@@ -50,6 +53,9 @@
                             Camiones  
                         </f:facet>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
+=======
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
 =======
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
@@ -57,6 +63,7 @@
                         <p:column headerText="Patente">  
                         #{cam.patente}  
                         </p:column>  
+<<<<<<< HEAD
 <<<<<<< HEAD
 
                         <p:column headerText="Municipalidad">  
@@ -72,6 +79,22 @@
                         </f:facet>  
                     </p:dataTable>
 
+=======
+
+                        <p:column headerText="Municipalidad">  
+                        #{cam.nombreMunicipalidad.nombreMunicipalidad}  
+                        </p:column> 
+
+                        <p:column headerText="Tipo de camión">  
+                        #{cam.idTc.nombreTc}  
+                        </p:column> 
+                        
+                        <f:facet name="footer">  
+                            Seleccione el camión a editar
+                        </f:facet>  
+                    </p:dataTable>
+
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
 =======
 
                         <p:column headerText="Municipalidad">  
