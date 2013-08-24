@@ -10,6 +10,7 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <h:form id="form" prependId="false">
                     <p:panel header="Re-activar basculista" footer="Ingrese el RUT del basculista que desea volver a activar">
                         <h:panelGrid columns="3" cellpadding="10">
@@ -25,6 +26,9 @@
                         <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                             <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update=":form"/>
                             <p:ajax event="rowUnselect" id="barras"/> 
+=======
+                <h:form id="form" prependId="false">
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
 =======
                 <h:form id="form" prependId="false">
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
@@ -73,6 +77,7 @@
                         <p:inputText value="#{mBasculista.telefono}"/>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                         <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
                         <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
@@ -83,6 +88,8 @@
                     </p:panel>
                     
 =======
+=======
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
                         <f:facet name="footer">
                             <div align="center">
                             <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
@@ -94,6 +101,9 @@
                         </f:facet>
                     </p:panelGrid>
                     </div>
+<<<<<<< HEAD
+>>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
+=======
 >>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
                 </h:form>   
                 </ui:define>
