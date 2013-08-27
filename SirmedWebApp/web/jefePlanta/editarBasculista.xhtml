@@ -64,11 +64,13 @@
 
                     </h:panelGrid>
 
-                        <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
-                        <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
-                            <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.actualizarBasculista()}" update=":form"/>  
-                            <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
-                        </p:confirmDialog>               
+                        <p:commandButton type="button" onclick="cd.show();" value="Editar" />
+                                <p:dialog  header="Petición de confirmación"  widgetVar="cd" resizable="false" footer="¿Esta seguro de continuar?" draggable="false" >  
+                                    <h:panelGroup style="margin-left: 50px">
+                                    <p:commandButton  style="width: 70px" value="Si"  actionListener="#{mBasculista.actualizarBasculista()}" oncomplete="confirmation.hide()"/>
+                                    <p:commandButton style="width: 70px" value="No" onclick="confirmation.hide();"/>
+                                    </h:panelGroup>
+                                </p:dialog>           
                     </p:panel>
 
                 </h:form>   

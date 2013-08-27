@@ -31,15 +31,10 @@
 
 
                             <f:facet name="footer">
-
                                 <p:commandButton type="button" onclick="cd.show();" value="Eliminar" />
-                                <p:dialog  header="Petición de confirmación"  widgetVar="cd" resizable="false" footer="¿Esta seguro de continuar?" draggable="false" >
-                                    
-                                    
+                                <p:dialog  header="Petición de confirmación"  widgetVar="cd" resizable="false" footer="¿Esta seguro de continuar?" draggable="false" >                               
                                     <p:commandButton  style="width: 70px" value="Si"  actionListener="#{mBasculista.borrarBasculista()}" oncomplete="confirmation.hide()"/>
                                     <p:commandButton style="width: 70px" value="No" onclick="confirmation.hide();"/>
-
-
                                 </p:dialog> 
                             </f:facet>
 
