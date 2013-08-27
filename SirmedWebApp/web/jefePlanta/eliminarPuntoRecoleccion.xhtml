@@ -10,13 +10,11 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
-
+                    <p:panel header="Eliminar punto de recolección" footer="Seleccione el punto de recolección que desee eliminar">
                     <p:dataTable id="precoleccion" var="pr" value="#{mPuntoRecoleccion.puntosRecoleccionPojo}" rowKey="#{pr.idTipo}" selection="#{mPuntoRecoleccion.prSeleccionadoPojo}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                         <p:ajax event="rowSelect" listener="#{mPuntoRecoleccion.setearPunto()}" update=":form"/>
                         <p:ajax event="rowUnselect"/> 
-                        <f:facet name="header">  
-                            Puntos de Recolección  
-                        </f:facet>
+                        
                         <p:column headerText="Identificador">  
                         #{pr.idTipo}  
                         </p:column>  
@@ -49,7 +47,7 @@
                             </p:confirmDialog>
                         </f:facet>  
                     </p:dataTable>
-                    
+                    </p:panel>
                     
                 </h:form>   
             </ui:define>

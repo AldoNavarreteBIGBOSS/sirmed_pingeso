@@ -11,12 +11,11 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
         <h:form id="form" prependId="false">
+            <p:panel header="Eliminar camión" footer="Seleccione el camion que desee eliminar">
             <p:dataTable id="camiones" var="cam" value="#{mCamiones.camiones}" rowKey="#{cam.patente}" selection="#{mCamiones.camionSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                 <p:ajax event="rowSelect" listener="#{mCamiones.setearCamion()}" update=":form"/>
                         <p:ajax event="rowUnselect"/> 
-                        <f:facet name="header">  
-                            Camiones  
-                        </f:facet>
+                       
 
                         <p:column headerText="Patente">  
                         #{cam.patente}  
@@ -37,7 +36,8 @@
                                 <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
                             </p:confirmDialog>
                         </f:facet>
-                    </p:dataTable>                                                
+                    </p:dataTable>  
+                </p:panel>
                 </h:form> 
                 </ui:define>
             </ui:composition>

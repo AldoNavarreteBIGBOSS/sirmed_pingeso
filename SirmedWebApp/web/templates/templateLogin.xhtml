@@ -7,50 +7,42 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
         <title>SIRMED</title>
     </h:head>
 
     <h:body>
-
         <p:layout fullPage="true">  
-
             <p:layoutUnit position="center">  
                 <ui:insert name="content">
                     <div  align="center">
                         <h:form id="login">
-                        <p:growl id="growl" showDetail="true" sticky="true" /> 
-                        <p:panel header="Login" style="width:-100px">
-                        <h:panelGrid  styleClass="panelLogin" columns="2" cellpadding="5px">
-                            <p:outputLabel value="Usuario: "/>
-                            <p:inputText value="#{autentificador.username}" required="true" label="Usuario"/>
-                            <p:outputLabel value="Contraseña: "/>
-                            <p:inputText value="#{autentificador.password}" required="true" type="password" label="Contraseña"/>
-                            <p:commandButton action="#{autentificador.login()}"  value="Ingresar" update="growl"/>
-                            <a href="#{request.contextPath}/faces/recuperarPass.xhtml">Olvidé mi contraseña</a>
-                        </h:panelGrid>
-                        </p:panel>
-                    </h:form>
-                </div>             
+                            <p:growl id="growl" showDetail="true" sticky="true" /> 
+                            <p:panel header="Iniciar Sesión"  footer="Ingrese sus datos para ingresar a SIRMED" style="width: 500px; margin-top: 60px;">
+                                <h:panelGrid  styleClass="panelLogin" columns="2" cellpadding="10">
+                                    <p:outputLabel value="Usuario: "/>
+                                    <p:inputText value="#{mVerificador.username}" required="true" label="Usuario"/>
+                                    <p:outputLabel value="Contraseña: "/>
+                                    <p:inputText value="#{mVerificador.password}" required="true" type="password" label="Contraseña"/>
+                                    <p:commandButton action="#{mVerificador.login()}"  value="Ingresar" update="growl"/>
+                                    <a href="#{request.contextPath}/faces/recuperarPass.xhtml">Olvidé mi contraseña</a>
+                                </h:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </div>             
                 </ui:insert>
             </p:layoutUnit>  
 
             <p:layoutUnit position="south" size="100">
-                    <ui:insert name="bottom">
-                        <div align="center">
-                            SIRMED fue desarrollada por los alumnos: Aldo Navarrete, Gabriela León y Macarena Pérez.
-                            <p>Fue desarrollada para el curso de Proyecto de Ingeniería de Software de la USACH en el primer semestre del 2013. </p>
-                        </div>
-                    </ui:insert>
+                <ui:insert name="bottom">
+                    <div align="center">
+                        SIRMED fue desarrollada por los alumnos: Aldo Navarrete, Gabriela León y Macarena Pérez.
+                        <p>Fue desarrollada para el curso de Proyecto de Ingeniería de Software de la USACH en el primer semestre del 2013. </p>
+                    </div>
+                </ui:insert>
             </p:layoutUnit>  
- 
-
             <p:layoutUnit position="north" size="100">  
-                
-               
-             </p:layoutUnit>  
-
+            </p:layoutUnit>  
         </p:layout>
-
     </h:body>
-
 </html>

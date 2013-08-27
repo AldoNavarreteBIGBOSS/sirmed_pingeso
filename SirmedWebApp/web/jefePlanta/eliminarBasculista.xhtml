@@ -10,10 +10,9 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
+                    <p:panel header="Eliminar basculista" footer="Seleccione el basculista que desee eliminar">
                     <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">               
-                        <f:facet name="header">  
-                            Basculistas  
-                        </f:facet>           
+                               
                         <p:column headerText="RUT">  
                     #{bas.rut}  
                         </p:column>  
@@ -38,7 +37,7 @@
                         </f:facet>  
                         
                     </p:dataTable>
-                    
+                    </p:panel>
                 </h:form>
             </ui:define>
         </ui:composition>

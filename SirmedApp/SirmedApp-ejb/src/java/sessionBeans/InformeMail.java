@@ -6,6 +6,8 @@ package sessionBeans;
 
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -27,13 +29,14 @@ import javax.mail.internet.MimeMessage;
  */
 @Singleton
 public class InformeMail implements InformeMailLocal {
+    @EJB
+    private AuditoriaLocal auditoria;
 
     @EJB
     private RegistrosLocal registros;
     private Properties props;
     private Session session;
     private Timer timer;
-    private Integer ultimo = null;
     private Date date;
   
     @Resource TimerService timerService;
@@ -55,17 +58,22 @@ public class InformeMail implements InformeMailLocal {
     
     @Override
     public void determinarHora(String h1, String h2){
-    /*Modificar cuando se haga la vista del Jefe de Planta Configiración*/
+    
+        
         ScheduleExpression schedule = new ScheduleExpression();
         schedule.minute("0");
         schedule.hour(h1+","+h2);
         schedule.second("0");
-        
+        try {
+            auditoria.registrarAccion("Hora de envio de informe configurada", "Hora 1: "+h1+" Hora 2: "+h2);
+        } catch (Exception ex) {
+            Logger.getLogger(InformeMail.class.getName()).log(Level.SEVERE, null, ex);
+        }
         timer = (Timer) timerService.createCalendarTimer(schedule);
     }
     
     @Timeout
-    private void enviarMail(Timer timer) throws MessagingException {
+    private void enviarMail(Timer timer) throws MessagingException, Exception {
        
         String mensaje = null;       
         Integer hora = date.getHours();
@@ -80,6 +88,7 @@ public class InformeMail implements InformeMailLocal {
         Transport t = session.getTransport("smtp");
         t.connect("arden.papifunk@gmail.com", "2850326");
         t.sendMessage(message, message.getAllRecipients());
+        auditoria.registrarAccion("Envio de informe", hora+":00 hrs.");
         message = null;
         t.close();
     }

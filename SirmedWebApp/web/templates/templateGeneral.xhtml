@@ -34,7 +34,7 @@
                     <h:form>                        
                         <p:panelMenu style="width:200px">  
                             <p:submenu label="Inicio">  
-                                <p:menuitem value="Historial"   icon="ui-icon-bookmark"/>  
+                                <p:menuitem value="Historial"   icon="ui-icon-bookmark" url="/faces/jefePlanta/inicio.xhtml"/>  
                                 <p:menuitem value="Perfil"  icon="ui-icon-person" url="/faces/jefePlanta/configurarPerfil.xhtml"/> 
                                 <p:menuitem value="Configuración" icon="ui-icon-wrench" url="/faces/jefePlanta/configuracion.xhtml"/>
                                 <p:menuitem value="Cerrar sesión" icon="ui-icon-power" action="#{autentificador.logout()}"/>
@@ -66,7 +66,7 @@
                             <p:separator />  
                             <p:submenu label="Ayuda" >                                                                       
                                 <p:menuitem value="Manual de usuario" icon="ui-icon-note"/>  
-                                <p:menuitem value="Preguntas frecuentes" icon="ui-icon-help"/>  
+                                <p:menuitem value="FAQ" icon="ui-icon-help"/>   
                             </p:submenu>  
                         </p:panelMenu>  
                     </h:form>

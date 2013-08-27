@@ -40,5 +40,16 @@ public class MAccionesGenerales {
         }
     }
     
+    public String devolverUsername(){
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+         
+         return request.getRemoteUser();
+        
+    
+    }
+    
     
 }

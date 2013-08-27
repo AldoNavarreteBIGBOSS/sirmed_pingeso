@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/templates/templateGeneral.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:panel header="Historial" footer="Estos son los movimientos y eventos ocurridos en la fecha seleccionada">
+                        <h:panelGrid columns="3" cellpadding="10">
+                            <p:outputLabel value="Fecha : "/>
+                            <p:calendar value="#{mHistorial.fechaSeleccionada}" pattern="yyyy-MM-dd" required="true" label="Fecha"/>
+                            <p:commandButton value="Ver" action="#{mHistorial.cargarListaFecha()}" update="auditora"/>
+                        </h:panelGrid>
+                        <p:dataTable id="auditora" var="aud" value="#{mHistorial.auditoriaPojos}" rowKey="#{aud.fecha}" rows="10"  paginator="true" paginatorAlwaysVisible="false">
+                            <p:column headerText="Fecha/Hora">  
+                                #{aud.fecha}  
+                            </p:column> 
+                            <p:column headerText="Descripción evento">  
+                                #{aud.descripción}  
+                            </p:column>
+                            <p:column headerText="Detalle evento">  
+                                #{aud.informacion}  
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define> 
+        </ui:composition>
+    </h:body>
+</html>
+

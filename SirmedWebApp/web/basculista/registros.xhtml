@@ -50,7 +50,7 @@
                             </h:panelGrid>                        
                         </p:panel>
                         <p:panel header="Seleccionar Puntos de Recolección" footer="Seleccione los puntos de recolección que visitó el camión">
-                            <p:dataTable var="pto" value="#{mRegistros.puntosRecoleccion}" rowKey="#{pto.idPunto}" rows="10" selection="#{mRegistros.puntosRecoleccionSeleccionados}">
+                            <p:dataTable var="pto" value="#{mRegistros.puntosRecoleccion}" rowKey="#{pto.idPunto}" rows="10" selection="#{mRegistros.puntosRecoleccionSeleccionados}" paginator="true" paginatorAlwaysVisible="false">
                                 <f:facet name="header">  
                                     Selección de Puntos de Recolección  
                                 </f:facet>  

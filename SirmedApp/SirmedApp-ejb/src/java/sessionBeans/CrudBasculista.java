@@ -11,7 +11,9 @@ import entities.Basculista;
 import entities.Usuario;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,10 +24,12 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CrudBasculista implements CrudBasculistaLocal {
+    @EJB
+    private AuditoriaLocal auditoria;
 
     @PersistenceContext(unitName = "SirmedApp-ejbPU")
     private EntityManager em;
-
+    
     @Override
     public void crearBasculista(String rut, String nombre, String apellido, String telefono) {
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
@@ -37,8 +41,12 @@ public class CrudBasculista implements CrudBasculistaLocal {
         b.setApellidoB(apellido);
         b.setTelefonoB(telefono);
         b.setHabilitado(true);
+        try {
+            auditoria.registrarAccion("Basculista ingresado", nombre+" "+apellido);
+        } catch (Exception ex) {
+            Logger.getLogger(CrudBasculista.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-                
         bdao.insert(b);      
         
         
@@ -89,9 +97,11 @@ public class CrudBasculista implements CrudBasculistaLocal {
        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
        BasculistaDAO bdao = dF.getBasculistaDAO();
        Basculista b = bdao.buscarPorRut(rut);
-       b.setHabilitado(false);
+       
        
        if(b != null){
+           b.setHabilitado(false);
+           auditoria.registrarAccion("Basculista deshabilitado", b.getNombreB()+" "+b.getApellidoB()+" RUT: "+b.getRut());
            bdao.update(b);
        }
        else{
@@ -120,6 +130,7 @@ public class CrudBasculista implements CrudBasculistaLocal {
                 
                 bdao.update(b);
                 udao.update(u);
+                auditoria.registrarAccion("Basculista Re-activado", b.getNombreB()+" "+b.getApellidoB());
             }
             else{
                 throw new  Exception("El basculista se encuentra habilitado");

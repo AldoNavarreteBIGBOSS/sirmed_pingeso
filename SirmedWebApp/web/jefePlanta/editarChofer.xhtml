@@ -10,9 +10,8 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
 
                     <p:panel header="Re-activar chofer" footer="Ingrese el RUT del chofer que desea volver a activar">
@@ -26,23 +25,7 @@
                         <p:dataTable id="choferes" var="chf" value="#{mChofer.choferes}" rowKey="#{chf.rutChofer}" selection="#{mChofer.choferSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                             <p:ajax event="rowSelect" listener="#{mChofer.setearChofer()}" update=":form"/>
                             <p:ajax event="rowUnselect"/> 
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
 
-                    <p:dataTable id="choferes" var="chf" value="#{mChofer.choferes}" rowKey="#{chf.rutChofer}" selection="#{mChofer.choferSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
-                        <p:ajax event="rowSelect" listener="#{mChofer.setearChofer()}" update=":form"/>
-                        <p:ajax event="rowUnselect"/> 
-                        <f:facet name="header">  
-                            Choferes  
-                        </f:facet>
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                             <p:column headerText="RUT">  
                                 #{chf.rutChofer}  
                             </p:column>  
@@ -96,90 +79,9 @@
                         </p:confirmDialog>
                     </p:panel>
 
-=======
-                        <p:column headerText="RUT">  
-                        #{chf.rutChofer}  
-                        </p:column>  
 
-                        <p:column headerText="Nombre">  
-                        #{chf.nombreChofer}  
-                        </p:column> 
 
-=======
-                        <p:column headerText="RUT">  
-                        #{chf.rutChofer}  
-                        </p:column>  
-
-                        <p:column headerText="Nombre">  
-                        #{chf.nombreChofer}  
-                        </p:column> 
-
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
-                        <p:column headerText="RUT">  
-                        #{chf.rutChofer}  
-                        </p:column>  
-
-                        <p:column headerText="Nombre">  
-                        #{chf.nombreChofer}  
-                        </p:column> 
-
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-                        <p:column headerText="Apellido">  
-                        #{chf.apellidoChofer}  
-                        </p:column> 
-                        
-                        <p:column headerText="Municipalidad">  
-                        #{chf.nombreMunicipalidad.nombreMunicipalidad}  
-                        </p:column> 
-                        
-                        <p:column headerText="Telefono">  
-                        #{chf.telefonoChofer}  
-                        </p:column> 
-                        
-                        <p:column headerText="Email">  
-                        #{chf.mailChofer}  
-                        </p:column> 
-                        
-                        <f:facet name="footer">  
-                            Seleccione el chofer a editar
-                        </f:facet>  
-                    </p:dataTable>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-
-                    <p:panelGrid columns="2" id="gret">
-                        <f:facet name="header">
-                            Editar chofer
-                        </f:facet>
-                        <p:outputLabel value="RUT: "/>
-                        <p:outputLabel value="#{mChofer.rut}"/>
-                        <p:outputLabel value="Nombre: "/>
-                        <p:inputText value="#{mChofer.nombre}"/>
-                        <p:outputLabel value="Apellido: "/>
-                        <p:inputText value="#{mChofer.apellido}"/>
-                        <p:outputLabel value="Telefono: "/>
-                        <p:inputText value="#{mChofer.telefono}"/>
-                        <h:outputLabel value="Municipalidad: "/>
-                        <p:selectOneMenu value="#{mChofer.municipalidad}">
-                            <f:selectItems value="#{mChofer.ms}" var="ch" itemLabel="#{ch.nombreMunicipalidad}" itemValue="#{ch.nombreMunicipalidad}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="Email: "/>
-                        <p:inputText value="#{chf.mailChofer}"/>
-                        <f:facet name="footer">
-                            <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
-                            <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
-                                <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mChofer.actualizarChofer()}" update=":form"/>  
-                                <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
-                            </p:confirmDialog>
-                        </f:facet>
-                        
-                    </p:panelGrid>
+                    
                 </h:form>   
                 </ui:define>
             </ui:composition>

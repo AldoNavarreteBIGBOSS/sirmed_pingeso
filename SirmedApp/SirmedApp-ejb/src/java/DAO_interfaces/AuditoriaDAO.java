@@ -5,6 +5,7 @@
 package DAO_interfaces;
 
 import entities.Auditoria;
+import java.util.Collection;
 
 /**
  *
@@ -12,4 +13,5 @@ import entities.Auditoria;
  */
 public interface AuditoriaDAO extends GenericDAO<Auditoria>{
     
+    public Collection<Auditoria> listarAuditoriaPorFecha(String fecha);
 }

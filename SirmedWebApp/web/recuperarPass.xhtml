@@ -17,20 +17,20 @@
                         <p:growl id="growl" showDetail="true" sticky="true" /> 
                         <p> </p>
                         <div align="center">
-                        <p:panelGrid columns="3" >
+                            <h:panelGrid columns="4"  cellpadding="10">
                             <p:outputLabel value="RUT : "/>
                             <p:inputText value="#{autentificador.rutRecuperar}"/>
                             <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update="ret"/>
+                            <p:button value="Volver" href="/faces/login.xhtml"/>
 
-                        </p:panelGrid>
+                        </h:panelGrid>
 
                         </div>
                     </h:form>
                 </p:panel>
                 <h:form>
-                    <p></p>
-                    <br></br>
-                    <p:button value="Volver" href="/faces/login.xhtml"/>
+                    
+                    
                 </h:form>
             </ui:define>
         </ui:composition>

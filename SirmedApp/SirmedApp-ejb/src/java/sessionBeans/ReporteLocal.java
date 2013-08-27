@@ -16,5 +16,9 @@ public interface ReporteLocal {
    
 
     public String generarReporteExcelFecha(String fecha1, String fecha2, String nombreArchivo, String municipalidad) throws Exception;
+
+    public String generarReporteExcelTemporada(String año, String temporada, String nombreArchivo, String municipalidad)throws Exception;
+
+    public void registrarReporte(String rut) throws Exception;
     
 }

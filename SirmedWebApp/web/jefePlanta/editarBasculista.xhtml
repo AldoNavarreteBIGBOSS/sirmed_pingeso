@@ -9,9 +9,8 @@
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
               <h:form id="form" prependId="false">
                     <p:panel header="Re-activar basculista" footer="Ingrese el RUT del basculista que desea volver a activar">
                         <h:panelGrid columns="3" cellpadding="10">
@@ -26,24 +25,7 @@
                     <p:panel id="panelito" header="Seleccionar basculista" footer="Seleccione el basculista a editar">
                         <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                             <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update=":form"/>
-                            <p:ajax event="rowUnselect" id="barras"/> 
-=======
-                <h:form id="form" prependId="false">
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
-                <h:form id="form" prependId="false">
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
-                <h:form id="form" prependId="false">
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-
-                    <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
-                        <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update=":form"/>
-                        <p:ajax event="rowUnselect"/> 
-                        <f:facet name="header">  
-                            Basculistas  
-                        </f:facet>
-
+                            <p:ajax event="rowUnselect" id="barras"/>
                         <p:column headerText="RUT">  
                         #{bas.rut}  
                         </p:column>  
@@ -64,13 +46,11 @@
                             Seleccione el basculista a editar
                         </f:facet>  
                     </p:dataTable>
-                    
-                    <br></br>
-                    <div align="center">
-                    <p:panelGrid columns="2" id="gret">
-                        <f:facet name="header">
-                            Editar Basculista
-                        </f:facet>
+
+                    </p:panel>
+                    <p:panel header="Editar chofer" footer="Edite los datos que estime convenientes">
+                    <h:panelGrid columns="2" cellpadding="10">
+
                         <p:outputLabel value="RUT: "/>
                         <p:outputLabel value="#{mBasculista.rut}"/>
                         <p:outputLabel value="Nombre: "/>
@@ -80,45 +60,18 @@
                         <p:outputLabel value="Telefono: "/>
                         <p:inputText value="#{mBasculista.telefono}"/>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+                    </h:panelGrid>
 
                         <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
                         <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
                             <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.actualizarBasculista()}" update=":form"/>  
                             <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
-                        </p:confirmDialog>
-                    </h:panelGrid>
+                        </p:confirmDialog>               
                     </p:panel>
-                    
-=======
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-                        <f:facet name="footer">
-                            <div align="center">
-                            <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
-                            <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
-                                <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mBasculista.actualizarBasculista()}" update=":form"/>  
-                                <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
-                            </p:confirmDialog>
-                            </div>
-                        </f:facet>
-                    </p:panelGrid>
-                    </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
-=======
->>>>>>> 1dac49ab06c9a5c4ff8881e0c915cdd40c173ad7
+
                 </h:form>   
                 </ui:define>
-            </ui:composition>
-        
+            </ui:composition> 
     </h:body>
 </html>
 

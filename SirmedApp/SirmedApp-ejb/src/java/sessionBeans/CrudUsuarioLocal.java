@@ -23,6 +23,10 @@ public interface CrudUsuarioLocal {
     public Usuario entregarPorRut(String rut) throws Exception;
 
     public boolean analizarContraseña(String rut, String oldPass) throws Exception;
+
+    public boolean analizarHabilitado(String rut) throws Exception;
+
+    public String entregarNombre(String rut) throws Exception;
     
     
     

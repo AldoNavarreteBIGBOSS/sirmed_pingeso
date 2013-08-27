@@ -4,7 +4,7 @@
  */
 package managedBeans;
 
-import auxiliar.ListaHorarios;
+
 import entities.JefePlanta;
 import entities.Usuario;
 import java.util.LinkedList;
@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import managedBeans.Pojo.JefePlantaPojo;
+import managedBeans.Pojo.ListasComboPojo;
 import sessionBeans.CrudJefePlantaLocal;
 import sessionBeans.CrudUsuarioLocal;
 import sessionBeans.InformeMailLocal;
@@ -33,12 +34,12 @@ public class MConfigJefePlanta {
     @EJB
     private InformeMailLocal informeMail;    
     @Inject
-    private MAutentificador autentificador;
+    private MAccionesGenerales ag;
     
     private String rutJP;
     private String hora1;
     private String hora2;
-    private List<ListaHorarios> listaHorarios;
+    private List<ListasComboPojo> listaHorarios;
     private JefePlantaPojo jefePlantaPojo;
     private MMessaegeController mc;
     
@@ -69,11 +70,11 @@ public class MConfigJefePlanta {
         this.hora2 = hora2;
     }
 
-    public List<ListaHorarios> getListaHorarios() {
+    public List<ListasComboPojo> getListaHorarios() {
         return listaHorarios;
     }
 
-    public void setListaHorarios(List<ListaHorarios> listaHorarios) {
+    public void setListaHorarios(List<ListasComboPojo> listaHorarios) {
         this.listaHorarios = listaHorarios;
     }
     
@@ -82,7 +83,7 @@ public class MConfigJefePlanta {
     @PostConstruct
     public void init(){
         mc = new MMessaegeController();
-        rutJP = autentificador.getUsername();
+        rutJP = ag.devolverUsername();
         
         cargarDatosJefe();
         cargarLista();
@@ -90,9 +91,9 @@ public class MConfigJefePlanta {
     
     private void cargarLista(){
     
-       listaHorarios = new LinkedList<ListaHorarios>();
+       listaHorarios = new LinkedList<ListasComboPojo>();
         for(Integer i = 1; i <= 24; i++){
-           ListaHorarios lh = new ListaHorarios();
+           ListasComboPojo lh = new ListasComboPojo();
            lh.setEtiqueta(i.toString()+":00");
            lh.setValor(i.toString());
            listaHorarios.add(lh);

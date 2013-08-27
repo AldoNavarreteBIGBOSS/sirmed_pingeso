@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Auditoria.findAll", query = "SELECT a FROM Auditoria a"),
     @NamedQuery(name = "Auditoria.findByIdAuditoria", query = "SELECT a FROM Auditoria a WHERE a.idAuditoria = :idAuditoria"),
-    @NamedQuery(name = "Auditoria.findByFechaAuditoria", query = "SELECT a FROM Auditoria a WHERE a.fechaAuditoria = :fechaAuditoria"),
+    @NamedQuery(name = "Auditoria.findByFechaAuditoria", query = "SELECT a FROM Auditoria a WHERE SUBSTRING(a.fechaAuditoria, 1, 10) = :fechaAuditoria ORDER BY a.fechaAuditoria DESC"),
     @NamedQuery(name = "Auditoria.findByDescripcionAuditoria", query = "SELECT a FROM Auditoria a WHERE a.descripcionAuditoria = :descripcionAuditoria"),
     @NamedQuery(name = "Auditoria.findByInfoAuditoria", query = "SELECT a FROM Auditoria a WHERE a.infoAuditoria = :infoAuditoria")})
 public class Auditoria implements Serializable {

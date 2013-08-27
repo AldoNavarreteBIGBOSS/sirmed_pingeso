@@ -11,6 +11,7 @@ import entities.Chofer;
 import entities.Municipalidad;
 import java.util.Collection;
 import java.util.LinkedList;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,6 +22,8 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CrudChofer implements CrudChoferLocal {
+    @EJB
+    private AuditoriaLocal auditoria;
 
     @PersistenceContext(unitName = "SirmedApp-ejbPU")
     private EntityManager em;
@@ -106,6 +109,7 @@ public class CrudChofer implements CrudChoferLocal {
         
         if(c != null){
             c.setHabilitado(false);
+            auditoria.registrarAccion("Chofer deshabilitado", c.getNombreChofer()+" "+c.getApellidoChofer()+" RUT: "+c.getRutChofer());
             cdao.update(c);
         }
         else{
@@ -149,6 +153,8 @@ public class CrudChofer implements CrudChoferLocal {
         if(chf != null){
             if(chf.getHabilitado() == false){
                 chf.setHabilitado(true);
+                auditoria.registrarAccion("Chofer Re-activado", chf.getNombreChofer()+" "+chf.getApellidoChofer()+" RUT: "+chf.getRutChofer());
+
                 cdao.update(chf);
             }
             else{

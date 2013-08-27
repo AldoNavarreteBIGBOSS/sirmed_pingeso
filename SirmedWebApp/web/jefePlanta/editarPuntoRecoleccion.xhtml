@@ -10,13 +10,11 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
-
+                    <p:panel header="Seleccionar punto de recolección" footer="Seleccione el punto de recoleccion que desee editar">
                     <p:dataTable id="precoleccion" var="pr" value="#{mPuntoRecoleccion.puntosRecoleccionPojo}" rowKey="#{pr.idTipo}" selection="#{mPuntoRecoleccion.prSeleccionadoPojo}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                         <p:ajax event="rowSelect" listener="#{mPuntoRecoleccion.setearPunto()}" update=":form"/>
                         <p:ajax event="rowUnselect"/> 
-                        <f:facet name="header">  
-                            Puntos de Recolección  
-                        </f:facet>
+                        
                         <p:column headerText="Identificador">  
                         #{pr.idTipo}  
                         </p:column>  
@@ -40,15 +38,13 @@
                         #{pr.descripcion}  
                         </p:column> 
 
-                        <f:facet name="footer">  
-                            Seleccione el punto de recolección a editar
-                        </f:facet>  
+                          
                     </p:dataTable>
+                        </p:panel>
                     <h:inputHidden value="#{mPuntoRecoleccion.idTipo}"/>
-                    <p:panelGrid columns="2" id="gret">
-                        <f:facet name="header">
-                            Editar Punto Recolección
-                        </f:facet>
+                    <p:panel header="Editar punto de recolección" footer="Edite los datos que estime convenientes">
+                    <h:panelGrid columns="2" id="gret" cellpadding="10">
+                        
                         
                         <p:outputLabel value="Nombre: "/>
                         <p:inputText value="#{mPuntoRecoleccion.nombrePunto}"/>
@@ -64,14 +60,15 @@
                         </p:selectManyCheckbox>  
                         <h:outputLabel value="Descripción: "/>
                         <h:inputTextarea value="#{mPuntoRecoleccion.descripcion}" />
-                        <f:facet name="footer">
+                        
                             <p:commandButton value="Editar" onclick="confirmation.show(); " type="button" ajax="false"/> 
                             <p:confirmDialog message="¿Realizar los cambios efectuados?" showEffect="fade" hideEffect="fade" header="Petición de confirmación" severity="alert" widgetVar="confirmation">  
                                 <p:commandButton value="Si" oncomplete="confirmation.hide()" actionListener="#{mPuntoRecoleccion.actualizarPunto()}" update=":form"/>  
                                 <p:commandButton value="No" onclick="confirmation.hide();" type="button" />   
                             </p:confirmDialog>
-                        </f:facet>
-                    </p:panelGrid>
+                        
+                    </h:panelGrid>
+                        </p:panel>
                 </h:form>   
             </ui:define>
         </ui:composition>

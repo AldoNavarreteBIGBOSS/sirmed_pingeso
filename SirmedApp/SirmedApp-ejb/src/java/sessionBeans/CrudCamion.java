@@ -13,6 +13,7 @@ import entities.Municipalidad;
 import entities.TipoCamion;
 import java.util.Collection;
 import java.util.LinkedList;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +24,8 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CrudCamion implements CrudCamionLocal {
+    @EJB
+    private AuditoriaLocal auditoria;
 
    @PersistenceContext(unitName = "SirmedApp-ejbPU")
     private EntityManager em;
@@ -102,6 +105,7 @@ public class CrudCamion implements CrudCamionLocal {
        
        if(c != null){
            c.setHabilitado(false);
+           auditoria.registrarAccion("Camión deshabilitado", patente);
            cdao.update(c);
        }
        else{
@@ -141,6 +145,7 @@ public class CrudCamion implements CrudCamionLocal {
        if(c != null){
            if(c.getHabilitado()==false){
                c.setHabilitado(true);
+                auditoria.registrarAccion("Camión Re-activado", patente);
                cdao.update(c);
            }
            else{
@@ -151,4 +156,8 @@ public class CrudCamion implements CrudCamionLocal {
            throw new Exception("No existe el camión");
        }
    }
+
+    public void persist(Object object) {
+        em.persist(object);
+    }
 }

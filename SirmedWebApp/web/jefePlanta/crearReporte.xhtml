@@ -12,9 +12,7 @@
                 <h:form id="reto">
                     <p:growl id="growl" showDetail="true" sticky="true"/> 
                     <h:form>
-
                         <p:panel header="Selección de fechas" footer="Seleccione entre las fechas para generar un reporte">
-
                             <h:panelGrid id="panel1" columns="2" cellpadding="10">
                                 <p:outputLabel value="Fecha desde:"/>
                                 <p:calendar value="#{mReportes.fechaInicio}" pattern="yyyy-MM-dd" required="true" label="Fecha de Inicio"/>
@@ -27,18 +25,12 @@
                                 </p:selectOneMenu>  
                                 <p:commandButton value="Pre-visualizar" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros" style="width: 187px"/>
                                 <h:panelGroup/>
-                                <p:commandButton value="Descargar reporte" action="#{mReportes.generarReporteFechasDescarga()}">
-                                   
+                                <p:commandButton value="Descargar reporte"   actionListener="#{mReportes.generarReporteFechasDescarga()}" update=":reto:growl " onclick="PrimeFaces.monitorDownload(start, stop)" ajax="false">
+                                    <p:fileDownload  value="#{mReportes.file}"/>
                                 </p:commandButton>
-                                
                                 <p:inputText id="archivo" value="#{mReportes.nombreArchivo}"/>
                                 <p:watermark for="archivo" value="Nombre de reporte"/>
-                                    
                             </h:panelGrid>
-
-
-
-
                         </p:panel> 
                     </h:form>
                     <p:panel header="Vista previa" footer="Estos son los registros resultantes">
@@ -86,10 +78,12 @@
                                 <f:selectItems var="mun2" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun2.nombreMunicipalidad}" itemValue="#{mun2.nombreMunicipalidad}"/>
                             </p:selectOneMenu> 
                             <p:commandButton value="Pre-visualizar" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros" style="width: 187px"/>
-                                <h:panelGroup/>
-                                <p:commandButton value="Descargar reporte"/>
-                                <p:inputText id="archivoTemp" value="#{mReportes.nombreArchivo}"/>
-                                <p:watermark for="archivoTemp" value="Nombre de reporte"/>
+                            <h:panelGroup/>
+                            <p:commandButton value="Descargar reporte" actionListener="#{mReportes.generarReportePorTemporada()}" update=":reto:growl" onclick="PrimeFaces.monitorDownload(start, stop)" ajax="false">
+                                <p:fileDownload  value="#{mReportes.file}"/>
+                            </p:commandButton>
+                            <p:inputText id="archivoTemp" value="#{mReportes.nombreArchivo}"/>
+                            <p:watermark for="archivoTemp" value="Nombre de reporte"/>
                         </h:panelGrid>                            
                     </p:panel>  
                 </h:form>

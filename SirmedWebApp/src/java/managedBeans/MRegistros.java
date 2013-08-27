@@ -40,7 +40,7 @@ public class MRegistros implements Serializable{
     @EJB
     private CrudChoferLocal crudChofer;
     @Inject
-    private MAutentificador mAutentificador;
+    private MAccionesGenerales ag;
     
     private String rutChofer;
     private String rutBasculista;
@@ -54,14 +54,13 @@ public class MRegistros implements Serializable{
     private Collection<Camion> camiones;
     private Collection<PuntoRecoleccion> puntosRecoleccion;
     private Collection<PuntoRecoleccion> puntosRecoleccionSeleccionados;
-    private MAccionesGenerales ag;
     private MMessaegeController mc;
     
     @PostConstruct
    public void init(){
        mc = new MMessaegeController();
-       ag = new MAccionesGenerales();
-       rutBasculista = mAutentificador.getUsername();
+      
+       rutBasculista = ag.devolverUsername();
        listaMunicipalidades = municipalidades.listaMunicipalidades();    
    }
 

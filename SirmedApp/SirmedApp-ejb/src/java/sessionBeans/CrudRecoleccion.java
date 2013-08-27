@@ -14,6 +14,7 @@ import entities.TipoRecoleccion;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,9 +25,12 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CrudRecoleccion implements CrudRecoleccionLocal {
+    @EJB
+    private AuditoriaLocal auditoria;
 
     @PersistenceContext(unitName = "SirmedApp-ejbPU")
     private EntityManager em;
+    
     
     
     @Override
@@ -51,7 +55,8 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
             for (TipoRecoleccion tRec : ctr) {
                 tRec.getPuntoRecoleccionCollection().add(pr);
             }
-            prdao.insert(pr);           
+            prdao.insert(pr);      
+            auditoria.registrarAccion("Ingreso de punto de recolección", nombrePunto+" Dirección: "+direccion);
         }
         else{
             throw new Exception("Punto de recolección ya existe");
@@ -113,6 +118,8 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
             }
             pr.getTipoRecoleccionCollection().clear();
             prdao.delete(pr);
+            auditoria.registrarAccion("Eliminación de punto de recolección", pr.getNombrePunto()+" Dirección: "+pr.getDireccionPunto());
+
             
         }
         else{

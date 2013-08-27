@@ -10,13 +10,11 @@
        <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
-
+                    <p:panel header="Eliminar chofer" footer="Seleccione el chofer que desee eliminar">
                     <p:dataTable id="choferes" var="chf" value="#{mChofer.choferes}" rowKey="#{chf.rutChofer}" selection="#{mChofer.choferSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
                         <p:ajax event="rowSelect" listener="#{mChofer.setearChofer()}" update=":form"/>
                         <p:ajax event="rowUnselect"/> 
-                        <f:facet name="header">  
-                            Choferes  
-                        </f:facet>
+                        
 
                         <p:column headerText="RUT">  
                         #{chf.rutChofer}  
@@ -51,7 +49,7 @@
                         </f:facet>
                     </p:dataTable>
 
-                    
+                    </p:panel> 
                 </h:form>   
                 </ui:define>
             </ui:composition>

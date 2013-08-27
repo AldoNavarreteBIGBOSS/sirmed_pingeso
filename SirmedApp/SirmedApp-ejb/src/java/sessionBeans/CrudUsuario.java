@@ -137,4 +137,41 @@ public class CrudUsuario implements CrudUsuarioLocal {
         }
         
     }
+    
+    @Override
+    public boolean analizarHabilitado(String rut)throws Exception{
+    
+        DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
+        UsuarioDAO udao = dF.getUsuarioDAO();
+        
+        try{
+            if(udao.estarHabilitado(rut)==true){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+    
+    }
+    
+    @Override
+    public String entregarNombre(String rut)throws Exception{
+        
+        String nombre = null;
+        
+        Usuario u = entregarPorRut(rut);
+        
+        if(u.getIdTipo().getIdTipo() == 1){
+            nombre = u.getBasculista().getNombreB() +" "+u.getBasculista().getApellidoB();
+        }
+        else{
+            nombre = u.getJefePlanta().getNombreJp() +" "+ u.getJefePlanta().getApellidoJp();
+        }
+        
+        return nombre;
+    }
 }
