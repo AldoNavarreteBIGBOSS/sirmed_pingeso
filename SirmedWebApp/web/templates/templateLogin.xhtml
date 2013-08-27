@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -20,9 +21,11 @@
                             <p:growl id="growl" showDetail="true" sticky="true" /> 
                             <p:panel header="Iniciar Sesión"  footer="Ingrese sus datos para ingresar a SIRMED" style="width: 500px; margin-top: 60px;">
                                 <h:panelGrid  styleClass="panelLogin" columns="2" cellpadding="10">
-                                    <p:outputLabel value="Usuario: "/>
-                                    <p:inputText value="#{mVerificador.username}" required="true" label="Usuario"/>
-                                    <p:outputLabel value="Contraseña: "/>
+                                    <p:outputLabel value="Usuario : " for="userName"/>
+                                    <p:inputText id="userName" value="#{mVerificador.username}" required="true" label="Usuario">
+                                        <f:validator validatorId="RutValidator"/>
+                                    </p:inputText>
+                                    <p:outputLabel value="Contraseña : "/>
                                     <p:inputText value="#{mVerificador.password}" required="true" type="password" label="Contraseña"/>
                                     <p:commandButton action="#{mVerificador.login()}"  value="Ingresar" update="growl"/>
                                     <a href="#{request.contextPath}/faces/recuperarPass.xhtml">Olvidé mi contraseña</a>
