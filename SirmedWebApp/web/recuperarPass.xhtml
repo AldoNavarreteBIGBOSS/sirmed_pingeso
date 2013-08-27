@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     
     <h:body>
         <ui:composition template="/templates/templateLogin.xhtml">
@@ -18,8 +19,10 @@
                         <p> </p>
                         <div align="center">
                             <h:panelGrid columns="4"  cellpadding="10">
-                            <p:outputLabel value="RUT : "/>
-                            <p:inputText value="#{autentificador.rutRecuperar}"/>
+                                <p:outputLabel value="RUT : " for="rutRecuperar"/>
+                                <p:inputText value="#{autentificador.rutRecuperar}" id="rutRecuperar" required="true" label="RUT">
+                                    <f:validator validatorId="RutValidator"/>
+                                </p:inputText>
                             <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update="ret"/>
                             <p:button value="Volver" href="/faces/login.xhtml"/>
 

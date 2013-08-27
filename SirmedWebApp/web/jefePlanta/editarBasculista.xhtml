@@ -15,7 +15,9 @@
                     <p:panel header="Re-activar basculista" footer="Ingrese el RUT del basculista que desea volver a activar">
                         <h:panelGrid columns="3" cellpadding="10">
                             <p:outputLabel value="RUT :"/>
-                            <p:inputText value="#{mBasculista.rutActivar}"/>
+                            <p:inputText value="#{mBasculista.rutActivar}"  label="RUT"/>
+                                
+                            
                             <p:commandButton value="Activar" action="#{mBasculista.activarRut()}" update="growl"/>
                         </h:panelGrid>
                     </p:panel>
