@@ -24,7 +24,7 @@
                         <h:outputLabel value="Apellido: "/>
                         <p:inputText value="#{mBasculista.apellido}" />
                         <h:outputLabel value="Telefono: "/>
-                        <p:inputText value="#{mBasculista.telefono}" required="true" label="Telefono"/>
+                        <p:inputMask value="#{mBasculista.telefono}" required="true" label="Telefono" mask="(9)-9999999"/>
                         <h:outputLabel value="Email: "/>
                         <p:inputText value="#{mBasculista.email}" required="true" label="Email"/>
                     </h:panelGrid>

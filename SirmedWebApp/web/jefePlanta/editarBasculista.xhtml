@@ -50,17 +50,17 @@
                     </p:dataTable>
 
                     </p:panel>
-                    <p:panel header="Editar chofer" footer="Edite los datos que estime convenientes">
+                    <p:panel header="Editar basculista" footer="Edite los datos que estime convenientes">
                     <h:panelGrid columns="2" cellpadding="10">
 
                         <p:outputLabel value="RUT: "/>
                         <p:outputLabel value="#{mBasculista.rut}"/>
                         <p:outputLabel value="Nombre: "/>
-                        <p:inputText value="#{mBasculista.nombre}"/>
+                        <p:inputText value="#{mBasculista.nombre}" />
                         <p:outputLabel value="Apellido: "/>
                         <p:inputText value="#{mBasculista.apellido}"/>
                         <p:outputLabel value="Telefono: "/>
-                        <p:inputText value="#{mBasculista.telefono}"/>
+                        <p:inputMask value="#{mBasculista.telefono}" mask="(9)-9999999"/>
 
                     </h:panelGrid>
 

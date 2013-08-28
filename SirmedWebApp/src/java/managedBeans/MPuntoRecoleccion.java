@@ -144,7 +144,7 @@ public class MPuntoRecoleccion {
     
     public void nuevoPunto() {
         try {
-            crudRecoleccion.crearPuntoRecoleccion(direccion.toUpperCase(), nombrePunto, descripcion, municipalidad, tipoRecoleccionSeleccionados);
+            crudRecoleccion.crearPuntoRecoleccion(direccion.toUpperCase(), nombrePunto.toUpperCase(), descripcion, municipalidad, tipoRecoleccionSeleccionados);
             mc.mensajeRetroalimentacion("Operacion", "Exitosa");
             resetCampos();
         } catch (Exception e) {
@@ -155,8 +155,8 @@ public class MPuntoRecoleccion {
     public void actualizarPunto() {
         
         try {
-            System.out.println(tipoRecoleccionSeleccionados);
-            crudRecoleccion.editarPuntoRecoleccion(idTipo, direccion.toUpperCase(), nombrePunto, descripcion, municipalidad, tipoRecoleccionSeleccionados);
+            
+            crudRecoleccion.editarPuntoRecoleccion(idTipo, direccion.toUpperCase(), nombrePunto.toUpperCase(), descripcion, municipalidad, tipoRecoleccionSeleccionados);
             resetCampos();
             ag.actualizarPagina();
         } catch (Exception ex) {

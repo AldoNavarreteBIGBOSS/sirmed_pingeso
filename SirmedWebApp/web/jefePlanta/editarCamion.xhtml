@@ -17,7 +17,8 @@
                     <p:panel header="Re-activar camión" footer="Ingrese la patente del camión que desea volver a activar">
                         <h:panelGrid columns="3" cellpadding="10">
                             <p:outputLabel value="Patente :"/>
-                            <p:inputText value="#{mCamiones.patenteActivar}"/>
+                            <p:inputMask id="patenteCamion" value="#{mCamiones.patenteActivar}" style="width: 270px" mask="a*-a*-99" maxlength="8"/>
+                            <p:watermark for="patenteCamion" value="Ejemplo: AA-BB-99"/>
                             <p:commandButton value="Activar" action="#{mCamiones.activarCamion()}" update="growl"/>
                         </h:panelGrid>
                     </p:panel>

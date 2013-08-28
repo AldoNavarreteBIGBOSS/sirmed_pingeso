@@ -135,8 +135,8 @@ public class MCamiones {
     public void nuevoCamion(){
         
         try{       
-            crudCamion.crearCamion(patente, municipalidad, TipoCamion);
-            mc.mensajeRetroalimentacion( "Operación Existosa", "Camión "+patente+" ingresado");
+            crudCamion.crearCamion(patente.toUpperCase(), municipalidad, TipoCamion);
+            mc.mensajeRetroalimentacion( "Operación Existosa", "Camión "+patente.toUpperCase()+" ingresado");
             resetCampos();
         }
         catch(Exception e){
@@ -147,7 +147,7 @@ public class MCamiones {
     public void actualizarCamion(){
         try {
             patente = camionSeleccionado.getPatente();
-            crudCamion.editarCamion(patente, municipalidad, TipoCamion);
+            crudCamion.editarCamion(patente.toUpperCase(), municipalidad, TipoCamion);
             resetCampos();
             ag.actualizarPagina();
         } catch (Exception e) {
@@ -159,7 +159,7 @@ public class MCamiones {
                    
         try {
             setearCamion();
-            crudCamion.eliminarCamion(patente);
+            crudCamion.eliminarCamion(patente.toUpperCase());
             ag.actualizarPagina();
         } catch (Exception e) {
             Logger.getLogger(MBasculista.class.getName()).log(Level.SEVERE, null, e);
@@ -181,7 +181,7 @@ public class MCamiones {
     public void activarCamion(){
         
         try{
-            crudCamion.activarCamion(patenteActivar);
+            crudCamion.activarCamion(patenteActivar.toUpperCase());
             ag.actualizarPagina();
         }
         catch(Exception e){

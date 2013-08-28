@@ -122,8 +122,8 @@ public class MBasculista {
     public void nuevoBasculista() {
         try {
             crudUsuario.crearUsuario(rut, email);
-            crudBasculista.crearBasculista(rut, nombre, apellido, telefono);
-            mensajeria.enviarMensajeBienvenida(email, rut, nombre+" "+apellido);
+            crudBasculista.crearBasculista(rut, nombre.toUpperCase(), apellido.toUpperCase(), telefono);
+            mensajeria.enviarMensajeBienvenida(email, rut, nombre.toUpperCase()+" "+apellido.toUpperCase());
             mc.mensajeRetroalimentacion("Operación Exitosa", null);
             resetCampos();
         } catch (Exception ex) {
@@ -135,7 +135,7 @@ public class MBasculista {
 
         try {
             rut = basculistaSeleccionado.getRut();
-            crudBasculista.editarBasculista(rut, nombre, apellido, telefono);
+            crudBasculista.editarBasculista(rut, nombre.toUpperCase(), apellido.toUpperCase(), telefono);
             resetCampos();
             ag.actualizarPagina();
         } catch (Exception e) {

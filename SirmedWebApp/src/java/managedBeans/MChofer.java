@@ -151,7 +151,7 @@ public class MChofer {
     public void nuevoChofer() {
 
         try {
-            crudChofer.crearChofer(rut, nombre, apellido, telefono, email, municipalidad);
+            crudChofer.crearChofer(rut, nombre.toUpperCase(), apellido.toUpperCase(), telefono, email, municipalidad);
             mc.mensajeRetroalimentacion("Operación Exitosa", "Chofer ingresado");
             resetCampos();
         } catch (Exception e) {
@@ -164,7 +164,7 @@ public class MChofer {
 
         try {
             rut = choferSeleccionado.getRutChofer();
-            crudChofer.editarChofer(rut, nombre, apellido, telefono, email, municipalidad);
+            crudChofer.editarChofer(rut, nombre.toUpperCase(), apellido.toUpperCase(), telefono, email, municipalidad);
             resetCampos();
             ag.actualizarPagina();
         } catch (Exception e) {

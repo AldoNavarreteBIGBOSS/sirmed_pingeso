@@ -18,7 +18,7 @@
                          <p:outputLabel value="Apellido: "/>
                          <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.apellidoJP}"/>
                          <p:outputLabel value="Telefono: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.telefonoJP}" required="true" label="Telefono"/>
+                         <p:inputMask value="#{mConfigJefePlanta.jefePlantaPojo.telefonoJP}" required="true" label="Telefono" mask="(9)-9999999"/>
                          <p:outputLabel value="Email: "/>
                          <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.emailJP}" required="true" label="Email"/>
                      </h:panelGrid>
