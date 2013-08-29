@@ -28,7 +28,7 @@
                                 <p:commandButton value="Descargar reporte"   actionListener="#{mReportes.generarReporteFechasDescarga()}" update=":reto:growl " onclick="PrimeFaces.monitorDownload(start, stop)" ajax="false">
                                     <p:fileDownload  value="#{mReportes.file}"/>
                                 </p:commandButton>
-                                <p:inputText id="archivo" value="#{mReportes.nombreArchivo}" required="true" label="Falta Nombre de Archivo"/>
+                                <p:inputText id="archivo" value="#{mReportes.nombreArchivo}"/>
                                 <p:watermark for="archivo" value="Nombre de reporte"/>
                             </h:panelGrid>
                         </p:panel> 
