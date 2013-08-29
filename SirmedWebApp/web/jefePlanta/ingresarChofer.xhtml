@@ -14,21 +14,24 @@
                     <p:panel header="Ingresar chofer" footer="Ingrese los datos en las casillas correspondientes">
                     <h:panelGrid id="panel" columns="2" cellpadding="10">  
                         <h:outputLabel value="Rut: " for="rutChofer"/>
-                        <p:inputText value="#{mChofer.rut}" required="true" label="RUT" id="rutChofer">
+                        <h:panelGroup>
+                        <p:inputText value="#{mChofer.rut}" label="RUT" id="rutChofer" >
                             <f:validator validatorId="RutValidator"/>
                         </p:inputText> 
+                        <p:watermark for="rutChofer" value="Ej: 12345678"/>
+                        </h:panelGroup>
                         <h:outputLabel value="Nombre: "/>
-                        <p:inputText value="#{mChofer.nombre}" required="true" label="Nombre"/>
-                        <h:outputLabel value="Apellido: "/>
-                        <p:inputText value="#{mChofer.apellido}" />
+                        <p:inputText value="#{mChofer.nombre}" required="true" label="Falta Nombre"/>
+                        <h:outputLabel value="Apellido: " />
+                        <p:inputText value="#{mChofer.apellido}" required="true" label="Falta Apellido" />
                         <h:outputLabel value="Municipalidad: "/>
                         <p:selectOneMenu value="#{mChofer.municipalidad}">
                             <f:selectItems value="#{mChofer.ms}" var="chf" itemLabel="#{chf.nombreMunicipalidad}" itemValue="#{chf.nombreMunicipalidad}"/>
                         </p:selectOneMenu>
                         <h:outputLabel value="Telefono: "/>
-                        <p:inputMask value="#{mChofer.telefono}" required="true" label="Telefono" mask="(9)-9999999"/>
+                        <p:inputMask value="#{mChofer.telefono}" required="true" label="Falta Telefono" mask="(9)-9999999"/>
                         <h:outputLabel value="Email: "/>
-                        <p:inputText value="#{mChofer.email}" required="true" label="Email"/>
+                        <p:inputText value="#{mChofer.email}" required="true" label="Falta Email"/>
                     </h:panelGrid>
                     <p:commandButton  value="Ingresar"  actionListener="#{mChofer.nuevoChofer()}" icon="ui-icon-check" update="ret"/>   
                     </p:panel>

@@ -51,18 +51,17 @@ public class UsuarioDAO_impl extends GenericDAO_impl<Usuario> implements Usuario
     @Override
     public boolean estarHabilitado(String rut)throws Exception{
     
-        try{
+        try {
             Usuario u = buscarPorRut(rut);
-            if(u.getHabilitado()==true){
+            if (u.getHabilitado() == true) {
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
-        }
-        catch(Exception  e){
+        } catch (Exception e) {
             throw new Exception("No existe el usuario");
         }
+
     
     }
     

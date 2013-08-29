@@ -12,21 +12,26 @@
 
 
               <h:form id="form" prependId="false">
+                  <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <p:panel header="Re-activar basculista" footer="Ingrese el RUT del basculista que desea volver a activar">
                         <h:panelGrid columns="3" cellpadding="10">
                             <p:outputLabel value="RUT :"/>
-                            <p:inputText value="#{mBasculista.rutActivar}"  label="RUT"/>
-                                
-                            
+                            <h:panelGroup>
+                                <p:inputText value="#{mBasculista.rutActivar}" id="rutBasculista" label="RUT">
+                                    
+                                </p:inputText>
+                            <p:watermark for="rutBasculista" value="Ej: 12345678"/>
+                            </h:panelGroup>
                             <p:commandButton value="Activar" action="#{mBasculista.activarRut()}" update="growl"/>
                         </h:panelGrid>
                     </p:panel>
-                        
+              </h:form>
+                <h:form id="form2">
                
-                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+                    
                     <p:panel id="panelito" header="Seleccionar basculista" footer="Seleccione el basculista a editar">
                         <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
-                            <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update=":form"/>
+                            <p:ajax event="rowSelect" listener="#{mBasculista.setearBasculista()}" update=":form2:pnlBas"/>
                             <p:ajax event="rowUnselect" id="barras"/>
                         <p:column headerText="RUT">  
                         #{bas.rut}  
@@ -50,17 +55,17 @@
                     </p:dataTable>
 
                     </p:panel>
-                    <p:panel header="Editar basculista" footer="Edite los datos que estime convenientes">
+                    <p:panel header="Editar basculista" footer="Edite los datos que estime convenientes" id="pnlBas">
                     <h:panelGrid columns="2" cellpadding="10">
 
                         <p:outputLabel value="RUT: "/>
                         <p:outputLabel value="#{mBasculista.rut}"/>
                         <p:outputLabel value="Nombre: "/>
-                        <p:inputText value="#{mBasculista.nombre}" />
+                        <p:inputText value="#{mBasculista.nombre}" required="true" label="Falta Nombre"/>
                         <p:outputLabel value="Apellido: "/>
-                        <p:inputText value="#{mBasculista.apellido}"/>
+                        <p:inputText value="#{mBasculista.apellido}" required="true" label="Falta Apellido"/>
                         <p:outputLabel value="Telefono: "/>
-                        <p:inputMask value="#{mBasculista.telefono}" mask="(9)-9999999"/>
+                        <p:inputMask value="#{mBasculista.telefono}" mask="(9)-9999999" required="true" label="Falta Telefono"/>
 
                     </h:panelGrid>
 

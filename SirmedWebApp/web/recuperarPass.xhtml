@@ -20,9 +20,12 @@
                         <div align="center">
                             <h:panelGrid columns="4"  cellpadding="10">
                                 <p:outputLabel value="RUT : " for="rutRecuperar"/>
-                                <p:inputText value="#{autentificador.rutRecuperar}" id="rutRecuperar" required="true" label="RUT">
+                                <h:panelGroup>
+                                <p:inputText value="#{autentificador.rutRecuperar}" id="rutRecuperar" label="RUT">
                                     <f:validator validatorId="RutValidator"/>
                                 </p:inputText>
+                                <p:watermark for="rutRecuperar" value="Ej: 12345678"/>
+                                </h:panelGroup>
                             <p:commandButton value="Enviar" action="#{autentificador.recuperarPassword()}" update="ret"/>
                             <p:button value="Volver" href="/faces/login.xhtml"/>
 

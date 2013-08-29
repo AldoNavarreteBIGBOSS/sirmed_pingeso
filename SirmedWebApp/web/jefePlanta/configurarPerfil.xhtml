@@ -8,34 +8,34 @@
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
              <ui:define name="content">
-                 <h:form>
+                 <h:form id="form">
                  <p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" /> 
                  <h:inputHidden value="#{mConfigJefePlanta.jefePlantaPojo.rutJP}"/>
                  <p:panel header="Configuración de datos personales" footer="Puede editar sus datos personales">
                      <h:panelGrid columns="2" cellpadding="10">
                          <p:outputLabel value="Nombre: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.nombreJP}" required="true" label="Nombre"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.nombreJP}" required="true" label="Falta Nombre"/>
                          <p:outputLabel value="Apellido: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.apellidoJP}"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.apellidoJP}" required="true" label="Falta Apellido"/>
                          <p:outputLabel value="Telefono: "/>
-                         <p:inputMask value="#{mConfigJefePlanta.jefePlantaPojo.telefonoJP}" required="true" label="Telefono" mask="(9)-9999999"/>
+                         <p:inputMask value="#{mConfigJefePlanta.jefePlantaPojo.telefonoJP}" required="true" label="Falta Telefono" mask="(9)-9999999"/>
                          <p:outputLabel value="Email: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.emailJP}" required="true" label="Email"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.emailJP}" required="true" label="Falta Email"/>
                      </h:panelGrid>
                      <p:commandButton value="Guardar" action="#{mConfigJefePlanta.editarDatosPersonales()}" update="growl"/>
                  </p:panel>
                  </h:form>
                  <h:form>
-                     <p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" /> 
-                     <p:panel header="Configuración de contraseña" footer="Puede cambiar su contraseña">
+                    
+                     <p:panel header="Configuración de contraseña" footer="Puede cambiar su contraseña" id="panel">
                      <h:panelGrid columns="1" cellpadding="10">
                          <p:outputLabel value="Contraseña antigua: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.antiguoPass}" required="true" label="Contraseña antigua" type="password"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.antiguoPass}" type="password"/>
                          <p:outputLabel value="Nueva contraseña: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.newPass}" required="true" label="Contraseña nueva" type="password"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.newPass}"  type="password"/>
                          <p:outputLabel value="Confirmar nueva contraseña: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.confNewPass}"  required="true" label="Confirmación" type="password"/>
-                         <p:commandButton value="Confirmar"  action="#{mConfigJefePlanta.cambiarContraseña()}" update="growl"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.confNewPass}"   type="password"/>
+                         <p:commandButton value="Confirmar"  action="#{mConfigJefePlanta.cambiarContraseña()}" update=":form:growl panel"/>
                      </h:panelGrid>
                          
                  </p:panel>

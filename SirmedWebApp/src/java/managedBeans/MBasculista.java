@@ -146,13 +146,19 @@ public class MBasculista {
 
     public void borrarBasculista() {
 
+        rut = basculistaSeleccionado.getRut();
+        if(rut != null){
         try {
-            rut = basculistaSeleccionado.getRut();
+            
             crudBasculista.eliminarBasculista(rut);
             crudUsuario.eliminarUsuario(rut);
             ag.actualizarPagina();
         } catch (Exception ex) {
             mc.mensajeRetroalimentacion("Error", ex.getMessage());
+        }
+        }
+        else{
+            mc.mensajeRetroalimentacion("Error", "Debe seleccionar basculista");
         }
     }
 

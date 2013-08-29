@@ -136,6 +136,7 @@ public class MConfigJefePlanta {
         
                 crudJefePlanta.actualizarDatosPersonales(jefePlantaPojo.getRutJP(), jefePlantaPojo.getNombreJP(), jefePlantaPojo.getApellidoJP(), jefePlantaPojo.getTelefonoJP(), jefePlantaPojo.getEmailJP());
                 mc.mensajeRetroalimentacion("Operación Exitosa", "Datos actualizados");
+               
             
         }
         catch(Exception e){
@@ -149,6 +150,7 @@ public class MConfigJefePlanta {
             if(jefePlantaPojo.getNewPass().compareTo(jefePlantaPojo.getConfNewPass())==0){
                 crudUsuario.actualizarUsuario(jefePlantaPojo.getRutJP(), jefePlantaPojo.getNewPass());
                 mc.mensajeRetroalimentacion("Operación Exitosa", "Nueva contraseña establecida");
+                 resetCampos();
             }
             else{
                 mc.mensajeRetroalimentacion("Error", "Las contraseñas no son iguales");
@@ -162,5 +164,8 @@ public class MConfigJefePlanta {
         catch(Exception e){
             mc.mensajeRetroalimentacion("Error", e.getMessage());
         }
+    }
+    public void resetCampos(){
+        jefePlantaPojo = null;
     }
 }

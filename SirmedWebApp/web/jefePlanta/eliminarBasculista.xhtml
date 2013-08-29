@@ -10,6 +10,7 @@
         <ui:composition template="/templates/templateGeneral.xhtml">
             <ui:define name="content">
                 <h:form id="form" prependId="false">
+                     <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <p:panel header="Eliminar basculista" footer="Seleccione el basculista que desee eliminar">
                         <p:dataTable id="basculistas" var="bas" value="#{mBasculista.basculista}" rowKey="#{bas.rut}" selection="#{mBasculista.basculistaSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">               
 
@@ -31,7 +32,7 @@
 
 
                             <f:facet name="footer">
-                                <p:commandButton type="button" onclick="cd.show();" value="Eliminar" />
+                                <p:commandButton type="button" onclick="cd.show();" value="Eliminar"/>
                                 <p:dialog  header="Petición de confirmación"  widgetVar="cd" resizable="false" footer="¿Esta seguro de continuar?" draggable="false" >                               
                                     <p:commandButton  style="width: 70px" value="Si"  actionListener="#{mBasculista.borrarBasculista()}" oncomplete="confirmation.hide()"/>
                                     <p:commandButton style="width: 70px" value="No" onclick="confirmation.hide();"/>

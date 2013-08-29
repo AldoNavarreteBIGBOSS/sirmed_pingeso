@@ -9,13 +9,13 @@
     <h:body>
         <ui:composition template="/templates/templateBasculista.xhtml">
             <ui:define name="content">
-                
+                <div id="msg"></div>
                 <h:form id="form">
                     <p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" /> 
                 <p:panel header="Seleccionar Municipalidad" footer="Seleccione la municipalidad de procedencia de la carga">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:outputLabel value="Municipalidad: "/>
-                            <p:selectOneMenu value="#{mRegistros.municipalidad}"  required="true"  label="Municipalidad">
+                            <p:selectOneMenu value="#{mRegistros.municipalidad}"  required="true" label="Falta Municipalidad ">
                                 <f:selectItem itemLabel="Municipalidad..." itemValue="#{null}"/>
                                 <f:selectItems var="mun" value="#{mRegistros.listaMunicipalidades}" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}" />
                                 <p:ajax listener="#{mRegistros.cargarDatos()}" update="reta"/>
@@ -25,9 +25,10 @@
                     <p:outputPanel id="reta">
                         <p:panel  header="Seleccionar Camión" footer="Seleccione la patente del camión que trae la carga e ingrese el peso">
                             <h:panelGrid columns="4" cellpadding="10">
-                                <p:outputLabel value="Camión: "/>
-                                <p:selectOneMenu  value="#{mRegistros.patenteCamion}"  style="width: 200px" required="true" label="Camión">
-                                     <f:selectItem itemLabel="Camión..." itemValue="#{null}"/>
+                                <h:outputLabel value="Camión: " />
+                                <p:selectOneMenu  value="#{mRegistros.patenteCamion}" style="width: 200px" required="true" label="Falta Camión " >
+                                    
+                                    <f:selectItem itemLabel="Camión..." itemValue="#{null}"  />
                                     <f:selectItems var="cam" value="#{mRegistros.camiones}" itemLabel="#{cam.patente}" itemValue="#{cam.patente}"/>
                                 </p:selectOneMenu>
                                 <p:outputLabel value="Pesaje Camión (Ton.): "/>
@@ -37,7 +38,7 @@
                         <p:panel header="Seleccionar Chofer" footer="Seleccione el chofer encargado de manejar la máquina">
                             <h:panelGrid columns="2" cellpadding="10">
                                <p:outputLabel value="Chofer: "/>
-                            <p:selectOneMenu  value="#{mRegistros.rutChofer}" required="true" label="Chofer">
+                               <p:selectOneMenu  value="#{mRegistros.rutChofer}"  required="true" label="Falta Chofer ">
                                 <f:selectItem itemLabel="Chofer..." itemValue="#{null}"/>
                                 <f:selectItems var="chf" value="#{mRegistros.choferes}" itemLabel="#{chf.nombreChofer} #{chf.apellidoChofer} RUT: #{chf.rutChofer}" itemValue="#{chf.rutChofer}"/>
                             </p:selectOneMenu>
@@ -45,8 +46,10 @@
                         </p:panel>                     
                         <p:panel header="Comentarios" footer="Si lo desea puede dejar un comentario u observación de la actividad">
                             <h:panelGrid columns="2" cellpadding="10">
-                                <p:outputLabel value="Descripción: "/>
+                                <p:outputLabel value="Descripción: " />
+                                
                                 <p:inputTextarea value="#{mRegistros.comentarioRegistro}"/>
+                                    
                             </h:panelGrid>                        
                         </p:panel>
                         <p:panel header="Seleccionar Puntos de Recolección" footer="Seleccione los puntos de recolección que visitó el camión">
@@ -55,7 +58,7 @@
                                     Selección de Puntos de Recolección  
                                 </f:facet>  
                                 
-                                <p:column selectionMode="multiple" style="width:7%"/>
+                                <p:column selectionMode="multiple" style="width:7%" />
                                 
                                 <p:column headerText="Identificador" style="width:25%">  
                                     #{pto.idPunto}  
@@ -77,7 +80,7 @@
                                     #{pto.descripcionPunto}  
                                 </p:column>                               
                             </p:dataTable>                            
-                            <p:commandButton value="Ingresar" action="#{mRegistros.crearRegistro()}" update="growl"/>
+                            <p:commandButton value="Ingresar" action="#{mRegistros.crearRegistro()}" update="growl" />
                                 
                            
                         </p:panel>                       

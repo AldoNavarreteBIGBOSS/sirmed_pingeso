@@ -84,10 +84,7 @@ public class MVerificador {
                 ag.goToPage("/faces/basculista/registros.xhtml");
             }
 
-        } else {
-            mc.mensajeRetroalimentacion("Advertencia", "Usuario no habilitado");
-        }
-
+        } 
     }
 
     public MVerificador() {

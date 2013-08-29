@@ -14,10 +14,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 
-/**
- *
- * @author Carlos
- */
+
 @FacesValidator("RutValidator")
 public class RutValidator implements Validator {
    
@@ -41,13 +38,20 @@ public class RutValidator implements Validator {
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
-        if(value.toString().length()>8){
-        FacesMessage msg =
+        if (value.toString().length() > 8 || value.toString().length() < 7) {
+            FacesMessage msg =
                     new FacesMessage("El rut ingresado no es válido",
-                    "Largo máximo de 8 dígitos");
+                    "No concuerda la cantidad de dígitos");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
-        
+
+        }
+        if (value.toString().length() == 0) {
+            FacesMessage msg =
+                    new FacesMessage("El rut ingresado no es válido",
+                    "No puede quedar en blanco");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
         }
         
     }

@@ -21,12 +21,15 @@
                             <p:growl id="growl" showDetail="true" sticky="true" /> 
                             <p:panel header="Iniciar Sesión"  footer="Ingrese sus datos para ingresar a SIRMED" style="width: 500px; margin-top: 60px;">
                                 <h:panelGrid  styleClass="panelLogin" columns="2" cellpadding="10">
-                                    <p:outputLabel value="Usuario : " for="userName"/>
-                                    <p:inputText id="userName" value="#{mVerificador.username}" required="true" label="Usuario">
+                                    <p:outputLabel value="RUT usuario : " for="userName"/>
+                                    <h:panelGroup>
+                                    <p:inputText id="userName" value="#{mVerificador.username}" label="Usuario">
                                         <f:validator validatorId="RutValidator"/>
                                     </p:inputText>
+                                    <p:watermark for="userName" value="Ej: 12345678"/>
+                                    </h:panelGroup>
                                     <p:outputLabel value="Contraseña : "/>
-                                    <p:inputText value="#{mVerificador.password}" required="true" type="password" label="Contraseña"/>
+                                    <p:inputText value="#{mVerificador.password}"  type="password" />
                                     <p:commandButton action="#{mVerificador.login()}"  value="Ingresar" update="growl"/>
                                     <a href="#{request.contextPath}/faces/recuperarPass.xhtml">Olvidé mi contraseña</a>
                                 </h:panelGrid>

@@ -7,12 +7,9 @@ package managedBeans;
 import entities.Municipalidad;
 import entities.PuntoRecoleccion;
 import entities.TipoRecoleccion;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -144,8 +141,9 @@ public class MPuntoRecoleccion {
     
     public void nuevoPunto() {
         try {
+            String temp = nombrePunto.toUpperCase();
             crudRecoleccion.crearPuntoRecoleccion(direccion.toUpperCase(), nombrePunto.toUpperCase(), descripcion, municipalidad, tipoRecoleccionSeleccionados);
-            mc.mensajeRetroalimentacion("Operacion", "Exitosa");
+            mc.mensajeRetroalimentacion("Operacion Exitosa","Punto: "+temp+" ingresado" );
             resetCampos();
         } catch (Exception e) {
             mc.mensajeRetroalimentacion("Error", e.getMessage());

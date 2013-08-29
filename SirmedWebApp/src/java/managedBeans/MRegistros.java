@@ -41,6 +41,8 @@ public class MRegistros implements Serializable{
     private CrudChoferLocal crudChofer;
     @Inject
     private MAccionesGenerales ag;
+    @Inject
+    private MMessaegeController mc;
     
     private String rutChofer;
     private String rutBasculista;
@@ -54,11 +56,11 @@ public class MRegistros implements Serializable{
     private Collection<Camion> camiones;
     private Collection<PuntoRecoleccion> puntosRecoleccion;
     private Collection<PuntoRecoleccion> puntosRecoleccionSeleccionados;
-    private MMessaegeController mc;
+    
     
     @PostConstruct
    public void init(){
-       mc = new MMessaegeController();
+       
       
        rutBasculista = ag.devolverUsername();
        listaMunicipalidades = municipalidades.listaMunicipalidades();    
@@ -174,7 +176,7 @@ public class MRegistros implements Serializable{
             try{
                 registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, comentarioRegistro, puntosRecoleccionSeleccionados);             
                 resetCampos();
-                ag.actualizarPagina();                
+                mc.mensajeRetroalimentacion("Operación exitosa", "Registro ingresado");
             }
             catch(Exception e){
                 mc.mensajeRetroalimentacion("Error", e.getMessage());

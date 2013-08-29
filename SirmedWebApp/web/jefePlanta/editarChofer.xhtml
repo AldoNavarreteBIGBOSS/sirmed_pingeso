@@ -17,13 +17,20 @@
                     <p:panel header="Re-activar chofer" footer="Ingrese el RUT del chofer que desea volver a activar">
                         <h:panelGrid columns="3" cellpadding="10">
                             <p:outputLabel value="RUT :"/>
-                            <p:inputText value="#{mChofer.rutActivarChofer}"/>
-                            <p:commandButton value="Activar" action="#{mChofer.activarChofer()}" update="growl"/>
+                            <h:panelGroup>
+                            <p:inputText id="rutChofer" value="#{mChofer.rutActivarChofer}">
+                                
+                            </p:inputText>
+                            <p:watermark for="rutChofer" value="Ej: 12345678"/>
+                            </h:panelGroup>
+                            <p:commandButton value="Activar" action="#{mChofer.activarChofer()}" update=":form:growl"/>
                         </h:panelGrid>
                     </p:panel>
+                    </h:form>
+                <h:form id="form2">
                     <p:panel header="Seleccionar chofer" footer="Seleccione el chofer a editar">
                         <p:dataTable id="choferes" var="chf" value="#{mChofer.choferes}" rowKey="#{chf.rutChofer}" selection="#{mChofer.choferSeleccionado}" selectionMode="single"  paginatorAlwaysVisible="false" paginator="true" rows="5">
-                            <p:ajax event="rowSelect" listener="#{mChofer.setearChofer()}" update=":form"/>
+                            <p:ajax event="rowSelect" listener="#{mChofer.setearChofer()}" update=":form2:pnlChf"/>
                             <p:ajax event="rowUnselect"/> 
 
                             <p:column headerText="RUT">  
@@ -53,23 +60,23 @@
 
                         </p:dataTable>
                     </p:panel>
-                    <p:panel header="Editar chofer" footer="Edite los datos que estime convenientes">
+                    <p:panel header="Editar chofer" footer="Edite los datos que estime convenientes" id="pnlChf">
                         <h:panelGrid columns="2" id="gret" cellpadding="7">
 
                             <p:outputLabel value="RUT: "/>
                             <p:outputLabel value="#{mChofer.rut}"/>
                             <p:outputLabel value="Nombre: "/>
-                            <p:inputText value="#{mChofer.nombre}"/>
+                            <p:inputText value="#{mChofer.nombre}" required="true" label="Falta Nombre"/>
                             <p:outputLabel value="Apellido: "/>
-                            <p:inputText value="#{mChofer.apellido}"/>
+                            <p:inputText value="#{mChofer.apellido}" required="true" label="Falta Apellido"/>
                             <p:outputLabel value="Telefono: "/>
-                            <p:inputMask value="#{mChofer.telefono}" mask="(9)-9999999"/>
+                            <p:inputMask value="#{mChofer.telefono}" mask="(9)-9999999" required="true" label="Falta Telefono"/>
                             <h:outputLabel value="Municipalidad: "/>
                             <p:selectOneMenu value="#{mChofer.municipalidad}">
                                 <f:selectItems value="#{mChofer.ms}" var="ch" itemLabel="#{ch.nombreMunicipalidad}" itemValue="#{ch.nombreMunicipalidad}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="Email: "/>
-                            <p:inputText value="#{mChofer.email}"/>
+                            <p:inputText value="#{mChofer.email}" required="true" label="Falta Email"/>
                         </h:panelGrid>
 
                         <p:commandButton type="button" onclick="cd.show();" value="Editar" />

@@ -42,18 +42,7 @@ public class MAutentificador implements Serializable {
      private MMessaegeController mc;
     
     private String rutRecuperar;
-    
-   
-
-   
-
-    
-
-  
-
-    
-
-    
+       
 
     public String getRutRecuperar() {
         return rutRecuperar;
@@ -83,12 +72,10 @@ public class MAutentificador implements Serializable {
                 
                 return true;
             } 
-        } catch (ServletException e) {
+            
+        } catch (Exception e) {
             mc.mensajeRetroalimentacion("Error", "Usuario y/o contraseña incorrecta");
-        } catch (Exception ex) {
-            mc.mensajeRetroalimentacion("Error", ex.getMessage());
-        }
-            return false;
+        }    return false;
     }
 
     public void logout() {
