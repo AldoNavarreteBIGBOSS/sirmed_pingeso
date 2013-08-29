@@ -80,6 +80,7 @@ public class MHistorial {
         
         auditoriaPojos = new LinkedList<AuditoriaPojo>();
         if(ca != null){
+         auditoriaPojos.clear();
         for(Auditoria a: ca){
             AuditoriaPojo ap = new AuditoriaPojo();
             ap.setFecha(a.getFechaAuditoria());

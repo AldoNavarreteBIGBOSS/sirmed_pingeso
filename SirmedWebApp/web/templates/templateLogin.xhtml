@@ -8,6 +8,8 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="../resources/css/default.css" />
+        <link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css'/>
 
         <title>SIRMED</title>
     </h:head>
@@ -23,10 +25,10 @@
                                 <h:panelGrid  styleClass="panelLogin" columns="2" cellpadding="10">
                                     <p:outputLabel value="RUT usuario : " for="userName"/>
                                     <h:panelGroup>
-                                    <p:inputText id="userName" value="#{mVerificador.username}" label="Usuario">
-                                        <f:validator validatorId="RutValidator"/>
-                                    </p:inputText>
-                                    <p:watermark for="userName" value="Ej: 12345678"/>
+                                        <p:inputText id="userName" value="#{mVerificador.username}" label="Usuario">
+                                            <f:validator validatorId="RutValidator"/>
+                                        </p:inputText>
+                                        <p:watermark for="userName" value="Ej: 12345678"/>
                                     </h:panelGroup>
                                     <p:outputLabel value="Contraseña : "/>
                                     <p:inputText value="#{mVerificador.password}"  type="password" />
@@ -39,15 +41,18 @@
                 </ui:insert>
             </p:layoutUnit>  
 
-            <p:layoutUnit position="south" size="100">
+            <p:layoutUnit position="south" size="50">
                 <ui:insert name="bottom">
                     <div align="center">
-                        SIRMED fue desarrollada por los alumnos: Aldo Navarrete, Gabriela León y Macarena Pérez.
-                        <p>Fue desarrollada para el curso de Proyecto de Ingeniería de Software de la USACH en el primer semestre del 2013. </p>
+                        SIRMED - EQUIPO DESARROLLADOR GALMA - PINGESO 1-2013
                     </div>
                 </ui:insert>
             </p:layoutUnit>  
-            <p:layoutUnit position="north" size="100">  
+            <p:layoutUnit position="north" > 
+                <div id="headerGeneral" align="center">
+
+                    SIRMED
+                </div>
             </p:layoutUnit>  
         </p:layout>
     </h:body>
