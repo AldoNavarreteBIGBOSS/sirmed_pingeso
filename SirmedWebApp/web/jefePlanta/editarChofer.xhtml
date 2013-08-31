@@ -66,17 +66,22 @@
                             <p:outputLabel value="RUT: "/>
                             <p:outputLabel value="#{mChofer.rut}"/>
                             <p:outputLabel value="Nombre: "/>
-                            <p:inputText value="#{mChofer.nombre}" required="true" label="Falta Nombre"/>
+                            <p:inputText value="#{mChofer.nombre}" required="true" requiredMessage="Ingrese Nombre"/>
                             <p:outputLabel value="Apellido: "/>
-                            <p:inputText value="#{mChofer.apellido}" required="true" label="Falta Apellido"/>
+                            <p:inputText value="#{mChofer.apellido}" required="true" requiredMessage="Ingrese Apellido"/>
                             <p:outputLabel value="Telefono: "/>
-                            <p:inputMask value="#{mChofer.telefono}" mask="(9)-9999999" required="true" label="Falta Telefono"/>
+                            <p:inputMask value="#{mChofer.telefono}" mask="(9)-9999999" required="true" requiredMessage="Ingrese Teléfono"/>
                             <h:outputLabel value="Municipalidad: "/>
                             <p:selectOneMenu value="#{mChofer.municipalidad}">
                                 <f:selectItems value="#{mChofer.ms}" var="ch" itemLabel="#{ch.nombreMunicipalidad}" itemValue="#{ch.nombreMunicipalidad}"/>
                             </p:selectOneMenu>
-                            <p:outputLabel value="Email: "/>
-                            <p:inputText value="#{mChofer.email}" required="true" label="Falta Email"/>
+                            <h:outputLabel value="Email: " for="emailChf"/>
+                            <h:panelGroup>
+                                <p:inputText id="emailChf" value="#{mChofer.email}" required="true" requiredMessage="Ingrese Email">
+                                    <f:validator validatorId="EmailValidator"/>
+                                </p:inputText>
+                                <p:watermark for="emailChf" value="ejemplo@sirmed.cl"/>
+                            </h:panelGroup>
                         </h:panelGrid>
 
                         <p:commandButton type="button" onclick="cd.show();" value="Editar" />

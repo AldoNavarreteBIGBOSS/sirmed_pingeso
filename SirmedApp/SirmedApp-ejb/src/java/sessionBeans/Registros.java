@@ -61,7 +61,6 @@ public class Registros implements RegistrosLocal {
             r.setComentarioRegistro(comentario);
             r.setPesajeRegistro(pesaje);
             r.setDetalleRegistro(generarDetalle(puntosSeleccionados));
-            r.setDetalleRegistro(generarDetalle(puntosSeleccionados));
             rdao.insert(r);
             
             

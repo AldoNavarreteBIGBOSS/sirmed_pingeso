@@ -25,21 +25,19 @@ public class DataValidator implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component,Object value) throws ValidatorException {
         
-        if (value == null) {
+        
+        
+        try{
+            float num = Float.parseFloat(value.toString());
+            
+            }
+        
+        catch(Exception e){
             FacesMessage msg =
                     new FacesMessage("Los datos ingresados no son válidos",
-                    "Ingrese datos correspondientes");
+                    "Ingrese solamente dígitos mayores a cero");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
-
-        }
-        if (((String)value).isEmpty()) {
-            FacesMessage msg =
-                    new FacesMessage("Los datos ingresados no son válidos",
-                    "Ingrese datos correspondientes");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(msg);
-
         }
         
     }

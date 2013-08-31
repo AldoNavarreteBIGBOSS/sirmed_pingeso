@@ -15,7 +15,7 @@
                 <p:panel header="Seleccionar Municipalidad" footer="Seleccione la municipalidad de procedencia de la carga">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:outputLabel value="Municipalidad: "/>
-                            <p:selectOneMenu value="#{mRegistros.municipalidad}"  required="true" label="Falta Municipalidad ">
+                            <p:selectOneMenu value="#{mRegistros.municipalidad}"  required="true" requiredMessage="Seleccione Municipalidad">
                                 <f:selectItem itemLabel="Municipalidad..." itemValue="#{null}"/>
                                 <f:selectItems var="mun" value="#{mRegistros.listaMunicipalidades}" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}" />
                                 <p:ajax listener="#{mRegistros.cargarDatos()}" update="reta"/>
@@ -26,19 +26,24 @@
                         <p:panel  header="Seleccionar Camión" footer="Seleccione la patente del camión que trae la carga e ingrese el peso">
                             <h:panelGrid columns="4" cellpadding="10">
                                 <h:outputLabel value="Camión: " />
-                                <p:selectOneMenu  value="#{mRegistros.patenteCamion}" style="width: 200px" required="true" label="Falta Camión " >
+                                <p:selectOneMenu  value="#{mRegistros.patenteCamion}" style="width: 200px" required="true" requiredMessage="Seleccione Camión" >
                                     
                                     <f:selectItem itemLabel="Camión..." itemValue="#{null}"  />
                                     <f:selectItems var="cam" value="#{mRegistros.camiones}" itemLabel="#{cam.patente}" itemValue="#{cam.patente}"/>
                                 </p:selectOneMenu>
-                                <p:outputLabel value="Pesaje Camión (Ton.): "/>
-                                <p:inputText value="#{mRegistros.pesajeCamion}" style="width: 50px" required="true" label="Pesaje"/>
+                                <p:outputLabel value="Pesaje Camión (Ton.): " for="pesaje"/>
+                                <h:panelGroup>
+                                <p:inputText id="pesaje" value="#{mRegistros.pesajeCamion}" style="width: 50px" required="true" requiredMessage="Ingrese pesaje">
+                                    <f:validator validatorId="DataValidator"/>
+                                </p:inputText>
+                                <p:watermark for="pesaje" value="Ej: 10.2"/>
+                                </h:panelGroup>
                             </h:panelGrid>
                         </p:panel>
                         <p:panel header="Seleccionar Chofer" footer="Seleccione el chofer encargado de manejar la máquina">
                             <h:panelGrid columns="2" cellpadding="10">
                                <p:outputLabel value="Chofer: "/>
-                               <p:selectOneMenu  value="#{mRegistros.rutChofer}"  required="true" label="Falta Chofer ">
+                               <p:selectOneMenu  value="#{mRegistros.rutChofer}"  required="true" requiredMessage="Seleccione Chofer">
                                 <f:selectItem itemLabel="Chofer..." itemValue="#{null}"/>
                                 <f:selectItems var="chf" value="#{mRegistros.choferes}" itemLabel="#{chf.nombreChofer} #{chf.apellidoChofer} RUT: #{chf.rutChofer}" itemValue="#{chf.rutChofer}"/>
                             </p:selectOneMenu>

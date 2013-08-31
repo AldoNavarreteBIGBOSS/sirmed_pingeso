@@ -14,7 +14,7 @@
                 <h:form id="ret">
                     <p:growl id="growl" showDetail="true" sticky="true" /> 
                     <p:panel header="Ingresar basculista" footer="Ingrese los datos en las casillas correspondientes">
-                    <h:panelGrid id="panel" columns="2" cellpadding="10">  
+                        <h:panelGrid id="panel" columns="2" cellpadding="10">  
                         <h:outputLabel value="Rut: " for="rutBasculista"/>
                         <h:panelGroup>
                         <p:inputText value="#{mBasculista.rut}" label="RUT" id="rutBasculista">
@@ -23,15 +23,20 @@
                         <p:watermark for="rutBasculista" value="Ej: 12345678"/>
                         </h:panelGroup>
                         <h:outputLabel value="Nombre: "/>
-                        <p:inputText value="#{mBasculista.nombre}" required="true" label="Falta Nombre"/>
+                        <p:inputText value="#{mBasculista.nombre}" required="true" requiredMessage="Ingresar Nombre"  />
                         <h:outputLabel value="Apellido: "/>
-                        <p:inputText value="#{mBasculista.apellido}" required="true" label="Falta Apellido"/>
+                        <p:inputText value="#{mBasculista.apellido}" required="true" requiredMessage="Ingresar Apellido"/>
                         <h:outputLabel value="Telefono: "/>
-                        <p:inputMask value="#{mBasculista.telefono}" required="true" label="Falta Telefono" mask="(9)-9999999"/>
-                        <h:outputLabel value="Email: "/>
-                        <p:inputText value="#{mBasculista.email}" required="true" label="Email"/>
+                        <p:inputMask value="#{mBasculista.telefono}" required="true" requiredMessage="Ingresar Telefono" mask="(9)-9999999"/>
+                        <h:outputLabel value="Email: " for="emailBas"/>
+                        <h:panelGroup>
+                        <p:inputText  id="emailBas" value="#{mBasculista.email}" required="true" requiredMessage="Ingresar Email">
+                             <f:validator validatorId="EmailValidator"/>
+                        </p:inputText>
+                        <p:watermark for="emailBas" value="ejemplo@sirmed.cl"/>
+                        </h:panelGroup>
                     </h:panelGrid>
-                    <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista()}" icon="ui-icon-check" update="ret"/>    
+                    <p:commandButton  value="Ingresar"  actionListener="#{mBasculista.nuevoBasculista()}" icon="ui-icon-check" update=":ret:panel :ret:growl"/>    
                     </p:panel>
                 </h:form>
             </ui:define>  

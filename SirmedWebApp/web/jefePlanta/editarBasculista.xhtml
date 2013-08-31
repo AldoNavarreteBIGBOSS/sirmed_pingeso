@@ -12,7 +12,7 @@
 
 
               <h:form id="form" prependId="false">
-                  <p:growl id="growl" showDetail="true" sticky="true" /> 
+                  <p:growl id="growl" showDetail="true" sticky="true" />
                     <p:panel header="Re-activar basculista" footer="Ingrese el RUT del basculista que desea volver a activar">
                         <h:panelGrid columns="3" cellpadding="10">
                             <p:outputLabel value="RUT :"/>
@@ -56,24 +56,25 @@
 
                     </p:panel>
                     <p:panel header="Editar basculista" footer="Edite los datos que estime convenientes" id="pnlBas">
+                         
                     <h:panelGrid columns="2" cellpadding="10">
 
                         <p:outputLabel value="RUT: "/>
                         <p:outputLabel value="#{mBasculista.rut}"/>
                         <p:outputLabel value="Nombre: "/>
-                        <p:inputText value="#{mBasculista.nombre}" required="true" label="Falta Nombre"/>
+                        <p:inputText value="#{mBasculista.nombre}" required="true" requiredMessage="Ingrese Nombre"/>
                         <p:outputLabel value="Apellido: "/>
-                        <p:inputText value="#{mBasculista.apellido}" required="true" label="Falta Apellido"/>
+                        <p:inputText value="#{mBasculista.apellido}" required="true" requiredMessage="Ingrese Apellido"/>
                         <p:outputLabel value="Telefono: "/>
-                        <p:inputMask value="#{mBasculista.telefono}" mask="(9)-9999999" required="true" label="Falta Telefono"/>
+                        <p:inputMask value="#{mBasculista.telefono}" mask="(9)-9999999" required="true" requiredMessage="Ingrese Telefono"/>
 
                     </h:panelGrid>
 
                         <p:commandButton type="button" onclick="cd.show();" value="Editar" />
                                 <p:dialog  header="Petición de confirmación"  widgetVar="cd" resizable="false" footer="¿Esta seguro de continuar?" draggable="false" >  
                                     <h:panelGroup style="margin-left: 50px">
-                                    <p:commandButton  style="width: 70px" value="Si"  actionListener="#{mBasculista.actualizarBasculista()}" oncomplete="confirmation.hide()"/>
-                                    <p:commandButton style="width: 70px" value="No" onclick="confirmation.hide();"/>
+                                        <p:commandButton  style="width: 70px" value="Si"  actionListener="#{mBasculista.actualizarBasculista()}" oncomplete="confirmation.hide()" update=":form:growl pnlBas"/>
+                                        <p:commandButton style="width: 70px" value="No" onclick="confirmation.hide();" action="#{mBasculista.resetCampos()}" update="pnlBas"/>
                                     </h:panelGroup>
                                 </p:dialog>           
                     </p:panel>

@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import sessionBeans.CrudBasculistaLocal;
 import sessionBeans.CrudUsuarioLocal;
 import sessionBeans.InformeMailLocal;
@@ -30,7 +31,10 @@ public class MBasculista {
     private CrudUsuarioLocal crudUsuario;
     @EJB
     private CrudBasculistaLocal crudBasculista;
-    
+    @Inject
+     private MAccionesGenerales ag;
+     @Inject
+     private MMessaegeController mc;
     private String rut;
     private String nombre;
     private String apellido;
@@ -39,15 +43,15 @@ public class MBasculista {
     private String rutActivar;
     private Collection<Basculista> basculista;
     private Basculista basculistaSeleccionado;
-    private MAccionesGenerales ag;
-    private MMessaegeController mc;
+    
+    
     
     
     @PostConstruct
     public void init() {
+        
         basculista = crudBasculista.listaBasculistas();
-        mc = new MMessaegeController();
-        ag = new MAccionesGenerales();
+        
     }
 
     public String getRutActivar() {
@@ -121,10 +125,11 @@ public class MBasculista {
 
     public void nuevoBasculista() {
         try {
+            
             crudUsuario.crearUsuario(rut, email);
             crudBasculista.crearBasculista(rut, nombre.toUpperCase(), apellido.toUpperCase(), telefono);
             mensajeria.enviarMensajeBienvenida(email, rut, nombre.toUpperCase()+" "+apellido.toUpperCase());
-            mc.mensajeRetroalimentacion("Operación Exitosa", null);
+            mc.mensajeRetroalimentacion("Operación Exitosa", "Basculista ingresado");
             resetCampos();
         } catch (Exception ex) {
             mc.mensajeRetroalimentacion("Error", ex.getMessage());
@@ -137,6 +142,7 @@ public class MBasculista {
             rut = basculistaSeleccionado.getRut();
             crudBasculista.editarBasculista(rut, nombre.toUpperCase(), apellido.toUpperCase(), telefono);
             resetCampos();
+            mc.mensajeRetroalimentacion("Operación Exitosa", "Basculista editado");
             ag.actualizarPagina();
         } catch (Exception e) {
             mc.mensajeRetroalimentacion("Error", e.getMessage());

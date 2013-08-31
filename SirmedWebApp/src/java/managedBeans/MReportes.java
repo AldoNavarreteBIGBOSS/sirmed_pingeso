@@ -170,7 +170,7 @@ public class MReportes implements Serializable {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String f1 = df.format(fechaInicio);
         String f2 = df.format(fechaFin);
-
+        if(fechaInicio.before(fechaFin) || fechaInicio.equals(fechaFin)){
         try {
 
             if (filtroMunicipalidad == null) {
@@ -184,6 +184,10 @@ public class MReportes implements Serializable {
             }
         } catch (Exception e) {
             mc.mensajeRetroalimentacion("Error", e.getMessage());
+        }
+        }
+        else{
+        mc.mensajeRetroalimentacion("Error", "El rango de fecha no es correcto");
         }
     }
 
@@ -242,7 +246,8 @@ public class MReportes implements Serializable {
         String f1 = df.format(fechaInicio);
         String f2 = df.format(fechaFin);
         String url = null;
-
+           
+        if(fechaInicio.before(fechaFin) || fechaInicio.equals(fechaFin)){
         try {
             if (filtroMunicipalidad == null) {
                 url = reporte.generarReporteExcelFecha(f1, f2, nombreArchivo, null);
@@ -259,6 +264,11 @@ public class MReportes implements Serializable {
             }
         } catch (Exception e) {
             mc.mensajeRetroalimentacion("Error", e.getMessage());
+        }
+        }
+        else{
+                    
+            mc.mensajeRetroalimentacion("Error", "El rango de fecha no es correcto");
         }
     }
 

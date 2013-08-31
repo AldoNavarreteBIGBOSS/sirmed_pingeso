@@ -74,7 +74,7 @@ public class Reporte implements ReporteLocal {
             Bas.setCellValue("BASCULISTA");
             Chf.setCellValue("CHOFER");
             Cam.setCellValue("PATENTE CAMIÓN");
-            Pso.setCellValue("PESAJE");
+            Pso.setCellValue("PESAJE (TON)");
             Dte.setCellValue("FECHA REGISTRO");
             Det.setCellValue("DETALLE REGISTRO");
 

@@ -15,7 +15,7 @@
                     <h:panelGrid id="panel" columns="2" cellpadding="10">  
                         <h:outputLabel value="Patente: "/>
                         <h:panelGroup>
-                        <p:inputMask id="patenteCamion" value="#{mCamiones.patente}" required="true" label="Patente" style="width: 270px" mask="a*-a*-99" maxlength="8"/>
+                            <p:inputMask id="patenteCamion" value="#{mCamiones.patente}" required="true" requiredMessage="Ingrese patente" style="width: 270px" mask="a*-a*-99" maxlength="8"/>
                         <p:watermark for="patenteCamion" value="Ejemplo: AA-BB-99"/>
                         </h:panelGroup>
                         <h:outputLabel value="Municipalidad: " />

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     
     <h:body>
         <ui:composition template="/templates/templateGeneral.xhtml">
@@ -14,15 +15,20 @@
                  <p:panel header="Configuración de datos personales" footer="Puede editar sus datos personales">
                      <h:panelGrid columns="2" cellpadding="10">
                          <p:outputLabel value="Nombre: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.nombreJP}" required="true" label="Falta Nombre"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.nombreJP}" required="true" requiredMessage="Ingrese Nombre"/>
                          <p:outputLabel value="Apellido: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.apellidoJP}" required="true" label="Falta Apellido"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.apellidoJP}" required="true" requiredMessage="Ingrese Apellido"/>
                          <p:outputLabel value="Telefono: "/>
-                         <p:inputMask value="#{mConfigJefePlanta.jefePlantaPojo.telefonoJP}" required="true" label="Falta Telefono" mask="(9)-9999999"/>
-                         <p:outputLabel value="Email: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.emailJP}" required="true" label="Falta Email"/>
+                         <p:inputMask value="#{mConfigJefePlanta.jefePlantaPojo.telefonoJP}" required="true" requiredMessage="Ingrese Teléfono" mask="(9)-9999999"/>
+                         <h:outputLabel value="Email: " for="emailJP"/>
+                        <h:panelGroup>
+                            <p:inputText id="emailJP" value="#{mConfigJefePlanta.jefePlantaPojo.emailJP}" required="true" requiredMessage="Ingrese Email">
+                                <f:validator validatorId="EmailValidator"/>
+                            </p:inputText>
+                            <p:watermark for="emailJP" value="ejemplo@sirmed.cl"/>
+                        </h:panelGroup>
                      </h:panelGrid>
-                     <p:commandButton value="Guardar" action="#{mConfigJefePlanta.editarDatosPersonales()}" update="growl"/>
+                     <p:commandButton value="Guardar" action="#{mConfigJefePlanta.editarDatosPersonales()}" update=":form:growl"/>
                  </p:panel>
                  </h:form>
                  <h:form>

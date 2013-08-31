@@ -23,7 +23,7 @@
                                     <f:selectItem itemLabel="Seleccionar municipalidad" itemValue="#{null}"/>
                                     <f:selectItems var="mun" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun.nombreMunicipalidad}" itemValue="#{mun.nombreMunicipalidad}"/>
                                 </p:selectOneMenu>  
-                                <p:commandButton value="Pre-visualizar" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros" style="width: 187px"/>
+                                <p:commandButton value="Pre-visualizar" action="#{mReportes.obtenerRegistros()}" update=":reto:growl :reto:registros" />
                                 <h:panelGroup/>
                                 <p:commandButton value="Descargar reporte"   actionListener="#{mReportes.generarReporteFechasDescarga()}" update=":reto:growl " onclick="PrimeFaces.monitorDownload(start, stop)" ajax="false">
                                     <p:fileDownload  value="#{mReportes.file}"/>
@@ -77,7 +77,7 @@
                                 <f:selectItem itemLabel="Seleccionar municipalidad" itemValue="#{null}"/>
                                 <f:selectItems var="mun2" value="#{mReportes.listaMunicipalidades}" itemLabel="#{mun2.nombreMunicipalidad}" itemValue="#{mun2.nombreMunicipalidad}"/>
                             </p:selectOneMenu> 
-                            <p:commandButton value="Pre-visualizar" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros" style="width: 187px"/>
+                            <p:commandButton value="Pre-visualizar" action="#{mReportes.obtenerRegistrosTemporada()}" update=":reto:growl :reto:registros" />
                             <h:panelGroup/>
                             <p:commandButton value="Descargar reporte" actionListener="#{mReportes.generarReportePorTemporada()}" update=":reto:growl" onclick="PrimeFaces.monitorDownload(start, stop)" ajax="false">
                                 <p:fileDownload  value="#{mReportes.file}"/>

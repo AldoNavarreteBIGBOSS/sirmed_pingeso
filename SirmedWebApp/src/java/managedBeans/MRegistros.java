@@ -174,9 +174,15 @@ public class MRegistros implements Serializable{
     public void crearRegistro(){
         
             try{
+                if(!puntosRecoleccionSeleccionados.isEmpty()){
                 registros.crearRegistro(rutBasculista, municipalidad, patenteCamion, rutChofer, pesajeCamion, comentarioRegistro, puntosRecoleccionSeleccionados);             
                 resetCampos();
                 mc.mensajeRetroalimentacion("Operación exitosa", "Registro ingresado");
+                ag.actualizarPagina();
+                }
+                else{
+                    mc.mensajeRetroalimentacion("Error", "Seleccione puntos de recolección");
+                }
             }
             catch(Exception e){
                 mc.mensajeRetroalimentacion("Error", e.getMessage());

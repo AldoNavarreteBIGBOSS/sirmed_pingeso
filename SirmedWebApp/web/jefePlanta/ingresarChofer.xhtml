@@ -21,17 +21,22 @@
                         <p:watermark for="rutChofer" value="Ej: 12345678"/>
                         </h:panelGroup>
                         <h:outputLabel value="Nombre: "/>
-                        <p:inputText value="#{mChofer.nombre}" required="true" label="Falta Nombre"/>
+                        <p:inputText value="#{mChofer.nombre}" required="true" requiredMessage="Ingrese Nombre"/>
                         <h:outputLabel value="Apellido: " />
-                        <p:inputText value="#{mChofer.apellido}" required="true" label="Falta Apellido" />
+                        <p:inputText value="#{mChofer.apellido}" required="true" requiredMessage="Ingrese Apellido" />
                         <h:outputLabel value="Municipalidad: "/>
                         <p:selectOneMenu value="#{mChofer.municipalidad}">
                             <f:selectItems value="#{mChofer.ms}" var="chf" itemLabel="#{chf.nombreMunicipalidad}" itemValue="#{chf.nombreMunicipalidad}"/>
                         </p:selectOneMenu>
                         <h:outputLabel value="Telefono: "/>
-                        <p:inputMask value="#{mChofer.telefono}" required="true" label="Falta Telefono" mask="(9)-9999999"/>
-                        <h:outputLabel value="Email: "/>
-                        <p:inputText value="#{mChofer.email}" required="true" label="Falta Email"/>
+                        <p:inputMask value="#{mChofer.telefono}" required="true" requiredMessage="Ingrese Telefono" mask="(9)-9999999"/>
+                        <h:outputLabel value="Email: " for="emailChf"/>
+                        <h:panelGroup>
+                            <p:inputText id="emailChf" value="#{mChofer.email}" required="true" requiredMessage="Ingrese Email">
+                                <f:validator validatorId="EmailValidator"/>
+                            </p:inputText>
+                            <p:watermark for="emailChf" value="ejemplo@sirmed.cl"/>
+                        </h:panelGroup>
                     </h:panelGrid>
                     <p:commandButton  value="Ingresar"  actionListener="#{mChofer.nuevoChofer()}" icon="ui-icon-check" update="ret"/>   
                     </p:panel>
