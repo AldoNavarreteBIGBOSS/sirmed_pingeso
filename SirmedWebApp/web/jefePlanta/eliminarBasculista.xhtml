@@ -30,7 +30,9 @@
                                 #{bas.telefonoB}  
                             </p:column>                     
 
-
+                            <p:column headerText="E-mail">  
+                        #{bas.usuario.mail}  
+                            </p:column> 
                             <f:facet name="footer">
                                 <p:commandButton type="button" onclick="cd.show();" value="Eliminar"/>
                                 <p:dialog  header="Petición de confirmación"  widgetVar="cd" resizable="false" footer="¿Esta seguro de continuar?" draggable="false" >                               

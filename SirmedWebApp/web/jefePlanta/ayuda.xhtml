@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:body>
+        <ui:composition template="/templates/templateGeneral.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:panel header="Preguntas Frecuentes" footer="Seleccione la pregunta">
+                        <h:panelGrid columns="1" cellpadding="10">
+                            <h:panelGroup>
+                            <p:commandLink id="faq1" value="¿Qué es SIRMED?" type="button"/>
+                            <p:overlayPanel for="faq1" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                SIRMED corresponde a la sigla, Sistema de Registro y Mensajería de Datos, cumple con la función
+                                de almacenar toda la información referente a la llegada de residuos a la planta de tratamientos, junto
+                                con la oportunidad de generar de reportes y envio de información automatizada.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq2" value="¿Qué información puedo encontrar en el historial?" type="button"/>
+                            <p:overlayPanel for="faq2" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                La función del historial es dar a conocer los eventos ocurridos durante el
+                                día de trabajo, registrando el incio de actividades y cierre, el manejo de datos como el ingreso de nuevos usuarios,
+                                choferes, camiones y puntos de recolección asi como su deshabilitación.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq3" value="¿Solamente puedo ver los eventos del día de hoy?" type="button"/>
+                            <p:overlayPanel for="faq3" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                No, SIRMED entrega la posibilidad de seleccionar la fecha que usted desea consultar, y verificar
+                                los eventos ocurridos en esa fecha.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq4" value="¿Puedo cambiar mi contraseña?" type="button"/>
+                            <p:overlayPanel for="faq4" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                Si, SIRMED entrega la posibilidad de modificar sus datos, desde su información personal hasta su
+                                contraseña.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                             <h:panelGroup>
+                            <p:commandLink id="faq5" value="¿Qué es un informe?" type="button"/>
+                            <p:overlayPanel for="faq5" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                Un informe es un conjunto de registros realizados durante la jornada de trabajo,
+                                este informe es automático y es enviado al jefe de platan en 2 horarios que el 
+                                determine, de esta forma podrá ver las actividades que se han hecho en distintos turnos
+                                de trabajo, por ejemplo.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq6" value="¿Puedo controlar la hora de envío de informes?" type="button"/>
+                            <p:overlayPanel for="faq6" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                Si, SIRMED entrega la posibilidad de configurar el horario de envío de informes, seleccionando
+                                los dos horarios deseados, de esta forma puede llevar un seguimiento de la actividad de la planta 
+                                en horarios determinados.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq7" value="¿Qué es un basculista?" type="button"/>
+                            <p:overlayPanel for="faq7" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                En SIRMED los basculistas corresponden a aquellas personas encargadas de recibir los camiones
+                                de transporte de residuos y registrar sus datos.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq8" value="¿Qué significa re-activar un basculista?" type="button"/>
+                            <p:overlayPanel for="faq8" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                En SIRMED la información importante no es eliminada, los basculistas, choferes y camiones son desactivados
+                                y por lo tanto pueden re-activarse y ser parte del sistema mediante el ingreso del RUT o Patente
+                                según sea el caso. Un dato al estar deshabilitado no será mostrado por el sistema.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq9" value="¿Si elimino a un basculista/chofer/camión por error cómo saber su rut/patente?" type="button"/>
+                            <p:overlayPanel for="faq9" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                Las acciones de re-activar o desactivar un dato quedan registradas en el historial de acciones, de esta forma el usuario
+                                puede consultarlo y ver los datos necesarios para volver a incorporarlos al sistema. 
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq10" value="¿Qué es un reporte?" type="button"/>
+                            <p:overlayPanel for="faq10" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                Un reporte en un conjunto de registros realizados en un periodo de tiempo, estas fechas son determinadas
+                                por el usuario, tambien puede elegir la comuna en particular que desee ver o la temporada a elección.
+                                El usuario tendrá la oportunidad de generar una vista previa de su selección para corroborar que se encuentra 
+                                la información deseada. El usuario podrá descargar un archivo en formato Excel.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                            <p:commandLink id="faq11" value="¿Tendré que avisar al nuevo basculista que es parte de SIRMED?" type="button"/>
+                            <p:overlayPanel for="faq11" hideEffect="fade" style="width: 700px; text-align: justify;" >
+                                No, al momento de ingresar a un nuevo basculista se le será enviado un correo electrónico a la dirección
+                                de registro  con la información necesaria para iniciar sesión en SIRMED.
+                            </p:overlayPanel>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>            
+            </ui:define>            
+        </ui:composition>
+    </h:body>
+</html>
+

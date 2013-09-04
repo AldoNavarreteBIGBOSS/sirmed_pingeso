@@ -66,7 +66,7 @@ public class CrudRecoleccion implements CrudRecoleccionLocal {
     @Override
     public Collection<PuntoRecoleccion> listaPuntosRecoleccion(){
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
-        return dF.getPuntoRecoleccionDAO().findAll();
+        return dF.getPuntoRecoleccionDAO().listarPuntosRecoleccionOrden();
     }
     
     @Override

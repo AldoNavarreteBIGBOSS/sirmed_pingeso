@@ -15,4 +15,5 @@ public interface PuntoRecoleccionDAO extends GenericDAO<PuntoRecoleccion>{
     
     public PuntoRecoleccion buscarPorDireccionLike(String direccion);
     public Collection<PuntoRecoleccion> buscarPorMunicipalidad(String municipalidad);
+    public Collection<PuntoRecoleccion> listarPuntosRecoleccionOrden();
 }

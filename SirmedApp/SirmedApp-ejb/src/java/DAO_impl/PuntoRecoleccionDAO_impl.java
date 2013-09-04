@@ -49,4 +49,17 @@ public class PuntoRecoleccionDAO_impl extends GenericDAO_impl<PuntoRecoleccion> 
             return null;
         }
     }
+    
+    @Override
+   public Collection<PuntoRecoleccion> listarPuntosRecoleccionOrden(){
+       try{
+           Collection<PuntoRecoleccion> c = new LinkedList();
+           Query q = getEntityManager().createNamedQuery("PuntoRecoleccion.findAll");
+           c = q.getResultList();
+           return c;
+       }
+       catch(Exception e){
+           return null;
+       }
+   } 
 }

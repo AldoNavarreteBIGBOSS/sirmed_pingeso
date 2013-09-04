@@ -41,6 +41,7 @@ public class CrudBasculista implements CrudBasculistaLocal {
         b.setApellidoB(apellido);
         b.setTelefonoB(telefono);
         b.setHabilitado(true);
+        
         try {
             auditoria.registrarAccion("Basculista ingresado", nombre+" "+apellido);
         } catch (Exception ex) {

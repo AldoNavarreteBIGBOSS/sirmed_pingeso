@@ -36,11 +36,19 @@
                      <p:panel header="Configuración de contraseña" footer="Puede cambiar su contraseña" id="panel">
                      <h:panelGrid columns="1" cellpadding="10">
                          <p:outputLabel value="Contraseña antigua: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.antiguoPass}" type="password"/>
-                         <p:outputLabel value="Nueva contraseña: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.newPass}"  type="password"/>
+                         <p:inputText id="oldPass" value="#{mConfigJefePlanta.jefePlantaPojo.antiguoPass}" type="password" validatorMessage="Solo caracteres alfanuméricos">
+                             <f:validateRegex pattern="[a-zA-Z0-9]*" />
+                         </p:inputText>
+         
+                         <p:outputLabel  value="Nueva contraseña: "/>
+                         <p:inputText id="newPass" value="#{mConfigJefePlanta.jefePlantaPojo.newPass}"  type="password" validatorMessage="Solo caracteres alfanuméricos">
+                             <f:validateRegex pattern="[a-zA-Z0-9]*" />
+                         </p:inputText>
+                         
                          <p:outputLabel value="Confirmar nueva contraseña: "/>
-                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.confNewPass}"   type="password"/>
+                         <p:inputText value="#{mConfigJefePlanta.jefePlantaPojo.confNewPass}"   type="password" validatorMessage="Solo caracteres alfanuméricos">
+                             <f:validateRegex pattern="[a-zA-Z0-9]*" />
+                         </p:inputText>
                          <p:commandButton value="Confirmar"  action="#{mConfigJefePlanta.cambiarContraseña()}" update=":form:growl panel"/>
                      </h:panelGrid>
                          

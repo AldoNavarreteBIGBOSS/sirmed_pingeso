@@ -29,7 +29,13 @@ public class DataValidator implements Validator {
         
         try{
             float num = Float.parseFloat(value.toString());
-            
+            if(num < 0){
+                FacesMessage msg =
+                    new FacesMessage("Los datos ingresados no son válidos",
+                    "El pesaje no puede ser negativo");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+            }
             }
         
         catch(Exception e){
