@@ -122,12 +122,13 @@ public class Registros implements RegistrosLocal {
     private String escribirInforme(Collection<Registro> datos){
     
         String data = "";
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         Registro temp;
         for(Registro r: datos){
             temp = r;
             data += "N° Registro: "+temp.getIdRegistro()+"\n"+"Basculista: "+temp.getRut().getNombreB()+" "+temp.getRut().getApellidoB()+"\n"+"Chofer: "+temp.getRutChofer().getNombreChofer()+
                     " "+temp.getRutChofer().getApellidoChofer()+"\n"+"Municipalidad: "+temp.getNombreMunicipalidad().getNombreMunicipalidad()+"\n"+"Camión: "+temp.getPatente().getPatente()+"\n"+
-                    "Pesaje: "+temp.getPesajeRegistro()+"\n"+"Fecha: "+temp.getFechaRegistro().toString()+"\n"+"Detalle: "+temp.getDetalleRegistro()+"\n"+"Comentarios: "+temp.getComentarioRegistro()+"\n"+
+                    "Pesaje: "+temp.getPesajeRegistro()+"\n"+"Fecha: "+dt1.format(temp.getFechaRegistro())+"\n"+"Detalle: \n"+temp.getDetalleRegistro()+"\n"+"Comentarios: "+temp.getComentarioRegistro()+"\n"+
                     "________________________________________________________________________\n\n";
         }
         

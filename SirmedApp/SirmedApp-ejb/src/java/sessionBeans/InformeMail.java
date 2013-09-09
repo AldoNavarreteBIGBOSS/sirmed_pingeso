@@ -57,15 +57,20 @@ public class InformeMail implements InformeMailLocal {
     
     
     @Override
-    public void determinarHora(String h1, String h2){
+    public void determinarHora(String h1, String m1, String h2){
     
         
         ScheduleExpression schedule = new ScheduleExpression();
-        schedule.minute("0");
+        schedule.minute(m1);
         schedule.hour(h1+","+h2);
         schedule.second("0");
         try {
-            auditoria.registrarAccion("Hora de envio de informe configurada", "Hora 1: "+h1+" Hora 2: "+h2);
+            if(m1.length() == 1){
+            auditoria.registrarAccion("Hora de envio de informe configurada", "Hora 1: "+h1+" : 0"+m1+" Hora 2: "+h2+" : 0"+m1);
+            }
+            else{
+            auditoria.registrarAccion("Hora de envio de informe configurada", "Hora 1: "+h1+" : "+m1+" Hora 2: "+h2+" : "+m1);
+            }
         } catch (Exception ex) {
             Logger.getLogger(InformeMail.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,18 +82,19 @@ public class InformeMail implements InformeMailLocal {
        
         String mensaje = null;       
         Integer hora = date.getHours();
+        Integer minutos= date.getMinutes();
         mensaje = registros.generarInforme(hora);
                
         MimeMessage message = new MimeMessage(session); 
-        message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("arden.papifunk@gmail.com"));
+        message.setFrom(new InternetAddress("sirmed.emeres@gmail.com"));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress("sirmed.emeres@gmail.com"));
         message.setSubject("SIRMED: Informe de registros");
         message.setText(mensaje);
 
         Transport t = session.getTransport("smtp");
-        t.connect("arden.papifunk@gmail.com", "2850326");
+        t.connect("sirmed.emeres@gmail.com", "sirmed2013");
         t.sendMessage(message, message.getAllRecipients());
-        auditoria.registrarAccion("Envio de informe", hora+":00 hrs.");
+        auditoria.registrarAccion("Envio de informe", hora+":"+minutos);
         message = null;
         t.close();
     }

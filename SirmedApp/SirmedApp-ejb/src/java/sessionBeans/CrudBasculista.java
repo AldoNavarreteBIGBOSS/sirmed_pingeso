@@ -55,7 +55,7 @@ public class CrudBasculista implements CrudBasculistaLocal {
     
     @Override
     public Collection<Basculista> listaBasculistas(){
-    
+        
         DAOFactory dF = DAOFactory.getDAOFactory(DAOFactory.MYSQL, em);
         Collection<Basculista> cb = dF.getBasculistaDAO().findAll();
         Collection<Basculista> cbE = new LinkedList<Basculista>();

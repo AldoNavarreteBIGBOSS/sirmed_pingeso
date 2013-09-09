@@ -14,14 +14,21 @@
                     <p:panel header="Configuración de horario" footer="Seleccione los dos horarios en que desea recibir los informes">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:outputLabel value="Horario 1: "/>
-                            <p:selectOneMenu value="#{mConfigJefePlanta.hora1}" required="true" label="Horario 1">
-                                <f:selectItem itemLabel="Seleccionar horario 1" itemValue="#{null}"/>
+                            <p:selectOneMenu value="#{mConfigJefePlanta.hora1}" required="true" requiredMessage="Seleccionar Hora 1">
+                                <f:selectItem itemLabel="Seleccionar Hora" itemValue="#{null}"/>
                                 <f:selectItems var="hor" value="#{mConfigJefePlanta.listaHorarios}" itemLabel="#{hor.etiqueta}" itemValue="#{hor.valor}"/>
                             </p:selectOneMenu>
+                            
+                            
                             <p:outputLabel value="Horario 2: "/>
-                            <p:selectOneMenu value="#{mConfigJefePlanta.hora2}" required="true" label="Horario 2">
-                                <f:selectItem itemLabel="Seleccionar horario 2" itemValue="#{null}"/>
+                            <p:selectOneMenu value="#{mConfigJefePlanta.hora2}" required="true" requiredMessage="Seleccionar Hora 2">
+                                <f:selectItem itemLabel="Seleccionar Hora" itemValue="#{null}"/>
                                 <f:selectItems var="hor2" value="#{mConfigJefePlanta.listaHorarios}" itemLabel="#{hor2.etiqueta}" itemValue="#{hor2.valor}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Minutos: "/>
+                            <p:selectOneMenu value="#{mConfigJefePlanta.minuto1}" required="true" requiredMessage="Seleccionar Minutos">
+                                <f:selectItem itemLabel="Seleccionar Minutos" itemValue="#{null}"/>
+                                <f:selectItems var="min1" value="#{mConfigJefePlanta.listaMinutos}" itemLabel="#{min1.etiqueta}" itemValue="#{min1.valor}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>
                         <p:commandButton value="Aceptar" update="growl" action="#{mConfigJefePlanta.determinarHora()}"/>

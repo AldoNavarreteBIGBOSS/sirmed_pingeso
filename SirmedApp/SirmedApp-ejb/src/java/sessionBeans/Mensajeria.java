@@ -73,11 +73,11 @@ public class Mensajeria implements MensajeriaLocal {
         MimeMessage message = new MimeMessage(session); 
         message.setSubject("SIRMED: Contraseña Reestablecida");
         message.setText(mensaje);
-        message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
+        message.setFrom(new InternetAddress("sirmed.emeres@gmail.com"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
         
         Transport t = session.getTransport("smtp");
-        t.connect("arden.papifunk@gmail.com", "2850326");
+        t.connect("sirmed.emeres@gmail.com", "sirmed2013");
         t.sendMessage(message, message.getAllRecipients());
         message = null;
         t.close();
@@ -89,13 +89,13 @@ public class Mensajeria implements MensajeriaLocal {
         String mensaje = "Felicidades! "+nombre+"\n Eres parte de SIRMED tus datos son: \n Usuario: "+contraseña+"  \n Contraseña: "+contraseña+"";
         
         MimeMessage message = new MimeMessage(session); 
-        message.setFrom(new InternetAddress("arden.papifunk@gmail.com"));
+        message.setFrom(new InternetAddress("sirmed.emeres@gmail.com"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
         message.setSubject("SIRMED: Bienvenido!");
         message.setText(mensaje);
 
         Transport t = session.getTransport("smtp");
-        t.connect("arden.papifunk@gmail.com", "2850326");
+        t.connect("sirmed.emeres@gmail.com", "sirmed2013");
         t.sendMessage(message, message.getAllRecipients());
         message = null;
         t.close();

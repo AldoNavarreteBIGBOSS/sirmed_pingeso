@@ -35,15 +35,35 @@ public class MConfigJefePlanta {
     private InformeMailLocal informeMail;    
     @Inject
     private MAccionesGenerales ag;
+    @Inject
+    private MMessaegeController mc;
     
     private String rutJP;
     private String hora1;
     private String hora2;
+    private String minuto1;
     private List<ListasComboPojo> listaHorarios;
+    private List<ListasComboPojo> listaMinutos;
     private JefePlantaPojo jefePlantaPojo;
-    private MMessaegeController mc;
+    
     
     public MConfigJefePlanta() {
+    }
+
+    public String getMinuto1() {
+        return minuto1;
+    }
+
+    public void setMinuto1(String minuto1) {
+        this.minuto1 = minuto1;
+    }   
+
+    public List<ListasComboPojo> getListaMinutos() {
+        return listaMinutos;
+    }
+
+    public void setListaMinutos(List<ListasComboPojo> listaMinutos) {
+        this.listaMinutos = listaMinutos;
     }
 
     public JefePlantaPojo getJefePlantaPojo() {
@@ -82,7 +102,7 @@ public class MConfigJefePlanta {
     
     @PostConstruct
     public void init(){
-        mc = new MMessaegeController();
+        
         rutJP = ag.devolverUsername();
         
         cargarDatosJefe();
@@ -94,17 +114,36 @@ public class MConfigJefePlanta {
        listaHorarios = new LinkedList<ListasComboPojo>();
         for(Integer i = 1; i <= 24; i++){
            ListasComboPojo lh = new ListasComboPojo();
-           lh.setEtiqueta(i.toString()+":00");
+           lh.setEtiqueta(i.toString());
            lh.setValor(i.toString());
            listaHorarios.add(lh);
         }
+        
+        listaMinutos = new LinkedList<>();
+        for(Integer i = 0; i<= 59; i++){
+            ListasComboPojo lm = new ListasComboPojo();
+            if(i < 10){
+                lm.setEtiqueta("0"+i.toString());
+            }
+            else{
+                lm.setEtiqueta(i.toString());
+            }
+            lm.setValor(i.toString());
+            listaMinutos.add(lm);
+        }
+        
     
     }
     
     public void determinarHora(){
         try{
-            informeMail.determinarHora(hora1, hora2);
-            mc.mensajeRetroalimentacion("Operación Exitosa", "Horarios modificados");
+            informeMail.determinarHora(hora1,minuto1, hora2);
+            if(minuto1.length()==1){
+                mc.mensajeRetroalimentacion("Operación Exitosa", "Horarios modificados a las "+hora1+":"+"0"+minuto1+" y "+hora2+":"+minuto1);
+            }
+            else{
+                mc.mensajeRetroalimentacion("Operación Exitosa", "Horarios modificados a las "+hora1+":"+minuto1+" y "+hora2+":"+minuto1);
+            }
         }
         catch(Exception e){}
     }

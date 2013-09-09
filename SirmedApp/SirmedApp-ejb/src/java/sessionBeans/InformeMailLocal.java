@@ -13,6 +13,6 @@ import javax.ejb.Local;
 @Local
 public interface InformeMailLocal {
 
-    public void determinarHora(String h1, String h2);
+    public void determinarHora(String h1, String m1, String h2);
     
 }
